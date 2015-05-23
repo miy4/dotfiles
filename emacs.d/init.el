@@ -13,7 +13,7 @@
   (el-get-bundle win-switch)
   (el-get-bundle solarized-emacs)       ; theme
   (el-get-bundle highlight-symbol)      ; highlight
-  (el-get-bundle sequential-command)    ; key util
+  (el-get-bundle elpa:mwim)             ; key util
   (el-get-bundle smartrep)
   (el-get-bundle anzu)                  ; edit
   (el-get-bundle expand-region)         ; region
@@ -118,12 +118,10 @@
     (set-face-attribute 'highlight-symbol-face nil :background "green" :foreground "black")))
 
 (defun my/key-util-settings ()
-  ;; sequential-command
-  ;; http://www.emacswiki.org/emacs/sequential-command.el
-  (when (require 'sequential-command-config nil t)
-    (define-sequential-command seq-home
-      back-to-indentation beginning-of-line beginning-of-buffer seq-return)
-    (sequential-command-setup-keys)))
+  ;; mwim
+  ;; https://github.com/alezost/mwim.el
+  (global-set-key (kbd "C-a") 'mwim-beginning-of-code-or-line)
+  (global-set-key (kbd "C-e") 'mwim-end-of-code-or-line))
 
 (defun my/completion-settings ()
   ;; dabbrev-expandをhippie-expandに変更
