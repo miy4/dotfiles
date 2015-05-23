@@ -1,5 +1,5 @@
 [ghq]
-	root = /Users/miyano/src
+	root = ~/src
 [core]
 	editor = /usr/local/bin/emacsclient -t -a /usr/local/bin/emacs
 [user]
