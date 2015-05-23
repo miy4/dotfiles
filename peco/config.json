@@ -1,0 +1,11 @@
+{
+    "Style": {
+        "Selected": ["on_magenta", "white"]
+    },
+    "CustomFilter": {
+        "Migemo": {
+            "Cmd": "migemogrep",
+            "Args": [ "$QUERY" ]
+        }
+    }
+}

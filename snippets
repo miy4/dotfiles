@@ -1,0 +1,87 @@
+# ls
+ls -lXB   #拡張子順
+ls -lSr   #ファイルサイズ順
+ls -ltcr  #更新順
+ls -ltur  #アクセス順
+
+# date
+date +%s
+date -d @1410624155 +"%Y/%m/%d %T"
+
+# zip, unzip
+unzip -Z .zip
+zipinfo .zip
+
+# fileutil
+find . -type f -print0 | xargs -0 ls -la | sort -nr -k5
+du -b . | sort -nr
+noglob zmv -W    # *.xxx *.yyy
+
+# pager
+less -S   # (または起動中に-Sr) 1行で表示する
+less -R   # (または起動中に-Rr) ANSIカラーシーケンスを表示する
+less +F   # (または起動中にF) tail -f モード
+
+# wget
+wget -q --http-user= --http-password= http://
+
+# curl
+curl ifconfig.me         # リモートIP
+curl ifconfig.me/host    # リモートホスト
+
+# git
+git add 
+git add .
+git add -A 
+git branch
+git branch -d branch   # ブランチ削除
+git commit
+git commit -m
+git commit --amend   # 直前のログを修正
+git checkout
+git checkout -b branch   # ブランチを作成して、切り替え
+git checkout master
+git checkout -- file   # 前回のコミットに戻す
+git diff
+git diff HEAD
+git diff --staged   # stagingとHEADの差分
+git init
+git log
+git log --graph --oneline --decorate --all
+git log --pretty=format:"%h %ad %s" --date=short --all
+git merge branch   # 今のブランチとbranchをマージ
+git merge --no-ff
+git push
+git push -u origin master
+git pull
+git reset   # stagingのファイルを取り消し
+git status -s
+git stash
+git stash list
+git stash pop
+git stash drop
+
+# tcpdump/ngrep
+tcpdump -s0 -A port 80
+ngrep -W byline -q port 80
+
+# openssl
+openssl pkcs12 -in foo.p12 -nocerts -nodes -out foo.key.pem   # PKCS12->秘密鍵
+openssl pkcs12 -in foo.p12 -clcerts -nokeys -out foo.cert.pem # PKCS12->証明書
+
+# Digest
+openssl md5 file     # MD5
+openssl sha1 file    # SHA1
+md5sum file          # MD5
+shasum -a 256 file   # SHA256
+
+# abcde
+abcde -o flac:"-8" -d /dev/disk3
+abcde -o flac:"-8" -d /dev/disk4 1-4
+
+# metaflac
+metaflac --export-tags-to=- .flac
+metaflac --set-tag=ARTIST="" --set-tag=ALBUM="" --set-tag=TITLE="" --set-tag=DATE= --set-tag=GENRE= --set-tag=TRACKNUMBER= .flac
+metaflac --remove-tag= .flac
+metaflac --export-picture-to=folder.jpg .flac
+metaflac --import-picture-from=folder.jpg .flac
