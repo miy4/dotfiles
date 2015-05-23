@@ -10,14 +10,14 @@ echo_green() { echo_colored 32 "$@"; }
 echo_yellow() { echo_colored 33 "$@"; }
 echo_blue() { echo_colored 34 "$@"; }
 echo_colored() {
-    _color=$1
+    local color=$1
     shift
-    echo -e "\033[${_color}m$@\033[m"
+    echo -e "\033[${color}m$@\033[m"
 }
 
 link_file() {
-    source=${1:?missing argument}
-    target=${2:?missing argument}
+    local source=${1:?missing argument}
+    local target=${2:?missing argument}
 
     echo_green "$source -> $target"
     if ! test_file_exists $source; then
