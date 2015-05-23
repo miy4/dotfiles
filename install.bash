@@ -50,4 +50,5 @@ link_file ${dotfiles_dir}/emacs.d/init.el ~/.emacs.d/init.el
 link_file ${dotfiles_dir}/peco/config.json ~/.peco/config.json
 link_file ${dotfiles_dir}/keysnail.js ~/.keysnail.js
 link_file ${dotfiles_dir}/snippets ~/.snippets
+link_file ${dotfiles_dir}/gitconfig ~/.gitconfig
 #link_file ${dotfiles_dir}/minttyrc ~/.minttyrc

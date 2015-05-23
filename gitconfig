@@ -1,0 +1,18 @@
+[ghq]
+	root = /Users/miyano/src
+[core]
+	editor = /usr/local/bin/emacsclient -t -a /usr/local/bin/emacs
+[user]
+	email = miy4@users.noreply.github.com
+	name = miy4
+[color]
+	ui = auto
+[github]
+	user = miy4
+[alias]
+	s = status
+	l = log --graph --oneline --decorate -n 20
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
