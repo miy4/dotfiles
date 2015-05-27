@@ -310,6 +310,35 @@
     (add-hook 'simplenote2-note-mode-hook
               'my/simplenote2-keybindings)))
 
+(defun my/eww-settings ()
+  ;; 背景、文字色を無効にする
+  ;; http://rubikitch.com/2014/11/19/eww-nocolor/
+  (defvar eww-disable-colorize t)
+  (defun shr-colorize-region--disable (orig start end fg &optional bg &rest _)
+    (unless eww-disable-colorize
+      (funcall orig start end fg)))
+  (advice-add 'shr-colorize-region :around 'shr-colorize-region--disable)
+  (advice-add 'eww-colorize-region :around 'shr-colorize-region--disable)
+  (defun eww-disable-color ()
+    (interactive)
+    (setq-local eww-disable-colorize t)
+    (eww-reload))
+  (defun eww-enable-color ()
+    (interactive)
+    (setq-local eww-disable-colorize nil)
+    (eww-reload))
+
+  ;; キーバインドをKeySnail風にする
+  (with-eval-after-load 'eww
+    (define-key eww-mode-map "g" 'beginning-of-buffer)
+    (define-key eww-mode-map "G" 'end-of-buffer)
+    (define-key eww-mode-map "j" 'scroll-up-line)
+    (define-key eww-mode-map "k" 'scroll-down-line)
+    (define-key eww-mode-map "b" 'scroll-down)
+    (define-key eww-mode-map "F" 'eww-forward-url)
+    (define-key eww-mode-map "B" 'eww-back-url)
+    (define-key eww-mode-map "r" 'eww-reload)))
+
 (defun my/darwin-settings ()
   ;; commandキーをメタキーとして使う
   (setq ns-command-modifier 'meta)
@@ -357,6 +386,7 @@
 (my/markdown-settings)
 (my/golang-settings)
 (my/memo-settings)
+(my/eww-settings)
 
 (when (eq system-type 'darwin)
   (my/darwin-settings))
