@@ -27,6 +27,7 @@
   (el-get-bundle helm)                  ; helm/anything
   (el-get-bundle helm-swoop)
   (el-get-bundle helm-ag)
+  (el-get-bundle helm-dash)
   (el-get-bundle ace-jump-mode)         ; acejump
   (el-get-bundle elscreen :type git :url "git@github.com:knu/elscreen.git") ; session manager
   (el-get-bundle markdown-mode)         ; markdown
@@ -199,7 +200,17 @@
   ;; helm-swoop
   (global-set-key (kbd "M-i") 'helm-swoop)
   (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+
+  ;; helm-dash
+  (global-set-key (kbd "M-d") 'helm-dash)
+  ;; docsetの置き場所
+  (setq helm-dash-docsets-path (expand-file-name "~/.docsets"))
+  (setq helm-dash-common-docsets '("Go" "Bash"))
+  ;; 検索開始に必要な最低入力文字数
+  (setq helm-dash-min-lengh 2)
+  ;; デフォルトのブラウザ
+  (setq helm-dash-browser-func 'eww))
 
 (defun my/navigation-settings ()
   ;; ace-jump
