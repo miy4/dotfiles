@@ -198,6 +198,8 @@ my_zsh_alias() {
     alias l='less -sNRi'
     alias lF='less -sNRij10 +F'
 
+    alias g='grep --color=auto'
+
     alias psv='ps auxww'
 
     mkdir-and-go() { mkdir -p ${1:?missing operand} && cd $_ }
@@ -290,7 +292,6 @@ export PAGER=less
 export MANPAGER='less -X'
 export LESSCHARSET=utf-8
 export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-export GREP_OPTIONS='--color=auto'
 
 PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:/usr/X11/bin:~/bin
 if brew --prefix coreutils >/dev/null 2>&1; then
