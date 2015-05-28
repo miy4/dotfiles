@@ -282,7 +282,9 @@ my_zsh_git() {
 load_utilities
 
 # 環境変数
-export LANG=ja_JP.UTF-8
+export LANG=C
+export LANGUAGE=C
+export LC_ALL=''
 export EDITOR='emacsclient --alternate-editor=vi'
 export PAGER=less
 export MANPAGER='less -X'
