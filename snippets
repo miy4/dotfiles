@@ -22,6 +22,11 @@ less -S   # (または起動中に-Sr) 1行で表示する
 less -R   # (または起動中に-Rr) ANSIカラーシーケンスを表示する
 less +F   # (または起動中にF) tail -f モード
 
+# traceroute
+traceroute -T -p 80     # TCP
+traceroute -U -p 53     # UDP
+traceroute -I           # ICMP
+
 # wget
 wget -q --http-user= --http-password= http://
 
