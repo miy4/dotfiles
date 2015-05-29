@@ -28,6 +28,7 @@
   (el-get-bundle helm-swoop)
   (el-get-bundle helm-ag)
   (el-get-bundle helm-dash)
+  (el-get-bundle helm-descbinds)
   (el-get-bundle ace-jump-mode)         ; acejump
   (el-get-bundle elscreen :type git :url "git@github.com:knu/elscreen.git") ; session manager
   (el-get-bundle markdown-mode)         ; markdown
