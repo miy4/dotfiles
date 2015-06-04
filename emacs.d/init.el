@@ -35,6 +35,8 @@
   (el-get-bundle go-mode)               ; golang
   (el-get-bundle go-autocomplete)
   (el-get-bundle go-eldoc)
+  (el-get-bundle js2-mode)              ; javascript
+  (el-get-bundle tern)
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
 )
@@ -292,6 +294,37 @@
 
     (require 'go-autocomplete)))
 
+(defun my/javascript-settings ()
+  ;; 依存:
+  ;; npm install -g tern
+  ;; npm install -g eslint
+  (defun my/js2-turn-on-flycheck-mode ()
+    (flycheck-mode 1))
+  (defun my/js2-turn-on-autopair-mode()
+    (autopair-mode))
+  (defun my/js2-mode-format ()
+    (setq js2-basic-offset 2))
+  (defun my/js2-mode-linting ()
+    ;; JSHintを抑止
+    ;; linterは JSHint > ESLint > Closure Linter の順に優先される
+    (setq-default flycheck-disabled-checkers
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint))))
+  (defun my/js2-enable-tern-mode ()
+    (tern-mode t))
+
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
+  (with-eval-after-load 'js2-mode
+    (add-hook 'js2-mode-hook 'my/js2-turn-on-flycheck-mode)
+    (add-hook 'js2-mode-hook 'my/js2-turn-on-autopair-mode)
+    (add-hook 'js2-mode-hook 'my/js2-mode-format)
+    (add-hook 'js2-mode-hook 'my/js2-mode-linting)
+    (add-hook 'js2-mode-hook 'my/js2-enable-tern-mode))
+  (with-eval-after-load 'tern
+    (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
 (defun my/memo-settings ()
   ;; simplenote2
   ;; https://github.com/alpha22jp/simplenote2.el
@@ -386,6 +419,7 @@
 (my/programming-settings)
 (my/markdown-settings)
 (my/golang-settings)
+(my/javascript-settings)
 (my/memo-settings)
 (my/eww-settings)
 
