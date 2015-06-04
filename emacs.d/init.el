@@ -171,12 +171,16 @@
 (defun my/helm-anything-settings ()
   (require 'helm-config)
   (helm-mode 1)
-  (global-set-key (kbd "C-c h") 'helm-mini)
 
+  (global-set-key (kbd "C-c h") 'helm-mini)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (define-key helm-map (kbd "C-M-n") 'helm-next-source)
   (define-key helm-map (kbd "C-M-p") 'helm-previous-source)
-  (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
-  (define-key global-map (kbd "C-c i") 'helm-imenu)
+
+  (custom-set-variables
+   '(helm-command-prefix-key "C-z"))
+  (define-key helm-command-map (kbd "m") 'helm-imenu)
+  (define-key helm-command-map (kbd "d") 'helm-descbinds)
 
   ;; TABで補完する
   ;; 代わりにCtrl-zでアクション選択する
@@ -201,12 +205,12 @@
   (global-set-key (kbd "M-g ,") 'helm-ag-pop-stack)
 
   ;; helm-swoop
-  (global-set-key (kbd "M-i") 'helm-swoop)
-  (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+  (define-key helm-command-map (kbd "i") 'helm-swoop)
+  (define-key helm-command-map (kbd "I") 'helm-swoop-back-to-last-point)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 
   ;; helm-dash
-  (global-set-key (kbd "M-d") 'helm-dash)
+  (define-key helm-command-map (kbd "a") 'helm-dash)
   ;; docsetの置き場所
   (setq helm-dash-docsets-path (expand-file-name "~/.docsets"))
   (setq helm-dash-common-docsets '("Go" "Bash" "Clojure" "Java" "Markdown" "Python 2"))
