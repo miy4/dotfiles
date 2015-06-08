@@ -275,7 +275,7 @@ my_zsh_golang() {
 my_zsh_java() {
     local java_home_cmd=/usr/libexec/java_home
     if test_executable $java_home_cmd; then
-        export JAVA_HOME=$($java_home_cmd -v 1.8)
+        export JAVA_HOME=$($java_home_cmd -v 1.6)
     fi
 }
 
