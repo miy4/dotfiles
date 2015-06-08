@@ -1,7 +1,7 @@
 [ghq]
 	root = ~/src
 [core]
-	editor = /usr/local/bin/emacsclient -t -a /usr/local/bin/emacs
+	editor = emacsclient -t -a vi
 [user]
 	email = miy4@users.noreply.github.com
 	name = miy4
