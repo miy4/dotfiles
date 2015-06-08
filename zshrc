@@ -255,9 +255,8 @@ my_zsh_ruby() {
 
 my_zsh_javascript() {
     # https://github.com/hokaccha/nodebrew
-    if test_command_exists nodebrew; then
-        local nodebrew_path=$(which nodebrew)
-        export NODEBREW_ROOT=${nodebrew_path%/current/bin/nodebrew}
+    if test_dir_exists /usr/local/var/nodebrew; then
+        export NODEBREW_ROOT=/usr/local/var/nodebrew
         export PATH=$NODEBREW_ROOT/current/bin:$PATH
     elif test_executable ~/.nodebrew/current/bin/nodebrew; then
         export NODEBREW_ROOT=~/.nodebrew
