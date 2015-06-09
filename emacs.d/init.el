@@ -100,7 +100,9 @@
   (column-number-mode t)                     ; カラム番号を表示
   (size-indication-mode t)                   ; ファイルサイズを表示
   (setq ring-bell-function 'ignore)          ; ビープ音OFF
-  )
+  (with-eval-after-load 'linum
+    (setq linum-format "%4d ")               ; -nw環境にはフリンジがない
+    (set-face-attribute 'linum nil :background "unspecified-bg")))
 
 (defun my/window-settings ()
   ;; popwin
@@ -271,6 +273,7 @@
 
 (defun my/golang-settings ()
   (defun my/turn-on-flycheck-mode ()
+    (linum-mode 1)
     (flycheck-mode 1))
   (defun my/go-mode-compile-command ()
     (setq compile-command "go build -v && go test -v"))
@@ -303,6 +306,7 @@
   ;; npm install -g tern
   ;; npm install -g eslint
   (defun my/js2-turn-on-flycheck-mode ()
+    (linum-mode 1)
     (flycheck-mode 1))
   (defun my/js2-turn-on-autopair-mode()
     (autopair-mode))
