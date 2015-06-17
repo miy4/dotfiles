@@ -352,6 +352,7 @@
               (company-mode t)
               (linum-mode t)
               (autopair-on)))
+  (setq company-idle-delay 0.1)
   (setq company-tooltip-align-annotations t))
 
 (defun my/memo-settings ()
