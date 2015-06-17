@@ -37,6 +37,14 @@
   (el-get-bundle go-eldoc)
   (el-get-bundle js2-mode)              ; javascript
   (el-get-bundle tern)
+  (el-get-bundle typescript-mode
+    :type github
+    :pkgname "ananthakumaran/typescript.el")
+  (el-get-bundle tide
+    :type github
+    :pkgname "ananthakumaran/tide"
+    :depends (dash flycheck typescript-mode))
+  (el-get-bundle company-mode)
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
 )
@@ -333,6 +341,19 @@
     (require 'tern-auto-complete)
       (tern-ac-setup)))
 
+(defun my/typescript-settings ()
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+  (add-hook 'typescript-mode-hook
+            (lambda ()
+              (tide-setup)
+              (flycheck-mode t)
+              (setq flycheck-check-syntax-automatically '(save mode-enabled))
+              (eldoc-mode t)
+              (company-mode t)
+              (linum-mode t)
+              (autopair-on)))
+  (setq company-tooltip-align-annotations t))
+
 (defun my/memo-settings ()
   ;; simplenote2
   ;; https://github.com/alpha22jp/simplenote2.el
@@ -428,6 +449,7 @@
 (my/markdown-settings)
 (my/golang-settings)
 (my/javascript-settings)
+(my/typescript-settings)
 (my/memo-settings)
 (my/eww-settings)
 
