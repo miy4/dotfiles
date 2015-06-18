@@ -257,10 +257,10 @@ my_zsh_javascript() {
     # https://github.com/hokaccha/nodebrew
     if test_dir_exists /usr/local/var/nodebrew; then
         export NODEBREW_ROOT=/usr/local/var/nodebrew
-        export PATH=$NODEBREW_ROOT/current/bin:$PATH
+        export PATH=$NODEBREW_ROOT/current/bin:$PATH:./node_modules/.bin
     elif test_executable ~/.nodebrew/current/bin/nodebrew; then
         export NODEBREW_ROOT=~/.nodebrew
-        export PATH=$NODEBREW_ROOT/current/bin:$PATH
+        export PATH=$NODEBREW_ROOT/current/bin:$PATH:./node_modules/.bin
     fi
 }
 
