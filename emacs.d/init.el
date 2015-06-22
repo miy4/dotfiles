@@ -101,7 +101,8 @@
   (setq mouse-yank-at-point t)               ; カーソルの位置にペーストされるようにする
   (if window-system
       (menu-bar-mode 1) (menu-bar-mode -1))  ; ターミナル上のEmacsはメニューバー非表示
-  (tool-bar-mode 0)                          ; ツールバーを非表示
+  (if window-system
+      (tool-bar-mode 0))                     ; ツールバーを非表示
   (if window-system
       (scroll-bar-mode 0))                   ; スクロールバーを非表示
   (setq frame-title-format "%f")             ; タイトルバーにファイルのフルパスを表示
