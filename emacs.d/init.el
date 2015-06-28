@@ -9,6 +9,7 @@
 
 (defun my/el-get-dependencies ()
   (el-get-bundle exec-path-from-shell)  ; configuration
+  (el-get-bundle use-package)
   (el-get-bundle popwin)                ; window
   (el-get-bundle win-switch)
   (el-get-bundle solarized-emacs)       ; theme
@@ -45,6 +46,7 @@
     :pkgname "ananthakumaran/tide"
     :depends (dash flycheck typescript-mode))
   (el-get-bundle company-mode)
+  (el-get-bundle semantic-refactor)     ; c/c++
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
 )
@@ -404,6 +406,24 @@
     (define-key eww-mode-map "B" 'eww-back-url)
     (define-key eww-mode-map "r" 'eww-reload)))
 
+(defun my/c-settings ()
+  (use-package cc-mode
+    :defer t
+    :init
+    (with-eval-after-load 'c-mode
+      (add-hook 'c-mode-common-hook
+                (lambda ()
+                  (setq c-default-style "k&r")
+                  (setq indent-tabs-mode nil)
+                  (setq c-basic-offset 2)))))
+  (use-package semantic-refactor
+    :commands srefactor-refactor-at-point
+    :init
+    (semantic-mode t)
+    (with-eval-after-load 'cc-mode
+      (bind-keys :map c-mode-map
+                 ("M-RET" . srefactor-refactor-at-point)))))
+
 (defun my/darwin-settings ()
   ;; commandキーをメタキーとして使う
   (setq ns-command-modifier 'meta)
@@ -432,6 +452,9 @@
 (my/el-get-install)
 (my/el-get-dependencies)
 
+(unless (require 'use-package nil t)
+  (defmacro use-package (&rest args)))
+
 (my/emacsclient-settings)
 (my/theme-settings)
 
@@ -454,6 +477,7 @@
 (my/typescript-settings)
 (my/memo-settings)
 (my/eww-settings)
+(my/c-settings)
 
 (when (eq system-type 'darwin)
   (my/darwin-settings))
