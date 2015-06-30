@@ -443,6 +443,18 @@
   (setq interprogram-paste-function
         '(lambda () (shell-command-to-string "pbpaste"))))
 
+(defun my/linux-settings ()
+  ;; クリップボード連携
+  (when (executable-find "xsel")
+    (setq interprogram-cut-function
+          '(lambda (text &optional push)
+             (let ((process-connection-type nil))
+               (let ((proc (start-process "xsel" "*Messages*" "xsel" "--display" ":0" "--input" "--clipboard")))
+                 (process-send-string proc text)
+                 (process-send-eof proc)))))
+    (setq interprogram-paste-function
+          '(lambda () (shell-command-to-string "xsel --display :0 --output --clipboard")))))
+
 
 ;; emacs directory
 ;; emacs -q -l path/to/somewhere/init.el
@@ -481,3 +493,6 @@
 
 (when (eq system-type 'darwin)
   (my/darwin-settings))
+
+(when (eq system-type 'gnu/linux)
+  (my/linux-settings))

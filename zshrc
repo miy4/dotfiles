@@ -289,6 +289,15 @@ my_zsh_git() {
     fi
 }
 
+my_zsh_clipboard() {
+    if test_command_exists /usr/bin/Xvfb && ! test_file_exists /tmp/.X0-lock && test_command_exists /usr/bin/VBoxClient; then
+        # Xがない環境でクリップボードを使うためにXvfbを立ち上げ
+        /usr/bin/Xvfb -screen 0 320x240x8 >/dev/null 2>&1 &
+        sleep 1
+        DISPLAY=:0 /usr/bin/VBoxClient --clipboard
+    fi
+}
+
 load_utilities
 
 # 環境変数
@@ -322,6 +331,7 @@ my_zsh_javascript
 my_zsh_golang
 my_zsh_java
 my_zsh_git
+my_zsh_clipboard
 
 my_zsh_antigen
 my_zsh_alias
