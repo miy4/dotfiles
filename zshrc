@@ -195,8 +195,13 @@ my_zsh_alias() {
     alias da='d -a'
     alias va='v -a'
 
-    alias l='less -sNRi'
-    alias lF='less -sNRij10 +F'
+    if test_command_exists src-hilite-lesspipe.sh; then
+        alias l="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRi"
+        alias lF="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRij10 +F"
+    else
+        alias l='less -sNRi'
+        alias lF='less -sNRij10 +F'
+    fi
 
     alias g='grep --color=auto'
 
@@ -306,8 +311,6 @@ export PATH
 fpath=(/usr/local/share/zsh/site-functions $fpath)
 
 ulimit -c unlimited
-
-test_command_exists src-hilite-lesspipe.sh && export LESSOPEN='| src-hilite-lesspipe.sh %s'
 
 my_zsh_history
 my_zsh_command_line_editting
