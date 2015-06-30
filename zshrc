@@ -307,6 +307,8 @@ fpath=(/usr/local/share/zsh/site-functions $fpath)
 
 ulimit -c unlimited
 
+test_command_exists src-hilite-lesspipe.sh && export LESSOPEN='| src-hilite-lesspipe.sh %s'
+
 my_zsh_history
 my_zsh_command_line_editting
 my_zsh_completion
