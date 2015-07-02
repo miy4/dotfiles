@@ -226,7 +226,7 @@
   (define-key helm-command-map (kbd "a") 'helm-dash)
   ;; docsetの置き場所
   (setq helm-dash-docsets-path (expand-file-name "~/.docsets"))
-  (setq helm-dash-common-docsets '("Go" "Bash" "Clojure" "Java" "Markdown" "Python 2" "JavaScript"))
+  (setq helm-dash-common-docsets '("Go" "Bash" "Java" "Markdown" "Python 2" "JavaScript" "C"))
   ;; 検索開始に必要な最低入力文字数
   (setq helm-dash-min-lengh 2)
   ;; デフォルトのブラウザ
