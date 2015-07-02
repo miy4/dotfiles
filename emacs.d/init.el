@@ -47,6 +47,7 @@
     :depends (dash flycheck typescript-mode))
   (el-get-bundle company-mode)
   (el-get-bundle semantic-refactor)     ; c/c++
+  (el-get-bundle c-eldoc)
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
 )
@@ -408,21 +409,24 @@
 
 (defun my/c-settings ()
   (use-package cc-mode
-    :defer t
     :init
-    (with-eval-after-load 'c-mode
-      (add-hook 'c-mode-common-hook
-                (lambda ()
-                  (setq c-default-style "k&r")
-                  (setq indent-tabs-mode nil)
-                  (setq c-basic-offset 2)))))
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (setq c-default-style "k&r")
+                (setq indent-tabs-mode nil)
+                (setq c-basic-offset 2))))
   (use-package semantic-refactor
     :commands srefactor-refactor-at-point
     :init
     (semantic-mode t)
     (with-eval-after-load 'cc-mode
       (bind-keys :map c-mode-map
-                 ("M-RET" . srefactor-refactor-at-point)))))
+                 ("M-RET" . srefactor-refactor-at-point))))
+  (use-package c-eldoc
+    :init
+    (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+    :config
+    (setq c-eldoc-buffer-regenerate-time 60)))
 
 (defun my/darwin-settings ()
   ;; commandキーをメタキーとして使う
