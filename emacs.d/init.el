@@ -412,9 +412,11 @@
     :init
     (add-hook 'c-mode-common-hook
               (lambda ()
-                (setq c-default-style "k&r")
+                (setq c-default-style "linux")
                 (setq indent-tabs-mode nil)
-                (setq c-basic-offset 2))))
+                (setq c-basic-offset 4)
+                (linum-mode 1)
+                (autopair-mode))))
   (use-package semantic-refactor
     :commands srefactor-refactor-at-point
     :init
