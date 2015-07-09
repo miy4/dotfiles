@@ -92,6 +92,20 @@ metaflac --remove-tag= .flac
 metaflac --export-picture-to=folder.jpg .flac
 metaflac --import-picture-from=folder.jpg .flac
 
+# apt-get, dpkg
+sudo apt-get install -y _  # パッケージのインストール
+sudo apt-get update        # パッケージリストの更新
+sudo apt-get upgrade       # パッケージの更新
+sudo apt-get dist-upgrade  # ディストリの更新
+dpkg -l                    # インストール済パッケージの一覧
+dpkg -L _                  # インストール済パッケージのファイル一覧
+apt-cache search _         # パッケージの検索
+sudo apt-get remove _      # パッケージの削除
+sudo apt-get autoremove    # 未使用パッケージを削除
+sudo apt-get purge _       # パッケージ、設定ファイルを削除
+sudo apt-get clean         # アーカイブファイルを削除
+sudo apt-get autoclean     # 未使用パッケージのアーカイブファイルを削除
+
 # pacman
 pacman -S --noconfirm  # パッケージのインストール
 pacman -Syy            # DBの更新
