@@ -93,6 +93,11 @@ metaflac --remove-tag= .flac
 metaflac --export-picture-to=folder.jpg .flac
 metaflac --import-picture-from=folder.jpg .flac
 
+# netcat
+echo "hello" | nc -u -w 0 localhost 5432                    # localhost:5432へUDP送信
+dd if=/dev/urandom count=1024 | nc -u -w 0 localhost 5100   # 1024バイトのランダムデータを送信
+nc -ul -w 0 5432                                            # 5432ポートでUDP待ち受け
+
 # apt-get, dpkg
 sudo apt-get install -y _  # パッケージのインストール
 sudo apt-get update        # パッケージリストの更新
