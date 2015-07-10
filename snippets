@@ -69,7 +69,10 @@ git stash pop
 git stash drop
 
 # tcpdump/ngrep
-tcpdump -s0 -A port 80
+tcpdump -i any -s0 -w _         # キャプチャ、ファイル保存
+tcpdump -r _ port 80            # -wのデータを読み込み、80番ポートを出力
+tcpdump -i any -nlx | tee _     # 標準出力&ファイル出力
+tcpdump -i any -s0 -A port 80   # ASCIIで80番ポートを出力
 ngrep -W byline -q port 80
 
 # openssl
