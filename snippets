@@ -5,8 +5,9 @@ ls -ltcr  #更新順
 ls -ltur  #アクセス順
 
 # date
-date +%s
-date -d @1410624155 +"%Y/%m/%d %T"
+date +%s                             # UNIX時間
+date -d "2012-9-12 16:32" +%s        # 日付→UNIX時間
+date -d @1410624155 +"%Y/%m/%d %T"   # UNIX時間→日付
 
 # zip, unzip
 unzip -Z .zip
