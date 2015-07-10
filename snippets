@@ -121,3 +121,9 @@ pacman -Rs             # 指定のPKG＆依存PKGを削除(他PKGが使ってい
 pacman -Ss             # パッケージを検索
 pacman -Si             # パッケージの情報
 pacman -Ql             # パッケージによってインストールされたファイルの一覧
+
+# rpm
+rpm -qa      # インストール済のパッケージ一覧
+rpm -ql _    # パッケージの中身
+rpm -qf _    # このファイルはどのパッケージのものか
+rpm -qi _    # パッケージの概要
