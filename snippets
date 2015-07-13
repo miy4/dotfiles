@@ -36,6 +36,10 @@ sudo lsof -i:_   # N番ポートオープン中のプロセス
 lsof -c _        # プロセスNのファイル
 lsof -p _        # PID N番のファイル
 
+# xargs
+_ | xargs -L 1 -P 2 _    # 引数1個、並列2件
+_ | xargs -I{} _ {} _    # プレースホルダ
+
 # traceroute
 traceroute -T -p 80     # TCP
 traceroute -U -p 53     # UDP
