@@ -28,7 +28,13 @@ less -R   # (または起動中に-Rr) ANSIカラーシーケンスを表示す�
 less +F   # (または起動中にF) tail -f モード
 
 # process
-pstree -p    # プロセス一覧(ツリー表示)
+pstree -p        # プロセス一覧(ツリー表示)
+netstat -ptln    # Listenポート(TCP)持ちのプロセス
+ss -ptln         # Listenポート(TCP)持ちのプロセス
+lsof _           # ファイルオープン中のプロセス
+sudo lsof -i:_   # N番ポートオープン中のプロセス
+lsof -c _        # プロセスNのファイル
+lsof -p _        # PID N番のファイル
 
 # traceroute
 traceroute -T -p 80     # TCP
