@@ -133,14 +133,14 @@ sudo apt-get clean         # アーカイブファイルを削除
 sudo apt-get autoclean     # 未使用パッケージのアーカイブファイルを削除
 
 # pacman
-pacman -S --noconfirm  # パッケージのインストール
-pacman -Syy            # DBの更新
-pacman -Syu            # 全パッケージのアップグレード
-pacman -R              # 指定のパッケージのみ削除
-pacman -Rs             # 指定のPKG＆依存PKGを削除(他PKGが使っている時は残す)
-pacman -Ss             # パッケージを検索
-pacman -Si             # パッケージの情報
-pacman -Ql             # パッケージによってインストールされたファイルの一覧
+sudo -E pacman -S --noconfirm _  # パッケージのインストール
+sudo -E pacman -Syy              # DBの更新
+sudo -E pacman -Syu              # 全パッケージのアップグレード
+sudo pacman -R _                 # 指定のパッケージのみ削除
+sudo pacman -Rs _                # 指定のPKG＆依存PKGを削除(他PKGが使っている時は残す)
+pacman -Ss _                     # パッケージを検索
+pacman -Si _                     # パッケージの情報
+pacman -Ql                       # パッケージによってインストールされたファイルの一覧
 
 # rpm
 rpm -qa      # インストール済のパッケージ一覧
