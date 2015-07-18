@@ -58,32 +58,34 @@ git add
 git add .
 git add -A 
 git branch
-git branch -d branch   # ブランチ削除
+git branch -d _          # ブランチ削除
 git commit
 git commit -m
-git commit --amend   # 直前のログを修正
+git commit --amend       # 直前のログを修正
 git checkout
-git checkout -b branch   # ブランチを作成して、切り替え
+git checkout -b _        # ブランチを作成して、切り替え
 git checkout master
-git checkout -- file   # 前回のコミットに戻す
+git checkout -- _        # 前回のコミットに戻す
 git diff
 git diff HEAD
-git diff --staged   # stagingとHEADの差分
+git diff --staged        # stagingとHEADの差分
 git init
 git log
 git log --graph --oneline --decorate --all
 git log --pretty=format:"%h %ad %s" --date=short --all
-git merge branch   # 今のブランチとbranchをマージ
+git merge _              # 今のブランチと_をマージ
 git merge --no-ff
 git push
 git push -u origin master
 git pull
-git reset   # stagingのファイルを取り消し
+git reset                # stagingのファイルを取り消し
 git status -s
 git stash
 git stash list
 git stash pop
 git stash drop
+git remote -v            # リモートの一覧
+git remote add _ _       # リモートを追加 _1:名前 _2:URL
 
 # tcpdump/ngrep
 tcpdump -i any -s0 -w _         # キャプチャ、ファイル保存
