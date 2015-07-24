@@ -21,6 +21,7 @@ find . -type f -print0 | xargs -0 ls -la | sort -nr -k5
 find . -size +100M -type f -exec du {} \;                  # 100MB超えのファイル
 du -b . | sort -nr
 noglob zmv -W    # *.xxx *.yyy
+stat -c '%a' _   # パーミッション(数字)を表示
 
 # pager
 less -S   # (または起動中に-Sr) 1行で表示する
