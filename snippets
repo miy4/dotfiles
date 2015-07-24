@@ -22,6 +22,10 @@ find . -size +100M -type f -exec du {} \;                  # 100MB超えのフ�
 du -b . | sort -nr
 noglob zmv -W    # *.xxx *.yyy
 stat -c '%a' _   # パーミッション(数字)を表示
+wc -l            # 行数
+wc -m            # 文字数
+wc -w            # ワード数
+wc -c            # バイト数
 
 # pager
 less -S   # (または起動中に-Sr) 1行で表示する
