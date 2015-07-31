@@ -157,3 +157,19 @@ rpm -qa      # インストール済のパッケージ一覧
 rpm -ql _    # パッケージの中身
 rpm -qf _    # このファイルはどのパッケージのものか
 rpm -qi _    # パッケージの概要
+
+# docker
+docker-machine create --driver virtualbox _  # Virtualbox上でboot2docker
+docker-machine rm _                          # マシンを削除する
+docker-machine ls                            # マシンの一覧
+docker-machine inspect _                     # マシン情報を表示
+docker-machine ip _                          # マシンのIPアドレスを表示
+docker-machine start _                       # マシンを起動する
+docker-machine stop _                        # マシンを停止する
+docker-machine kill _                        # マシンを強制停止する
+docker-machine restart _                     # マシンを再起動する
+docker-machine ssh _                         # SSHログイン
+docker-machine ssh _ -- _                    # SSH経由でコマンド実行 
+docker $(docker-machine config _) _          # 指定したマシン上でdockerコマンドを実行できる
+eval "$(docker-machine env _)"               # 以降、指定したマシン上でdockerコマンドを実行できる
+eval "$(docker-machine env _ -u)"            # 設定したDOCKER環境変数を無効にする
