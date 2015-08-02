@@ -159,6 +159,23 @@ rpm -qf _    # このファイルはどのパッケージのものか
 rpm -qi _    # パッケージの概要
 
 # docker
+docker images                                                 # イメージの一覧
+docker pull _image_:_tag_                                     # イメージをダウンロードする
+docker rmi _imageid_                                          # イメージを削除する
+docker run -it _image_:_tag_ _command_                        # コンテナの作成と実行(フォアグラウンド)
+docker run -d _image_:_tag_ _command_                         # コンテナの作成と実行(バックグラウンド)
+docker run -v _hostdir_:_mountpoint_ _image_:_tag_ _command_  # ホストのディレクトリをマウントする
+docker stop _containerid_                                     # コンテナを停止する
+docker start _containerid_                                    # コンテナを起動する
+docker restart _containerid_                                  # コンテナを再起動する
+docker attach _containerid_                                   # 起動中のコンテナにログイン
+docker cp _containerid_:_file_ .                              # コンテナ内のファイルをローカルにコピー
+docker ps -a                                                  # コンテナの一覧
+docker ps -l -q                                               # 直前のコンテナID
+docker inspect _containerid_                                  # コンテナの情報
+docker logs _containerid_                                     # コンテナのログ
+docker top _containerid_                                      # コンテナのプロセス
+docker rm _containerid_                                       # 停止中のコンテナを削除する
 docker-machine create --driver virtualbox _  # Virtualbox上でboot2docker
 docker-machine rm _                          # マシンを削除する
 docker-machine ls                            # マシンの一覧
