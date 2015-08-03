@@ -59,7 +59,11 @@ wget -q --http-user= --http-password= http://
 # curl
 curl ifconfig.me         # リモートIP
 curl ifconfig.me/host    # リモートホスト
-curl 'http://' -H 'HTTP Header' --compressed -o filename -C -    # ヘッダ指定、レンジリクエストによるレジュームを有効
+curl 'http://' -H 'HTTP Header' --compressed -o filename -C -   # ヘッダ指定、レンジリクエストによるレジュームを有効
+curl -d _name1_=_value1_ -d _name2_=_value2_ 'http://'          # x-www-form-urlencoded 形式で POST (URLエンコードしない)
+curl --data-urlencode _name_=_value_ 'http://'                  # x-www-form-urlencoded 形式で POST (URLエンコードする)
+curl --data-binary '@_file_' 'http://'                          # x-www-form-urlencoded 形式で ファイルの内容を POST
+curl -F '_name_=@_file_' 'http://'                              # multipart/form-data 形式で ファイルの内容を POST
 
 # git
 git add 
