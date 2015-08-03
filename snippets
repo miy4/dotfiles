@@ -131,6 +131,7 @@ metaflac --import-picture-from=folder.jpg .flac
 echo "hello" | nc -u -w 0 localhost 5432                    # localhost:5432へUDP送信
 dd if=/dev/urandom count=1024 | nc -u -w 0 localhost 5100   # 1024バイトのランダムデータを送信
 nc -ul -w 0 5432                                            # 5432ポートでUDP待ち受け
+(echo "HTTP/1.0 200 Ok"; echo; echo) | nc -l 80             # 簡易HTTPサーバ
 
 # apt-get, dpkg
 sudo apt-get install -y _  # パッケージのインストール
