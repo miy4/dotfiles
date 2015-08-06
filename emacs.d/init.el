@@ -46,8 +46,6 @@
     :pkgname "ananthakumaran/tide"
     :depends (dash flycheck typescript-mode))
   (el-get-bundle company-mode)
-  (el-get-bundle semantic-refactor)     ; c/c++
-  (el-get-bundle c-eldoc)
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
 )
@@ -407,29 +405,6 @@
     (define-key eww-mode-map "B" 'eww-back-url)
     (define-key eww-mode-map "r" 'eww-reload)))
 
-(defun my/c-settings ()
-  (use-package cc-mode
-    :init
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (setq c-default-style "linux")
-                (setq indent-tabs-mode nil)
-                (setq c-basic-offset 4)
-                (linum-mode 1)
-                (autopair-mode))))
-  (use-package semantic-refactor
-    :commands srefactor-refactor-at-point
-    :init
-    (semantic-mode t)
-    (with-eval-after-load 'cc-mode
-      (bind-keys :map c-mode-map
-                 ("M-RET" . srefactor-refactor-at-point))))
-  (use-package c-eldoc
-    :init
-    (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-    :config
-    (setq c-eldoc-buffer-regenerate-time 60)))
-
 (defun my/darwin-settings ()
   ;; commandキーをメタキーとして使う
   (setq ns-command-modifier 'meta)
@@ -495,7 +470,6 @@
 (my/typescript-settings)
 (my/memo-settings)
 (my/eww-settings)
-(my/c-settings)
 
 (when (eq system-type 'darwin)
   (my/darwin-settings))
