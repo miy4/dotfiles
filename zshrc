@@ -91,7 +91,7 @@ my_zsh_command_line_editting() {
 }
 
 my_zsh_completion() {
-    autoload -Uz compinit && compinit -C
+    autoload -Uz compinit && compinit
     zsh_completions=/usr/local/share/zsh-completions
     test_dir_exists $zsh_completions && fpath=($zsh_completions $fpath)
 
@@ -342,7 +342,7 @@ if test_file_exists $zshrc_site; then
 fi
 
 # プロファイルを取得
-# 事前に .zshenv で zmodload zsh/zprof && zprof すること
+# .zshenv で zmodload zsh/zprof && zprof すること
 if test_command_exists zprof; then
     zprof | less
 fi
