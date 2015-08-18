@@ -340,3 +340,9 @@ local zshrc_site=~/.zshrc_site
 if test_file_exists $zshrc_site; then
     . $zshrc_site
 fi
+
+# プロファイルを取得
+# 事前に .zshenv で zmodload zsh/zprof && zprof すること
+if test_command_exists zprof; then
+    zprof | less
+fi
