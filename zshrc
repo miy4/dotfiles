@@ -245,6 +245,8 @@ my_zsh_antigen() {
         antigen-bundle zsh-users/zsh-syntax-highlighting
         antigen bundle Tarrasch/zsh-bd
         antigen bundle mollifier/anyframe
+        export ENHANCD_COMMAND=ed
+        antigen-bundle b4b4r07/enhancd
         antigen apply
         bindkey '^xr' anyframe-widget-put-history
         bindkey '^xg' anyframe-widget-cd-ghq-repository
