@@ -162,7 +162,7 @@
 
   ;; expand-region
   ;; https://github.com/magnars/expand-region.el
-  (global-set-key (kbd "C-M-w") 'er/expand-region)
+  (global-set-key (kbd "M-m") 'er/expand-region)
 
   ;; region-bindings-mode
   ;; https://github.com/fgallina/region-bindings-mode
