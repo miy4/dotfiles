@@ -45,6 +45,7 @@
     :type github
     :pkgname "ananthakumaran/tide"
     :depends (dash flycheck typescript-mode))
+  (el-get-bundle web-mode)
   (el-get-bundle company-mode)
   (el-get-bundle simplenote2)           ; memo
   (el-get-bundle gist)                  ; github/gist
@@ -311,6 +312,17 @@
 
     (require 'go-autocomplete)))
 
+(defun my/web-settings ()
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+  (with-eval-after-load 'web-mode
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    ;; force autoclosing and autopairing in a terminal
+    ;; https://github.com/fxbois/web-mode/issues/358
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-auto-pairing t)))
+
 (defun my/javascript-settings ()
   ;; 依存:
   ;; npm install -g tern
@@ -466,6 +478,7 @@
 (my/programming-settings)
 (my/markdown-settings)
 (my/golang-settings)
+(my/web-settings)
 (my/javascript-settings)
 (my/typescript-settings)
 (my/memo-settings)
