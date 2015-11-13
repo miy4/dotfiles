@@ -283,6 +283,9 @@
     (define-key markdown-mode-map (kbd "C-c m") 'markdown-preview-file)))
 
 (defun my/golang-settings ()
+  ;; depends: go get github.com/rogpeppe/godef
+  ;; depends: go get golang.org/x/tools/cmd/goimports
+  ;; depends: go get github.com/nsf/gocode
   (defun my/turn-on-flycheck-mode ()
     (linum-mode 1)
     (flycheck-mode 1))
