@@ -289,6 +289,8 @@ my_zsh_android() {
     if test_dir_exists /opt/android-sdk; then
         export ANDROID_HOME=/opt/android-sdk
         export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
+    elif test_dir_exists /usr/local/opt/android-sdk; then
+        export ANDROID_HOME=/usr/local/opt/android-sdk
     fi
 }
 
