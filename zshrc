@@ -285,6 +285,13 @@ my_zsh_java() {
     fi
 }
 
+my_zsh_android() {
+    if test_dir_exists /opt/android-sdk; then
+        export ANDROID_HOME=/opt/android-sdk
+        export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
+    fi
+}
+
 my_zsh_git() {
     if brew --prefix git >/dev/null 2>&1; then
         export PATH=$PATH:$(brew --prefix git)/share/git-core/contrib/diff-highlight
@@ -330,6 +337,7 @@ my_zsh_ruby
 my_zsh_javascript
 my_zsh_golang
 my_zsh_java
+my_zsh_android
 my_zsh_git
 my_zsh_clipboard
 
