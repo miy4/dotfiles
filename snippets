@@ -167,6 +167,7 @@ sudo apt-get autoclean     # 未使用パッケージのアーカイブファイ
 sudo -E pacman -S --noconfirm _  # パッケージのインストール
 sudo -E pacman -Syy              # DBの更新
 sudo -E pacman -Syu              # 全パッケージのアップグレード
+yaourt -Syua                     # 全パッケージのアップグレード(pacman+yaourt両方)
 sudo pacman -R _                 # 指定のパッケージのみ削除
 sudo pacman -Rs _                # 指定のPKG＆依存PKGを削除(他PKGが使っている時は残す)
 pacman -Ss _                     # パッケージを検索
