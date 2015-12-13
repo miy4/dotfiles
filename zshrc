@@ -231,6 +231,10 @@ my_zsh_alias() {
         alias dropbook='open "$(ls -1d ~/Dropbox/books/* | peco)"'
     fi
 
+    function = {
+        bc -l <<< "$@"
+    }
+
     if on_osx; then
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
         alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all'
