@@ -77,7 +77,7 @@ my_zsh_command_line_editting() {
         fi
         echo " (%F{$color}$branch%f)"
     }
-    PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{green}(｡ÖｖÖ)%f< "
+    PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{magenta}❯%f "
     #RPROMPT="!%F{cyan}%!%f"
 
     # スニペット
