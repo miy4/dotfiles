@@ -295,8 +295,8 @@ my_zsh_android() {
 }
 
 my_zsh_git() {
-    if brew --prefix git >/dev/null 2>&1; then
-        export PATH=$PATH:$(brew --prefix git)/share/git-core/contrib/diff-highlight
+    if test_executable /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight; then
+        export PATH=$PATH:/usr/local/opt/git/share/git-core/contrib/diff-highlight
     elif test_executable /usr/share/git/diff-highlight/diff-highlight; then
         export PATH=$PATH:/usr/share/git/diff-highlight
     fi
