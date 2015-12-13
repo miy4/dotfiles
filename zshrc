@@ -91,7 +91,7 @@ my_zsh_command_line_editting() {
 }
 
 my_zsh_completion() {
-    autoload -Uz compinit && compinit
+    autoload -Uz compinit && compinit -C
     zsh_completions=/usr/local/share/zsh-completions
     test_dir_exists $zsh_completions && fpath=($zsh_completions $fpath)
 
