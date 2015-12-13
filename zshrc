@@ -259,12 +259,18 @@ my_zsh_zplug() {
 
     source $zplug_zsh
     zplug "zsh-users/zsh-syntax-highlighting"
+    zplug "zsh-users/zsh-history-substring-search"
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
     zplug "b4b4r07/enhancd", of:enhancd.sh
 
     zplug check || zplug install
     zplug load
+
+    if zplug check "zsh-users/zsh-history-substring-search"; then
+        bindkey -M emacs '^P' history-substring-search-up
+        bindkey -M emacs '^N' history-substring-search-down
+    fi
 
     if zplug check "mollifier/anyframe"; then
         bindkey '^xr' anyframe-widget-put-history
