@@ -253,6 +253,25 @@ my_zsh_antigen() {
     fi
 }
 
+my_zsh_zplug() {
+    local zplug_zsh=~/src/github.com/b4b4r07/zplug/zplug
+    test_file_exists $zplug_zsh || return
+
+    source $zplug_zsh
+    zplug "zsh-users/zsh-syntax-highlighting"
+    zplug "mollifier/anyframe"
+    export ENHANCD_COMMAND=ed
+    zplug "b4b4r07/enhancd", of:enhancd.sh
+
+    zplug check || zplug install
+    zplug load
+
+    if zplug check "mollifier/anyframe"; then
+        bindkey '^xr' anyframe-widget-put-history
+        bindkey '^xg' anyframe-widget-cd-ghq-repository
+    fi
+}
+
 my_zsh_ruby() {
     # https://github.com/sstephenson/rbenv/
     if test_command_exists rbenv; then
@@ -345,7 +364,8 @@ my_zsh_android
 my_zsh_git
 my_zsh_clipboard
 
-my_zsh_antigen
+#my_zsh_antigen
+my_zsh_zplug
 my_zsh_alias
 
 # 環境依存の設定を読み込む
