@@ -18,3 +18,5 @@
 	diff = diff-highlight | less
 [merge]
     ff = false
+[pull]
+	rebase = true
