@@ -179,7 +179,8 @@
   (define-key region-bindings-mode-map (kbd "u") 'mc/unmark-next-like-this)
   (define-key region-bindings-mode-map (kbd "U") 'mc/unmark-previous-like-this)
   (define-key region-bindings-mode-map (kbd "s") 'mc/skip-to-next-like-this)
-  (define-key region-bindings-mode-map (kbd "S") 'mc/skip-to-previous-like-this))
+  (define-key region-bindings-mode-map (kbd "S") 'mc/skip-to-previous-like-this)
+  (define-key region-bindings-mode-map (kbd "r") 'anzu-query-replace-at-cursor-thing))
 
 (defun my/helm-anything-settings ()
   (require 'helm-config)
