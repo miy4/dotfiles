@@ -10,8 +10,15 @@
 [github]
 	user = miy4
 [alias]
-	s = status
-	l = log --graph --oneline --decorate -n 20
+	br = branch
+	co = checkout
+	st = status
+	sh = show
+	ft = fetch
+	co = checkout
+	ad = add
+	ci = commit
+	l  = log --graph --oneline --decorate -n 20
 [pager]
 	log = diff-highlight | less
 	show = diff-highlight | less
