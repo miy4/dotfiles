@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+
 load_utilities() {
     test_file_exists() { [[ -f $1 ]] }
     test_dir_exists() { [[ -d $1 ]] }
@@ -391,3 +393,4 @@ fi
 if test_command_exists zprof; then
     zprof | less
 fi
+
