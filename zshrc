@@ -239,8 +239,7 @@ my_zsh_alias() {
 
     if on_osx; then
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-        alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all'
-        alias update-cask='brew update && for c in $(brew cask list); do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done && brew cask cleanup && for c in /opt/homebrew-cask/Caskroom/*; do versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done; done'
+        alias update='sudo softwareupdate -i -a; brew update && brew upgrade && for c in $(brew cask list); do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done && for c in /opt/homebrew-cask/Caskroom/*; do versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done; done'
     fi
 }
 
