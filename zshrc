@@ -81,15 +81,6 @@ my_zsh_command_line_editting() {
     }
     PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{magenta}❯%f "
     #RPROMPT="!%F{cyan}%!%f"
-
-    # スニペット
-    peco-snippets() {
-        BUFFER=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER" | sed 's/[[:blank:]]*#[^#]*$//')
-        CURSOR=$#BUFFER
-        zle clear-screen
-    }
-    zle -N peco-snippets
-    bindkey '^xs' peco-snippets
 }
 
 my_zsh_completion() {
@@ -269,6 +260,9 @@ my_zsh_zplug() {
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
     zplug "b4b4r07/enhancd", of:enhancd.sh
+    export EASY_ONE_REFFILE=~/.snippets
+    export EASY_ONE_KEYBIND="^xs"
+    zplug "b4b4r07/easy-oneliner", if:"which fzf"
 
     zplug check || zplug install
     zplug load
