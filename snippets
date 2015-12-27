@@ -1,44 +1,44 @@
 : ls
-[ファイルリスト 拡張子順]         ls -lXB
+[ファイルリスト 拡張子順] ls -lXB
 [ファイルリスト ファイルサイズ順] ls -lSr
-[ファイルリスト 更新順]           ls -ltcr
-[ファイルリスト アクセス順]       ls -ltur
-[ファイルサイズ順ワースト10件]    find . -type f -print0 | xargs -0 ls -la | sort -nr -k5 | tail -n 10
+[ファイルリスト 更新順] ls -ltcr
+[ファイルリスト アクセス順] ls -ltur
+[ファイルサイズ順ワースト10件] find . -type f -print0 | xargs -0 ls -la | sort -nr -k5 | tail -n 10
 
 : sed, awk
 [5行目から100行目を出力] sed -n 5,100p @file
 
 : od
 [バイナリエディタ風] od -Ax -tx1z @file
-[上下に並べる]       od -Ax -tx1c @file
+[上下に並べる] od -Ax -tx1c @file
 
 : date
-[UNIX時間]       date +%s
+[UNIX時間] date +%s
 [日付→UNIX時間] date -d datestr@ +%s
 [UNIX時間→日付] date -d @unixtime +"%Y/%m/%d %T"
 
 : fileutil
-[100MB超えのファイル]              find . -size +100M -type f -exec du {} \;
+[100MB超えのファイル] find . -size +100M -type f -exec du {} \;
 [どのディレクトリがサイズ大きい？] du -b . | sort -n
-[ファイルの拡張子を変更]           noglob zmv -W *.xxx *.yyy
-[パーミッションを表示]             stat -c '%a' @file
-[ランダムで10行ピックアップ]       shuf -n 10 @file
-[Spotlightファイル検索]            mdfind @keyword
-[ファイルメタ情報]                 mdls @file
+[ファイルの拡張子を変更] noglob zmv -W *.xxx *.yyy
+[パーミッションを表示] stat -c '%a' @file
+[ランダムで10行ピックアップ] shuf -n 10 @file
+[Spotlightファイル検索] mdfind @keyword
+[ファイルメタ情報] mdls @file
 
 : wc
-[行数]     wc -l
-[文字数]   wc -m
+[行数] wc -l
+[文字数] wc -m
 [ワード数] wc -w
 [バイト数] wc -c
 
 : pager
-[1行で表示する]        less -S    # または起動中に-Sr
-[ANSIカラーを表示する] less -R    # または起動中に-Rr
-[tail -f モード]       less +F    # または起動中にF
+[1行で表示する] less -S # または起動中に-Sr
+[ANSIカラーを表示する] less -R # または起動中に-Rr
+[tail -f モード] less +F # または起動中にF
 
 : process
-[プロセス一覧(ツリー表示)]        pstree -p
+[プロセス一覧(ツリー表示)] pstree -p
 [Listenポート(TCP)持ちのプロセス] netstat -ptln
 [Listenポート(TCP)持ちのプロセス] ss -ptln
 
@@ -46,84 +46,84 @@
 [タイムアウトつきでコマンド実行] timeout 10 @cmd
 
 : sysstat
-[ファイルオープン中のプロセス]  lsof @file
+[ファイルオープン中のプロセス] lsof @file
 [N番ポートオープン中のプロセス] lsof -P -i:@portnum
-[プロセスNのファイル]           lsof -P -c @process
-[PID N番のファイル]             lsof -n -P -p @pid
+[プロセスNのファイル] lsof -P -c @process
+[PID N番のファイル] lsof -n -P -p @pid
 
-[ロードアベレージ]       sar -q
-[CPU使用率]              sar -u
-[I/O]                    sar -b
+[ロードアベレージ] sar -q
+[CPU使用率] sar -u
+[I/O] sar -b
 [メモリとスワップ使用率] sar -r
-[X時Y分Z秒以降のデータ]  sar -s @X:Y:Z
-[X時Y分Z秒までのデータ]  sar -e @X:Y:Z
+[X時Y分Z秒以降のデータ] sar -s @X:Y:Z
+[X時Y分Z秒までのデータ] sar -e @X:Y:Z
 
 : traceroute
-[TCP]  traceroute -T -p @portnum
-[UDP]  traceroute -U -p @portnum
+[TCP] traceroute -T -p @portnum
+[UDP] traceroute -U -p @portnum
 [ICMP] traceroute -I
 
 : wget
 [ベーシック認証] wget -q --http-user= --http-password= http://
 
 : curl
-[リモートIP]     curl ifconfig.me
+[リモートIP] curl ifconfig.me
 [リモートホスト] curl ifconfig.me/host
 [ヘッダ指定、レンジリクエストによるレジュームを有効] curl 'http://' -H 'HTTP Header' --compressed -o @outfile -C -
-[URLを元にファイルに出力]                            curl -O 'http://'
-[転送情報を抑制]                                     curl -sS 'http://'
-[レスポンスヘッダを出力]                             curl -I -s 'http://'
-[レスポンスヘッダ＆ボディを出力]                     curl -i -s 'http://'
-[リクエスト＆レスポンスを出力]                       curl -v -s 'http://'
-[より詳しく、トレース情報を出力]                     curl -sS --trace @tracelog -o /dev/null 'http://'
-[x-www-form-urlencodedでPOST(URLエンコードしない)]   curl -d 'name1=value1&name2=value2' -X POST 'http://'
-[x-www-form-urlencodedでPOST(URLエンコードする)]     curl --data-urlencode 'name=value' -X POST 'http://'
-[x-www-form-urlencodedでファイルの内容をPOST]        curl --data-binary @file -X POST 'http://'
-[multipart/form-dataでファイルの内容をPOST]          curl -F 'name=file' -X POST 'http://'
-[ベーシック認証]                                     curl -u @user:@password 'http://'
-[ベーシック認証(パスワードは別途)]                   curl -u @user 'http://'
-[Cookieを保存]                                       curl -c @cookiefile 'http://'
-[Cookieを設定]                                       curl -b @cookiefile 'http://'
-[URLエンコード]                                      curl -s -w '%{url_effective}\n' --data-urlencode '@word' -G '' | cut -c 3-
+[URLを元にファイルに出力] curl -O 'http://'
+[転送情報を抑制] curl -sS 'http://'
+[レスポンスヘッダを出力] curl -I -s 'http://'
+[レスポンスヘッダ＆ボディを出力] curl -i -s 'http://'
+[リクエスト＆レスポンスを出力] curl -v -s 'http://'
+[より詳しく、トレース情報を出力] curl -sS --trace @tracelog -o /dev/null 'http://'
+[x-www-form-urlencodedでPOST(URLエンコードしない)] curl -d 'name1=value1&name2=value2' -X POST 'http://'
+[x-www-form-urlencodedでPOST(URLエンコードする)] curl --data-urlencode 'name=value' -X POST 'http://'
+[x-www-form-urlencodedでファイルの内容をPOST] curl --data-binary @file -X POST 'http://'
+[multipart/form-dataでファイルの内容をPOST] curl -F 'name=file' -X POST 'http://'
+[ベーシック認証] curl -u @user:@password 'http://'
+[ベーシック認証(パスワードは別途)] curl -u @user 'http://'
+[Cookieを保存] curl -c @cookiefile 'http://'
+[Cookieを設定] curl -b @cookiefile 'http://'
+[URLエンコード] curl -s -w '%{url_effective}\n' --data-urlencode '@word' -G '' | cut -c 3-
 
 : git
-[インデックスへ追加]           git add
-[新規作成/変更ファイルを追加]  git add .
-[新規作成/変更/削除を追加]     git add -A
-[ブランチ作成]                 git branch @branchname
-[ブランチ一覧]                 git branch -a
-[ブランチ削除]                 git branch -d @branchname
-[コミット]                     git commit
-[メッセージ付きコミット]       git commit -m @msg
-[直前のログを修正]             git commit --amend
-[ブランチを切り替え]           git checkout @branch
+[インデックスへ追加] git add
+[新規作成/変更ファイルを追加] git add .
+[新規作成/変更/削除を追加] git add -A
+[ブランチ作成] git branch @branchname
+[ブランチ一覧] git branch -a
+[ブランチ削除] git branch -d @branchname
+[コミット] git commit
+[メッセージ付きコミット] git commit -m @msg
+[直前のログを修正] git commit --amend
+[ブランチを切り替え] git checkout @branch
 [ブランチを作成して、切り替え] git checkout -b @branch
-[前回のコミットに戻す]         git checkout -- @file
-[working treeとindexの差分]    git diff
-[working treeとHEADの差分]     git diff HEAD
-[indexとHEADの差分]            git diff --cached
-[初期化]                       git init
-[コミットログ]                 git log
-[コミットログ]                 git log --graph --oneline --decorate --all
-[コミットログ]                 git log --pretty=format:"%h %ad %s" --date=short --all
-[今のブランチと指定のブランチをマージ]   git merge @branchname
-[どのブランチかわかるようにマージ]       git merge --no-ff
+[前回のコミットに戻す] git checkout -- @file
+[working treeとindexの差分] git diff
+[working treeとHEADの差分] git diff HEAD
+[indexとHEADの差分] git diff --cached
+[初期化] git init
+[コミットログ] git log
+[コミットログ] git log --graph --oneline --decorate --all
+[コミットログ] git log --pretty=format:"%h %ad %s" --date=short --all
+[今のブランチと指定のブランチをマージ] git merge @branchname
+[どのブランチかわかるようにマージ] git merge --no-ff
 [リモートレポジトリにブランチ作成、変更] git push @repos @refspec
-[@refspecは@reposを追跡する]             git push -u @repos @refspec
-[リモートレポジトリの内容を取り込み]     git pull @repos @refspec
-[リモートを追加]                         git remote add @name @url
-[stagingのファイルを取り消し]  git reset
-[現在の作業を退避する]         git stash save
-[退避した作業の一覧]           git stash list
-[退避した作業を復元]           git stash pop
-[退避した作業を削除]           git stash drop
-[リモートの一覧]               git remote -v
+[@refspecは@reposを追跡する] git push -u @repos @refspec
+[リモートレポジトリの内容を取り込み] git pull @repos @refspec
+[リモートを追加] git remote add @name @url
+[stagingのファイルを取り消し] git reset
+[現在の作業を退避する] git stash save
+[退避した作業の一覧] git stash list
+[退避した作業を復元] git stash pop
+[退避した作業を削除] git stash drop
+[リモートの一覧] git remote -v
 
 : tcpdump/ngrep
-[キャプチャ、ファイル保存]               tcpdump -i any -s0 -w @file
+[キャプチャ、ファイル保存] tcpdump -i any -s0 -w @file
 [-wのデータを読み込み、80番ポートを出力] tcpdump -r @file port 80
-[標準出力&ファイル出力]                  tcpdump -i any -nlx | tee @file
-[ASCIIで80番ポートを出力]                tcpdump -i any -s0 -A port 80
+[標準出力&ファイル出力] tcpdump -i any -nlx | tee @file
+[ASCIIで80番ポートを出力] tcpdump -i any -s0 -A port 80
 
 : openssl
 [PKCS12->秘密鍵] openssl pkcs12 -in foo.p12 -nocerts -nodes -out foo.key.pem
@@ -136,21 +136,21 @@
 [ダイジェスト:SHA256] shasum -a 256 file
 
 : abcde
-[FLACでリッピング(全トラック)]   abcde -o flac:"-8" -d /dev/@device
+[FLACでリッピング(全トラック)] abcde -o flac:"-8" -d /dev/@device
 [FLACでリッピング(トラック指定)] abcde -o flac:"-8" -d /dev/@device 1-9
 
 : metaflac
 [タグのエクスポート] metaflac --export-tags-to=- @file
-[タグを設定]         metaflac --set-tag=ARTIST="" --set-tag=ALBUM="" --set-tag=TITLE="" --set-tag=DATE= --set-tag=GENRE= --set-tag=TRACKNUMBER= @file
-[タグを削除]         metaflac --remove-tag= @file
+[タグを設定] metaflac --set-tag=ARTIST="" --set-tag=ALBUM="" --set-tag=TITLE="" --set-tag=DATE= --set-tag=GENRE= --set-tag=TRACKNUMBER= @file
+[タグを削除] metaflac --remove-tag= @file
 [カバーアートの取得] metaflac --export-picture-to=folder.jpg @file
 [カバーアートの設定] metaflac --import-picture-from=folder.jpg @file
 
 : netcat
-[localhost:5432へUDP送信]          echo "hello" | nc -u -w 0 localhost 5432
+[localhost:5432へUDP送信] echo "hello" | nc -u -w 0 localhost 5432
 [1024バイトのランダムデータを送信] dd if=/dev/urandom count=1024 | nc -u -w 0 localhost 5100
-[5432ポートでUDP待ち受け]          nc -ul -w 0 5432
-[簡易HTTPサーバ]                   (echo "HTTP/1.0 200 Ok"; echo; echo) | nc -l 80
+[5432ポートでUDP待ち受け] nc -ul -w 0 5432
+[簡易HTTPサーバ] (echo "HTTP/1.0 200 Ok"; echo; echo) | nc -l 80
 
 : WIFI Management for Mac OSX
 [ネットワークインターフェースの一覧] networksetup -listallhardwareports
@@ -160,70 +160,70 @@
 [WIFIネットワークの接続先を設定] networksetup -setairportnetwork en0 @ssid @wifipassword
 
 : apt-get, dpkg
-[パッケージのインストール]                   sudo apt-get install -y @package
-[パッケージリストの更新]                     sudo apt-get update
-[パッケージの更新]                           sudo apt-get upgrade
-[ディストリの更新]                           sudo apt-get dist-upgrade
-[インストール済パッケージの一覧]             dpkg -l
-[インストール済パッケージのファイル一覧]     dpkg -L @package
-[パッケージの検索]                           apt-cache search @keyword
-[パッケージの削除]                           sudo apt-get remove @package
-[未使用パッケージを削除]                     sudo apt-get autoremove
-[パッケージ、設定ファイルを削除]             sudo apt-get purge @package
-[アーカイブファイルを削除]                   sudo apt-get clean
+[パッケージのインストール] sudo apt-get install -y @package
+[パッケージリストの更新] sudo apt-get update
+[パッケージの更新] sudo apt-get upgrade
+[ディストリの更新] sudo apt-get dist-upgrade
+[インストール済パッケージの一覧] dpkg -l
+[インストール済パッケージのファイル一覧] dpkg -L @package
+[パッケージの検索] apt-cache search @keyword
+[パッケージの削除] sudo apt-get remove @package
+[未使用パッケージを削除] sudo apt-get autoremove
+[パッケージ、設定ファイルを削除] sudo apt-get purge @package
+[アーカイブファイルを削除] sudo apt-get clean
 [未使用パッケージのアーカイブファイルを削除] sudo apt-get autoclean
 
 : pacman
-[パッケージのインストール]                            sudo -E pacman -S --noconfirm @package
-[DBの更新]                                            sudo -E pacman -Syy
-[全パッケージのアップグレード]                        sudo -E pacman -Syu
-[全パッケージのアップグレード]                        yaourt -Syua
-[指定のパッケージのみ削除]                            sudo pacman -R @package
+[パッケージのインストール] sudo -E pacman -S --noconfirm @package
+[DBの更新] sudo -E pacman -Syy
+[全パッケージのアップグレード] sudo -E pacman -Syu
+[全パッケージのアップグレード] yaourt -Syua
+[指定のパッケージのみ削除] sudo pacman -R @package
 [指定のPKG＆依存PKGを削除(他PKGが使っている時は残す)] sudo pacman -Rs @package
-[パッケージを検索]                                    pacman -Ss @keyword
-[パッケージの情報]                                    pacman -Si @package
-[パッケージによってインストールされたファイルの一覧]  pacman -Ql
+[パッケージを検索] pacman -Ss @keyword
+[パッケージの情報] pacman -Si @package
+[パッケージによってインストールされたファイルの一覧] pacman -Ql
 
 : rpm
-[インストール済のパッケージ一覧]       rpm -qa
-[パッケージの中身]                     rpm -ql @package
+[インストール済のパッケージ一覧] rpm -qa
+[パッケージの中身] rpm -ql @package
 [このファイルはどのパッケージのものか] rpm -qf @file
-[パッケージの概要]                     rpm -qi @package
+[パッケージの概要] rpm -qi @package
 
 : docker
-[イメージの一覧]                                     docker images
-[イメージをダウンロードする]                         docker pull @image:@tag
-[イメージのコマンド履歴]                             docker history @image:@tag
-[イメージの情報]                                     docker inspect @image:@tag
-[イメージを削除する]                                 docker rmi @imageid
-[コンテナの作成と実行(フォアグラウンド)]             docker run -it @image:@tag @command
+[イメージの一覧] docker images
+[イメージをダウンロードする] docker pull @image:@tag
+[イメージのコマンド履歴] docker history @image:@tag
+[イメージの情報] docker inspect @image:@tag
+[イメージを削除する] docker rmi @imageid
+[コンテナの作成と実行(フォアグラウンド)] docker run -it @image:@tag @command
 [コンテナの作成と実行(コマンド完了後、コンテナ破棄)] docker run -rm -it @image:@tag @command
-[コンテナの作成と実行(バックグラウンド)]             docker run -d @image:@tag @command
-[ホストのディレクトリをマウントする]                 docker run -v @hostdir:@mountpoint @image:@tag @command
-[コンテナからイメージを作成する]                     docker commit -m "..." @containerid @username/@image
-[Dockerfile からイメージを作成する]                  docker build @username/@image @dir
-[コンテナを停止する]                                 docker stop @containerid
-[コンテナを起動する]                                 docker start @containerid
-[コンテナを再起動する]                               docker restart @containerid
-[起動中のコンテナにログイン]                         docker attach @containerid
-[コンテナ内のファイルをローカルにコピー]             docker cp @containerid:@file .
-[コンテナの一覧]                                     docker ps -a
-[直前のコンテナID]                                   docker ps -l -q
-[コンテナの情報]                                     docker inspect @containerid
-[コンテナのログ]                                     docker logs @containerid
-[コンテナのプロセス]                                 docker top @containerid
-[停止中のコンテナを削除する]                         docker rm @containerid
-[Virtualbox上でboot2docker]                          docker-machine create --driver virtualbox @machine
-[マシンを削除する]                                   docker-machine rm @machine
-[マシンの一覧]                                       docker-machine ls
-[マシン情報を表示]                                   docker-machine inspect @machine
-[マシンのIPアドレスを表示]                           docker-machine ip @machine
-[マシンを起動する]                                   docker-machine start @machine
-[マシンを停止する]                                   docker-machine stop @machine
-[マシンを強制停止する]                               docker-machine kill @machine
-[マシンを再起動する]                                 docker-machine restart @machine
-[SSHログイン]                                        docker-machine ssh @machine
-[SSH経由でコマンド実行 ]                             docker-machine ssh @machine -- @command
-[指定したマシン上でdockerコマンドを実行できる]       docker $(docker-machine config @machine) @command
+[コンテナの作成と実行(バックグラウンド)] docker run -d @image:@tag @command
+[ホストのディレクトリをマウントする] docker run -v @hostdir:@mountpoint @image:@tag @command
+[コンテナからイメージを作成する] docker commit -m "..." @containerid @username/@image
+[Dockerfile からイメージを作成する] docker build @username/@image @dir
+[コンテナを停止する] docker stop @containerid
+[コンテナを起動する] docker start @containerid
+[コンテナを再起動する] docker restart @containerid
+[起動中のコンテナにログイン] docker attach @containerid
+[コンテナ内のファイルをローカルにコピー] docker cp @containerid:@file .
+[コンテナの一覧] docker ps -a
+[直前のコンテナID] docker ps -l -q
+[コンテナの情報] docker inspect @containerid
+[コンテナのログ] docker logs @containerid
+[コンテナのプロセス] docker top @containerid
+[停止中のコンテナを削除する] docker rm @containerid
+[Virtualbox上でboot2docker] docker-machine create --driver virtualbox @machine
+[マシンを削除する] docker-machine rm @machine
+[マシンの一覧] docker-machine ls
+[マシン情報を表示] docker-machine inspect @machine
+[マシンのIPアドレスを表示] docker-machine ip @machine
+[マシンを起動する] docker-machine start @machine
+[マシンを停止する] docker-machine stop @machine
+[マシンを強制停止する] docker-machine kill @machine
+[マシンを再起動する] docker-machine restart @machine
+[SSHログイン] docker-machine ssh @machine
+[SSH経由でコマンド実行 ] docker-machine ssh @machine -- @command
+[指定したマシン上でdockerコマンドを実行できる] docker $(docker-machine config @machine) @command
 [以降、指定したマシン上でdockerコマンドを実行できる] eval "$(docker-machine env @machine)"
-[設定したDOCKER環境変数を無効にする]                 eval "$(docker-machine env @machine -u)"
+[設定したDOCKER環境変数を無効にする] eval "$(docker-machine env @machine -u)"
