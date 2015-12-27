@@ -152,6 +152,13 @@
 [5432ポートでUDP待ち受け]          nc -ul -w 0 5432
 [簡易HTTPサーバ]                   (echo "HTTP/1.0 200 Ok"; echo; echo) | nc -l 80
 
+: WIFI Management for Mac OSX
+[ネットワークインターフェースの一覧] networksetup -listallhardwareports
+[WIFIをOFFにする] networksetup -setairportpower en0 off
+[WIFIをONにする] networksetup -setairportpower en0 on
+[WIFIネットワークの一覧] /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport scan
+[WIFIネットワークの接続先を設定] networksetup -setairportnetwork en0 @ssid @wifipassword
+
 : apt-get, dpkg
 [パッケージのインストール]                   sudo apt-get install -y @package
 [パッケージリストの更新]                     sudo apt-get update
