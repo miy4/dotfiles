@@ -259,6 +259,7 @@ my_zsh_zplug() {
     zplug "zsh-users/zsh-history-substring-search"
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
+    export ENHANCD_FILTER=peco:fzf
     zplug "b4b4r07/enhancd", of:enhancd.sh
     export EASY_ONE_REFFILE=~/.snippets
     export EASY_ONE_KEYBIND="^xs"
