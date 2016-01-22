@@ -259,7 +259,7 @@ my_zsh_zplug() {
     zplug "zsh-users/zsh-history-substring-search"
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
-    export ENHANCD_FILTER=peco:fzf
+    export ENHANCD_FILTER=fzf:peco
     zplug "b4b4r07/enhancd", of:enhancd.sh
     export EASY_ONE_REFFILE=~/.snippets
     export EASY_ONE_KEYBIND="^xs"
@@ -274,6 +274,9 @@ my_zsh_zplug() {
     fi
 
     if zplug check "mollifier/anyframe"; then
+        if test_command_exists fzf; then
+            zstyle ":anyframe:selector:" use fzf
+        fi
         bindkey '^xr' anyframe-widget-put-history
         bindkey '^xg' anyframe-widget-cd-ghq-repository
     fi
@@ -331,6 +334,12 @@ my_zsh_clipboard() {
     fi
 }
 
+my_zsh_filter() {
+    if test_command_exists fzf; then
+        export FZF_DEFAULT_OPTS='--reverse --cycle --inline-info'
+    fi
+}
+
 load_utilities
 
 ulimit -c unlimited
@@ -347,6 +356,7 @@ my_zsh_java
 my_zsh_android
 my_zsh_git
 my_zsh_clipboard
+my_zsh_filter
 
 #my_zsh_antigen
 my_zsh_zplug
