@@ -336,7 +336,7 @@ my_zsh_clipboard() {
 
 my_zsh_filter() {
     if test_command_exists fzf; then
-        export FZF_DEFAULT_OPTS='--reverse --cycle --inline-info'
+        export FZF_DEFAULT_OPTS="--reverse --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
     fi
 }
 
