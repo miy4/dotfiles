@@ -80,7 +80,6 @@ my_zsh_command_line_editting() {
         echo " (%F{$color}$branch%f)"
     }
     PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{magenta}❯%f "
-    #RPROMPT="!%F{cyan}%!%f"
 }
 
 my_zsh_completion() {
@@ -194,22 +193,6 @@ my_zsh_alias() {
     fi
 }
 
-my_zsh_antigen() {
-    # https://github.com/zsh-users/antigen
-    local antigen_zsh=~/src/github.com/zsh-users/antigen/antigen.zsh
-    if test_file_exists $antigen_zsh; then
-        source $antigen_zsh
-        antigen bundle zsh-users/zsh-syntax-highlighting
-        antigen bundle Tarrasch/zsh-bd
-        antigen bundle mollifier/anyframe
-        export ENHANCD_COMMAND=ed
-        antigen bundle b4b4r07/enhancd
-        antigen apply
-        bindkey '^xr' anyframe-widget-put-history
-        bindkey '^xg' anyframe-widget-cd-ghq-repository
-    fi
-}
-
 my_zsh_zplug() {
     local zplug_zsh=~/src/github.com/b4b4r07/zplug/zplug
     test_file_exists $zplug_zsh || return
@@ -318,7 +301,6 @@ my_zsh_git
 my_zsh_clipboard
 my_zsh_filter
 
-#my_zsh_antigen
 my_zsh_zplug
 my_zsh_alias
 
