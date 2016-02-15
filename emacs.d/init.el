@@ -22,6 +22,7 @@
   (el-get-bundle multiple-cursors)
   (el-get-bundle region-bindings-mode)  ; completion
   (el-get-bundle auto-complete)
+  (el-get-bundle yasnippet)             ; template system
   (el-get-bundle autopair)              ; parens
   (el-get-bundle flycheck)              ; validation
   (el-get-bundle quickrun)              ; execution
@@ -30,6 +31,7 @@
   (el-get-bundle helm-ag)
   (el-get-bundle helm-dash)
   (el-get-bundle helm-descbinds)
+  (el-get-bundle helm-c-yasnippet)
   (el-get-bundle ace-jump-mode)         ; acejump
   (el-get-bundle elscreen :type git :url "git@github.com:knu/elscreen.git") ; session manager
   (el-get-bundle markdown-mode)         ; markdown
@@ -273,7 +275,20 @@
   (global-set-key (kbd "C-c C-q") 'quickrun)
   (global-set-key (kbd "C-c C-w") 'quickrun-with-arg)
   (global-set-key (kbd "C-c C-r") 'compile)
-  (global-set-key (kbd "C-c RET") 'recompile))
+  (global-set-key (kbd "C-c RET") 'recompile)
+
+  ;; yasnippet
+  ;; https://github.com/capitaomorte/yasnippet
+  (with-eval-after-load 'yasnippet
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
+    (yas-global-mode 1))
+  ;; helm-c-yasnippet
+  ;; https://github.com/emacs-jp/helm-c-yasnippet
+  (with-eval-after-load 'helm-c-yasnippet
+    (setq helm-yas-space-match-any-greedy t)
+    (global-set-key (kbd "C-z y") 'helm-yas-complete)))
 
 (defun my/markdown-settings ()
   (defun markdown-preview-file ()
