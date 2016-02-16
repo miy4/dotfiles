@@ -282,7 +282,7 @@
   (with-eval-after-load 'yasnippet
     (define-key yas-minor-mode-map (kbd "<tab>") nil)
     (define-key yas-minor-mode-map (kbd "TAB") nil)
-    (push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
     (yas-global-mode 1))
   ;; helm-c-yasnippet
   ;; https://github.com/emacs-jp/helm-c-yasnippet
