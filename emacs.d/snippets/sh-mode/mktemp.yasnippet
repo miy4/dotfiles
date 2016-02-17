@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: mktemp
+# key: mktemp
+# --
+_TMP=$(mktemp -t ${1:tmp.XXXXXX})
+trap "rm $_TMP* 2>/dev/null" EXIT
