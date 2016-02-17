@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if var has been assigned a value
+# key: assignedvalue
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -v ${1:var} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`

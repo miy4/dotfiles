@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if the length of string is non-zero
+# key: notnullstring?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -n ${1:string} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`
