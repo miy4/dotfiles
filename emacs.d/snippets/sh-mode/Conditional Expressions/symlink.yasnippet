@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if file exists and is a symbolic link?
+# key: symlink?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -h ${1:file} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`

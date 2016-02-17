@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if file exists and has a size greater than zero
+# key: not_empty?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -s ${1:file} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))` 

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if file exists
+# key: exists?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -e ${1:file} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`

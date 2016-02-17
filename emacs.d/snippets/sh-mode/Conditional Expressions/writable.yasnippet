@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if file exists and writable
+# key: writable?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -w ${1:file} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`

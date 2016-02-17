@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: test if file exists and is a regular file
+# key: regular_file?
+# group: Conditional Expressions
+# --
+`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "[")))`[ -f ${1:file} ]`(cond ((or (eq sh-shell 'bash) (eq sh-shell 'zsh)) "]")))`
