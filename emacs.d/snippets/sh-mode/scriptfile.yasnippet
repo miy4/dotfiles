@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# condition: (or (eq sh-shell 'bash) (eq sh-shell 'zsh))
+# name: script file name
+# key: scriptfile
+# --
+_SCRIPT_FILE="$(basename "`(cond ((eq sh-shell 'bash) "${BASH_SOURCE[0]}")
+                                 ((eq sh-shell 'zsh) "${(%):-%N}"))`")"
