@@ -2,4 +2,4 @@
 # name: warn
 # key: warn
 # --
-warn() { printf "$@\n" 1>&2 }
+warn() { IFS=" " printf '%s\n' "$*" 1>&2 }
