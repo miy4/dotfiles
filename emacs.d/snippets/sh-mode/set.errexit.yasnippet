@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: set enable to exit when a command fails
+# key: errexit
+# --
+`(cond ((eq sh-shell 'bash) "set -o errexit")
+       ((eq sh-shell 'zsh) "setopt ERR_EXIT")
+       (t "set -e"))`

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: set enable to trace what gets executed
+# key: xtrace
+# --
+`(cond ((eq sh-shell 'bash) "set -o xtrace")
+       ((eq sh-shell 'zsh) "setopt XTRACE")
+       (t "set -x"))`

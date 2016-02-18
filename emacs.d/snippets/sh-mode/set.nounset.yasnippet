@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: set enable to exit when tries to use undeclared variables
+# key: nounset
+# --
+`(cond ((eq sh-shell 'bash) "set -o nounset")
+       ((eq sh-shell 'zsh) "setopt NO_UNSET")
+       (t "set -u"))`
