@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: logging script with verbose xtrace output
+# key: logging_debug
+# condition: (or (eq sh-shell 'bash) (eq sh-shell 'zsh))
+# --
+`(cond ((eq sh-shell 'bash) "PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'\nset -o verbose\nset -o xtrace")
+       ((eq sh-shell 'zsh) "setopt PROMPT_SUBST\nPS4='+(%x:%I): ${funcstack[1]:+$funcstack[1](): }'\nsetopt VERBOSE\nsetopt XTRACE"))`
