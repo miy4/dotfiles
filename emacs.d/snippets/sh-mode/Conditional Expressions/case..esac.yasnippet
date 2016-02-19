@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: case..esac
+# group: Conditional Expressions
+# key: case
+# --
+case ${1:arg} in
+    ${2:pattern}) ${3:cmd};;
+    *) $0;;
+esac
