@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: parameter expansion: lower case
+# group: Parameter Expansion
+# key: lowercase
+# condition: (or (eq sh-shell 'bash) (eq sh-shell 'zsh))
+# --
+\${${1:parameter}`(cond ((eq sh-shell 'bash) ",,")
+                        ((eq sh-shell 'zsh) ":l"))`}
