@@ -191,6 +191,12 @@ my_zsh_alias() {
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
         alias update='sudo softwareupdate -i -a; brew update && brew upgrade && for c in $(brew cask list); do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done && for c in /opt/homebrew-cask/Caskroom/*; do versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done; done'
     fi
+
+    if test_command_exists tmux; then
+        notify-tmux() {
+            IFS=" " tmux set status-right "#[fg=colour255,bg=colour27,bold]$*#[default]"
+        }
+    fi
 }
 
 my_zsh_zplug() {
