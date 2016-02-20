@@ -18,7 +18,7 @@
 	co = checkout
 	ad = add
 	ci = commit
-	l  = log --graph --oneline --decorate -n 20
+	lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [pager]
 	log = diff-highlight | less
 	show = diff-highlight | less
