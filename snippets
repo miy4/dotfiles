@@ -226,4 +226,4 @@
 [SSH経由でコマンド実行 ] docker-machine ssh @machine -- @command
 [指定したマシン上でdockerコマンドを実行できる] docker $(docker-machine config @machine) @command
 [以降、指定したマシン上でdockerコマンドを実行できる] eval "$(docker-machine env @machine)"
-[設定したDOCKER環境変数を無効にする] eval "$(docker-machine env @machine -u)"
+[設定したDOCKER環境変数を無効にする] eval "$(docker-machine env -u)"
