@@ -218,12 +218,9 @@
 [マシンの一覧] docker-machine ls
 [マシン情報を表示] docker-machine inspect @machine
 [マシンのIPアドレスを表示] docker-machine ip @machine
-[マシンを起動する] docker-machine start @machine
-[マシンを停止する] docker-machine stop @machine
+[マシンを起動する] docker-machine start default && eval "$(docker-machine env default)"
+[マシンを停止する] docker-machine stop default && eval "$(docker-machine env -u)"
+[マシンを再起動する] docker-machine restart default && eval "$(docker-machine env default)"
 [マシンを強制停止する] docker-machine kill @machine
-[マシンを再起動する] docker-machine restart @machine
 [SSHログイン] docker-machine ssh @machine
 [SSH経由でコマンド実行 ] docker-machine ssh @machine -- @command
-[指定したマシン上でdockerコマンドを実行できる] docker $(docker-machine config @machine) @command
-[以降、指定したマシン上でdockerコマンドを実行できる] eval "$(docker-machine env @machine)"
-[設定したDOCKER環境変数を無効にする] eval "$(docker-machine env -u)"
