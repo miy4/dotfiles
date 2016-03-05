@@ -10,6 +10,17 @@ load_utilities() {
     test_not_null() { [[ -n $1 ]] }
     on_osx() { [[ $(uname) == "Darwin" ]] }
     on_linux() { [[ $(uname) == "Linux" ]] }
+    colored_echo() {
+        local color=$1
+        shift
+        printf "\033[${color}m%s\033[m\n" "$@"
+    }
+    echo_red() { colored_echo 31 "$@"; }
+    echo_green() { colored_echo 32 "$@"; }
+    echo_yellow() { colored_echo 33 "$@"; }
+    echo_blue() { colored_echo 34 "$@"; }
+    echo_magenta() { colored_echo 35 "$@"; }
+    echo_cyan() { colored_echo 36 "$@"; }
 }
 
 my_zsh_history() {
@@ -189,7 +200,33 @@ my_zsh_alias() {
 
     if on_osx; then
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-        alias update='sudo softwareupdate -i -a; brew update && brew upgrade && for c in $(brew cask list); do ! brew cask info $c | grep -qF "Not installed" || brew cask install $c; done && for c in /opt/homebrew-cask/Caskroom/*; do versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done; done'
+
+        update() {
+            echo_green "==> Software Update Tool"
+            sudo softwareupdate -i -a
+
+            if test_command_exists mas; then
+                echo_green "==> Mac App Store Update"
+                mas upgrade
+            fi
+
+            if test_command_exists brew; then
+                echo_green "==> Homebrew"
+                brew update && brew upgrade
+                [[ $? -eq 0 ]] || return
+
+                brew cask >/dev/null 2>&1 || return
+                echo_green "==> Homebrew Cask"
+                for c in $(brew cask list); do
+                    ! brew cask info $c | grep -qF "Not installed" || brew cask install $c;
+                done
+                [[ $? -eq 0 ]] || return
+
+                for c in /opt/homebrew-cask/Caskroom/*; do
+                    versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done;
+                done
+            fi
+        }
     fi
 
     if test_command_exists tmux; then
