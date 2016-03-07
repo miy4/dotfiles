@@ -10,7 +10,7 @@
 [github]
 	user = miy4
 [alias]
-    alias = !git config --list | grep '^alias\\.' | sed 's/^alias\\.//' | sort
+	alias = !git config --list | grep '^alias\\.' | sed 's/^alias\\.//' | sort
 	br = branch
 	co = checkout
 	st = status --short --branch
@@ -24,6 +24,6 @@
 	show = diff-highlight | less
 	diff = diff-highlight | less
 [merge]
-    ff = false
+	ff = false
 [pull]
 	rebase = true
