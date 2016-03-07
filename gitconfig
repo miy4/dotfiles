@@ -15,7 +15,6 @@
 	st = status
 	sh = show
 	ft = fetch
-	co = checkout
 	ad = add
 	ci = commit
 	lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
