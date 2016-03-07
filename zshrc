@@ -198,6 +198,12 @@ my_zsh_alias() {
         bc -l <<< "$@"
     }
 
+    if on_linux; then
+        if [[ $(lsb_release -is 2>/dev/null) == "Arch" ]]; then
+            alias update="sudo -E pacman -Syu"
+        fi
+    fi
+
     if on_osx; then
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
 
