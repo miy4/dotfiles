@@ -10,7 +10,7 @@
 [github]
 	user = miy4
 [alias]
-	alias = !git config --list | grep '^alias\\.' | sed 's/^alias\\.//' | sort
+	alias = !git config --list | sed -n 's/^alias\\.//p' | sort
 	br = branch
 	co = checkout
 	st = status --short --branch
