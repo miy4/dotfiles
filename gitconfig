@@ -13,7 +13,7 @@
     alias = !git config --list | grep '^alias\\.' | sed 's/^alias\\.//' | sort
 	br = branch
 	co = checkout
-	st = status
+	st = status --short --branch
 	sh = show
 	ft = fetch
 	ad = add
