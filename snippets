@@ -41,6 +41,7 @@
 [プロセス一覧(ツリー表示)] pstree -p
 [Listenポート(TCP)持ちのプロセス] netstat -ptln
 [Listenポート(TCP)持ちのプロセス] ss -ptln
+[プロセスの環境変数] tr '\0' '\n' < /proc/@pid/environ
 
 : timeout
 [タイムアウトつきでコマンド実行] timeout 10 @cmd
