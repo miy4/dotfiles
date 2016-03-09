@@ -295,6 +295,10 @@ my-zsh::clipboard() {
     if __has_file /tmp/.X0-lock && __command_found /usr/bin/VBoxClient; then
         # Xサーバ/Xvfbが起動していること
         DISPLAY=:0 /usr/bin/VBoxClient --clipboard
+        if __command_found xsel; then
+            alias pbcopy='xsel --display :0 --input --clipboard'
+            alias pbpaste='xsel --display :0 --output --clipboard'
+        fi
     fi
 }
 
