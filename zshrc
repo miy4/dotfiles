@@ -257,6 +257,18 @@ my-zsh::javascript() {
     if __has_executable ~/.nodebrew/current/bin/nodebrew; then
         export NODEBREW_ROOT=~/.nodebrew
         export PATH=$PATH:./node_modules/.bin:$NODEBREW_ROOT/current/bin
+
+        node-update() {
+            local prev_version=$(nodebrew ls | sed -n 's/^current: \(.*\)$/\1/p')
+            __echo_green "==> nodebrew install-binary stable"
+            nodebrew install-binary stable || return
+            __echo_green "==> nodebrew use stable"
+            nodebrew use stable
+
+            [[ -z $prev_version || $prev_version == "none" ]] && return
+            __echo_green "==> nodebrew migrate-package $prev_version"
+            nodebrew migrate-package $prev_version
+        }
     fi
 }
 
