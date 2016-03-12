@@ -6,7 +6,6 @@
     "ecma6"
   ],
   "plugins": {
-    "angular": {},
     "node": {}
   }
 }
