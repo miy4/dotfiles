@@ -227,7 +227,6 @@ my-zsh::zplug() {
 
     source $zplug_zsh
     zplug "zsh-users/zsh-syntax-highlighting"
-    zplug "zsh-users/zsh-history-substring-search"
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
     export ENHANCD_FILTER=fzf:peco
