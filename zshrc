@@ -75,16 +75,16 @@ my-zsh::command_line_editting() {
     zstyle ':vcs_info:git:*' actionformats '%b@%r|%a' '%c' '%u'
     setopt prompt_subst
     prompt_git_current_branch() {
-        local st branch color
+        [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == "true" ]] || return
+
         STY= LANG=en_US.UTF-8 vcs_info
-        st=`git status 2> /dev/null`
-        if [[ -z "$st" ]]; then return; fi
-        branch="$vcs_info_msg_0_"
-        if   [[ -n "$vcs_info_msg_1_" ]]; then color="green"   # staged
-        elif [[ -n "$vcs_info_msg_2_" ]]; then color="red"     # unstaged
-        elif [[ -n `echo "$st" | grep "^Untracked"` ]]; then color="cyan"  # untracked
+        local color
+        if   [[ -n $vcs_info_msg_1_ ]]; then color="green"   # staged
+        elif [[ -n $vcs_info_msg_2_ ]]; then color="red"     # unstaged
+        elif git status 2>/dev/null | grep -q "^Untracked"; then color="cyan"  # untracked
         else color="blue"
         fi
+        local branch="$vcs_info_msg_0_"
         echo " (%F{$color}$branch%f)"
     }
     PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{magenta}❯%f "
