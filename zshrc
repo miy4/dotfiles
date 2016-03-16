@@ -234,6 +234,7 @@ my-zsh::zplug() {
     export EASY_ONE_REFFILE=~/.snippets
     export EASY_ONE_KEYBIND="^xs"
     zplug "b4b4r07/easy-oneliner", of:easy-oneliner.zsh, if:"which fzf"
+    zplug "zsh-users/zsh-autosuggestions"
 
     zplug check || zplug install
     zplug load
@@ -249,6 +250,19 @@ my-zsh::zplug() {
         fi
         bindkey '^xr' anyframe-widget-put-history
         bindkey '^xg' anyframe-widget-cd-ghq-repository
+    fi
+
+    if zplug check "zsh-users/zsh-autosuggestions"; then
+        [[ $(echotc Co 2>/dev/null) == "256" ]] && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=232'
+        export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line vi-end-of-line)
+        export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
+            forward-char
+	        forward-word
+	        vi-forward-word
+	        vi-forward-word-end
+	        vi-forward-blank-word
+	        vi-forward-blank-word-end
+        )
     fi
 }
 
