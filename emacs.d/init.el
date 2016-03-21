@@ -327,8 +327,7 @@
   ;; depends: go get github.com/nsf/gocode
   ;; depends: go get github.com/rogpeppe/godef
   ;; depends: go get golang.org/x/tools/cmd/goimports
-  (use-package go-mode
-    :ensure t
+  (use-package go-mode :ensure t
     :mode "\\.go\\'"
     :init
     (with-eval-after-load 'multi-compile
