@@ -205,8 +205,7 @@
 
 (defun setup-keys-cheat-sheet ()
   ;; https://github.com/justbur/emacs-which-key
-  (use-package which-key
-    :ensure t
+  (use-package which-key :ensure t
     :config
     (setq which-key-popup-type 'side-window)
     (setq which-key-side-window-location 'right)
@@ -214,6 +213,13 @@
     (which-key-mode)))
 
 (defun setup-file-manager ()
+  (use-package dired
+    :defer t
+    :config
+    (setq dired-recursive-deletes 'always)
+    (setq dired-recursive-copies 'always)
+    (setq dired-dwim-target t))
+
   ;; https://github.com/jaypei/emacs-neotree
   (use-package neotree :ensure t
     :init
