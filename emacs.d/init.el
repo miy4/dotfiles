@@ -192,6 +192,28 @@
     :config
     (setq helm-yas-space-match-any-greedy t)))
 
+(defun setup-file-manager ()
+  ;; https://github.com/jaypei/emacs-neotree
+  (use-package neotree
+    :ensure t
+    :init
+    (setq-default neo-smart-open t)
+    (setq-default neo-dont-be-alone t)
+    :config
+    (setq neo-theme 'nerd)
+    (bind-keys
+     :map neotree-mode-map
+     ("C-c C-n"     . nil)
+     ("C-c C-d"     . nil)
+     ("C-c C-r"     . nil)
+     ("C-c C-p"     . nil)
+     ("."           . neotree-enter)
+     ("<C-return>"  . neotree-change-root)
+     ("C-c w"       . neotree-create-node)
+     ("C-c +"       . neotree-create-node)
+     ("C-c d"       . neotree-delete-node)
+     ("C-c r"       . neotree-rename-node))))
+
 (defun setup-navigation ()
   ;; https://github.com/abo-abo/avy
   (use-package avy :ensure t
@@ -557,6 +579,7 @@
 (setup-server-daemon)
 (setup-visual)
 (setup-interface-enhancement)
+(setup-file-manager)
 (setup-navigation)
 (setup-editting)
 
