@@ -86,6 +86,12 @@
     (setq linum-format "%4d ")
     (set-face-attribute 'linum nil :background "unspecified-bg"))
 
+  ;; https://github.com/k-talo/volatile-highlights.el
+  (use-package volatile-highlights :ensure t
+    :diminish volatile-highlights-mode
+    :config
+    (volatile-highlights-mode 1))
+
   ;; https://github.com/Malabarba/beacon
   (use-package beacon :ensure t
     :config
