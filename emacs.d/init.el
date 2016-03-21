@@ -279,7 +279,12 @@
   (use-package mwim :ensure t
     :bind
     (("C-a" . mwim-beginning-of-code-or-line)
-     ("C-e" . mwim-end-of-code-or-line))))
+     ("C-e" . mwim-end-of-code-or-line)))
+
+  ;; https://github.com/thierryvolpiatto/zop-to-char
+  (use-package zop-to-char :ensure t
+    :bind
+    ([remap zap-to-char] . zop-up-to-char)))
 
 (defun setup-programming ()
   ;; http://company-mode.github.io/
