@@ -192,10 +192,19 @@
     :config
     (setq helm-yas-space-match-any-greedy t)))
 
+(defun setup-keys-cheat-sheet ()
+  ;; https://github.com/justbur/emacs-which-key
+  (use-package which-key
+    :ensure t
+    :config
+    (setq which-key-popup-type 'side-window)
+    (setq which-key-side-window-location 'right)
+    (setq which-key-idle-delay 1.0)
+    (which-key-mode)))
+
 (defun setup-file-manager ()
   ;; https://github.com/jaypei/emacs-neotree
-  (use-package neotree
-    :ensure t
+  (use-package neotree :ensure t
     :init
     (setq-default neo-smart-open t)
     (setq-default neo-dont-be-alone t)
@@ -579,6 +588,7 @@
 (setup-server-daemon)
 (setup-visual)
 (setup-interface-enhancement)
+(setup-keys-cheat-sheet)
 (setup-file-manager)
 (setup-navigation)
 (setup-editing)
