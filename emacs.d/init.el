@@ -231,7 +231,7 @@
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
     (ace-window-display-mode 1)))
 
-(defun setup-editting ()
+(defun setup-editing ()
   ;; https://github.com/rejeep/wrap-region.el
   (use-package wrap-region :ensure t
     :config
@@ -581,7 +581,7 @@
 (setup-interface-enhancement)
 (setup-file-manager)
 (setup-navigation)
-(setup-editting)
+(setup-editing)
 
 (setup-programming)
 (setup-emacs-lisp)
