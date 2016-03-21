@@ -99,7 +99,12 @@
     (setq beacon-color "yellow")
     (setq beacon-blink-delay 0.1)
     (setq beacon-blink-duration 0.1)
-    (beacon-mode 1)))
+    (beacon-mode 1))
+
+  ;; http://www.dr-qubit.org/emacs.php
+  (use-package undo-tree :ensure t
+    :config
+    (global-undo-tree-mode 1)))
 
 (defun setup-interface-enhancement ()
   ;; https://github.com/knu/elscreen
