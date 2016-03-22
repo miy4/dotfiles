@@ -208,7 +208,7 @@
   (use-package which-key :ensure t
     :config
     (setq which-key-popup-type 'side-window)
-    (setq which-key-side-window-location 'right)
+    (setq which-key-side-window-location 'bottom)
     (setq which-key-idle-delay 1.0)
     (which-key-mode)))
 
