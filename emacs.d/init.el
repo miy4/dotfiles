@@ -203,7 +203,29 @@
     (with-eval-after-load 'helm-config
       (bind-key "y" 'helm-yas-complete helm-command-map))
     :config
-    (setq helm-yas-space-match-any-greedy t)))
+    (setq helm-yas-space-match-any-greedy t))
+
+  (use-package view
+    :bind
+    ("C-c v" . view-mode)
+    :config
+    (bind-keys
+     :map view-mode-map
+     ("h"     . backward-char)
+     ("j"     . next-line)
+     ("k"     . previous-line)
+     ("l"     . forward-char)
+     ("w"     . forward-word)
+     ("b"     . backward-word)
+     ("C-u"   . scroll-down)
+     ("SPC"   . scroll-up)
+     ("C-d"   . scroll-up)
+     ("^"     . mwim-beginning-of-code-or-line)
+     ("0"     . beginning-of-line)
+     ("$"     . end-of-line)
+     ("g"     . beginning-of-buffer)
+     ("G"     . end-of-buffer)
+     ("f"     . avy-goto-char))))
 
 (defun setup-keys-cheat-sheet ()
   ;; https://github.com/justbur/emacs-which-key
