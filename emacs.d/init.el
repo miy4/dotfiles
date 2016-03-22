@@ -222,6 +222,23 @@
     (setq dired-recursive-copies 'always)
     (setq dired-dwim-target t))
 
+  ;; https://github.com/crocket/dired-single
+  (use-package dired-single :ensure t
+    :bind
+    ("C-x C-d" . dired-single-magic-buffer-current-dir)
+    ("C-x C-j" . dired-single-magic-buffer)
+    :config
+    (defun dired-single-magic-buffer-current-dir ()
+      (interactive)
+      (dired-single-magic-buffer default-directory))
+    (defun dired-single-up-directory ()
+      (interactive)
+      (dired-single-buffer ".."))
+    (bind-keys
+     :map dired-mode-map
+     ("<return>" . dired-single-buffer)
+     ("^"        . dired-single-up-directory)))
+
   ;; https://github.com/jaypei/emacs-neotree
   (use-package neotree :ensure t
     :init
