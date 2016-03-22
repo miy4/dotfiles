@@ -64,6 +64,8 @@
 
   ;; https://github.com/bbatsov/solarized-emacs
   (use-package solarized-theme :ensure t
+    :init
+    (custom-set-variables '(solarized-high-contrast-mode-line t))
     :config
     (load-theme 'solarized-dark t)
     (enable-theme 'solarized-dark)
