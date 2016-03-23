@@ -345,6 +345,11 @@
     ([remap zap-to-char] . zop-up-to-char)))
 
 (defun setup-programming ()
+  (use-package subword
+    :defer t
+    :init
+    (add-hook 'prog-mode-hook 'subword-mode))
+
   ;; http://company-mode.github.io/
   (use-package company :ensure t
     :defer t
