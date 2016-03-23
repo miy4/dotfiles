@@ -8,6 +8,9 @@
 : sed, awk
 [5行目から100行目を出力] sed -n 5,100p @file
 
+: diff
+[改行文字の違いを無視して差分をとる] diff --strip-trailing-cr @file @file
+
 : od
 [バイナリエディタ風] od -Ax -tx1z @file
 [上下に並べる] od -Ax -tx1c @file
