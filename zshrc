@@ -87,7 +87,7 @@ my-zsh::command_line_editting() {
         local branch="$vcs_info_msg_0_"
         echo " (%F{$color}$branch%f)"
     }
-    PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%F{magenta}❯%f "
+    PROMPT='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%B%F{magenta}⟩%f%b "
 }
 
 my-zsh::completion() {
