@@ -211,6 +211,11 @@ my-zsh::alias() {
                     versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done;
                 done
             fi
+
+            if __command_found zplug; then
+                __echo_green "==> zplug"
+                zplug update
+            fi
         }
     fi
 
