@@ -4,7 +4,7 @@ export LANG=ja_JP.UTF-8
 export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=''
 
-export EDITOR='emacsclient --alternate-editor=vi'
+export EDITOR='emacsclient'
 
 export PAGER=less
 export MANPAGER='less -X'
