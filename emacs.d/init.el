@@ -594,9 +594,11 @@
   ;; https://github.com/alpha22jp/simplenote2.el
   (use-package simplenote2 :ensure t
     :defer t
+    :init
+    (setq simplenote2-notes-mode 'markdown-mode)
+    (setq simplenote2-markdown-notes-mode 'markdown-mode)
     :config
     (simplenote2-setup)
-    (setq simplenote2-markdown-notes-mode 'markdown-mode)
     (bind-keys
      :map simplenote2-note-mode-map
      ("C-c t" . simplenote2-add-tag)
