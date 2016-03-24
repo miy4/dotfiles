@@ -329,7 +329,7 @@ my-zsh::clipboard() {
 
 my-zsh::filter() {
     if __command_found fzf; then
-        export FZF_DEFAULT_OPTS="--reverse --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+        export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
     fi
 }
 
