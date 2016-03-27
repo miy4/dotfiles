@@ -236,7 +236,6 @@ my-zsh::zplug() {
     export ENHANCD_COMMAND=ed
     export ENHANCD_FILTER=fzf:peco
     zplug "b4b4r07/enhancd", of:enhancd.sh
-    export EASY_ONE_REFFILE=~/.snippets
     export EASY_ONE_KEYBIND="^xs"
     zplug "b4b4r07/easy-oneliner", if:"which fzf"
     zplug "zsh-users/zsh-autosuggestions"
@@ -250,6 +249,10 @@ my-zsh::zplug() {
         fi
         bindkey '^xr' anyframe-widget-put-history
         bindkey '^xg' anyframe-widget-cd-ghq-repository
+    fi
+
+    if zplug check "b4b4r07/easy-oneliner"; then
+        export EASY_ONE_REFFILE=~/.snippets
     fi
 
     if zplug check "zsh-users/zsh-autosuggestions"; then
