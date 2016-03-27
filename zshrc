@@ -224,6 +224,32 @@ my-zsh::alias() {
             IFS=" " tmux set status-right "#[fg=colour255,bg=colour27,bold]$*#[default]"
         }
     fi
+
+    datepick() {
+        local catalogue=(
+            'date +%Y/%m/%d'
+            'date +"%Y/%m/%d %T"'
+            'date +"%Y/%-m/%-d(%a)"'
+            'LANG=C date +"%Y/%-m/%-d(%a)"'
+            'echo 平成$(($(date +%y) + 12))年'
+            'date +%A'
+            'LANG=C date +%A'
+            'date +%Z'
+            'date +%s'
+            'date --iso-8601'
+            'date --iso-8601=hours'
+            'date --iso-8601=minutes'
+            'date --iso-8601=seconds'
+            'date --iso-8601=ns'
+            'date --rfc-2822'
+            'date --rfc-3339=date'
+            'date --rfc-3339=seconds'
+            'date --rfc-3339=ns'
+        )
+        for s in "${catalogue[@]}"; do
+            printf "%s	<>\033[32;1m# %s\033[m\n" "$s" "$(eval $s)"
+        done | column -t -s $'\t<>' | fzf --ansi | awk 'BEGIN {FS="# "} {print $2}' | pbcopy
+    }
 }
 
 my-zsh::zplug() {
