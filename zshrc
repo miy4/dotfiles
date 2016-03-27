@@ -238,7 +238,7 @@ my-zsh::zplug() {
     zplug "b4b4r07/enhancd", of:enhancd.sh
     export EASY_ONE_REFFILE=~/.snippets
     export EASY_ONE_KEYBIND="^xs"
-    zplug "b4b4r07/easy-oneliner", of:easy-oneliner.zsh, if:"which fzf"
+    zplug "b4b4r07/easy-oneliner", if:"which fzf"
     zplug "zsh-users/zsh-autosuggestions"
 
     zplug check || zplug install
