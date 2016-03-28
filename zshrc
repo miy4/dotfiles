@@ -279,6 +279,7 @@ my-zsh::zplug() {
 
     if zplug check "b4b4r07/easy-oneliner"; then
         export EASY_ONE_REFFILE=~/.snippets
+        export EASY_ONE_FZF_OPTS="--no-sort --reverse"
     fi
 
     if zplug check "zsh-users/zsh-autosuggestions"; then
