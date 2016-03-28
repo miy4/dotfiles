@@ -136,6 +136,13 @@ my-zsh::dir() {
     setopt extended_glob
 }
 
+my-zsh::env() {
+    # https://github.com/direnv/direnv
+    if __command_found direnv; then
+        eval "$(direnv hook zsh)"
+    fi
+}
+
 my-zsh::alias() {
     if hash gls >/dev/null 2>&1; then
         alias d='gls -G -F --color=auto --group-directories-first'
@@ -369,6 +376,7 @@ my-zsh::history
 my-zsh::command_line_editting
 my-zsh::completion
 my-zsh::dir
+my-zsh::env
 
 my-zsh::javascript
 my-zsh::golang
