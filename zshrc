@@ -231,32 +231,6 @@ my-zsh::alias() {
             IFS=" " tmux set status-right "#[fg=colour255,bg=colour27,bold]$*#[default]"
         }
     fi
-
-    datepick() {
-        local catalogue=(
-            'date +%Y/%m/%d'
-            'date +"%Y/%m/%d %T"'
-            'date +"%Y/%-m/%-d(%a)"'
-            'LANG=C date +"%Y/%-m/%-d(%a)"'
-            'echo 平成$(($(date +%y) + 12))年'
-            'date +%A'
-            'LANG=C date +%A'
-            'date +%Z'
-            'date +%s'
-            'date --iso-8601'
-            'date --iso-8601=hours'
-            'date --iso-8601=minutes'
-            'date --iso-8601=seconds'
-            'date --iso-8601=ns'
-            'date --rfc-2822'
-            'date --rfc-3339=date'
-            'date --rfc-3339=seconds'
-            'date --rfc-3339=ns'
-        )
-        for s in "${catalogue[@]}"; do
-            printf "%s	<>\033[32;1m# %s\033[m\n" "$s" "$(eval $s)"
-        done | column -t -s $'\t<>' | fzf --ansi | awk 'BEGIN {FS="# "} {print $2}' | pbcopy
-    }
 }
 
 my-zsh::zplug() {
@@ -276,6 +250,8 @@ my-zsh::zplug() {
           from:gist, as:command, of:describe_number, do:"chmod +x describe_number"
     zplug "miy4/9ad22d7270c1f1a08fed", \
           from:gist, as:command, of:tomato, do:"chmod +x tomato"
+    zplug "miy4/4365cc3f45a23061f36dbb3e96c2c2c6", \
+          from:gist, as:command, of:date_cat, do:"chmod +x date_cat"
 
     zplug check || zplug install
     zplug load
@@ -304,6 +280,11 @@ my-zsh::zplug() {
 	        vi-forward-blank-word
 	        vi-forward-blank-word-end
         )
+    fi
+
+    if zplug check "miy4/4365cc3f45a23061f36dbb3e96c2c2c6"; then
+        pick_dateformat() { date_cat | fzf --ansi --multi | awk 'BEGIN {FS=" *# *"} {print $1}' | pbcopy }
+        pick_date() { date_cat | fzf --ansi --multi | awk 'BEGIN {FS=" *# *"} {print $2}' | pbcopy }
     fi
 }
 
