@@ -150,7 +150,7 @@
 
   (use-package helm-config :ensure helm
     :bind
-    (("C-c h"   . helm-mini)
+    (("C-c h"   . helm-for-files)
      ("M-x"     . helm-M-x)
      ("M-y"     . helm-show-kill-ring)
      ("C-x C-f" . helm-find-files))
