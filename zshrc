@@ -272,6 +272,8 @@ my-zsh::zplug() {
     export EASY_ONE_KEYBIND="^xs"
     zplug "b4b4r07/easy-oneliner", if:"which fzf"
     zplug "zsh-users/zsh-autosuggestions"
+    zplug "miy4/acc7a8e9bd44c647d07c", \
+          from:gist, as:command, of:describe_number, do:"chmod +x describe_number"
 
     zplug check || zplug install
     zplug load
