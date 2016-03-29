@@ -186,7 +186,7 @@ my-zsh::alias() {
 
     if __on_linux; then
         if [[ $(lsb_release -is 2>/dev/null) == "Arch" ]]; then
-            alias update="sudo -E pacman -Syu"
+            alias update="sudo -E pacman -Syu; zplug update"
         fi
     fi
 
