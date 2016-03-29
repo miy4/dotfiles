@@ -274,6 +274,8 @@ my-zsh::zplug() {
     zplug "zsh-users/zsh-autosuggestions"
     zplug "miy4/acc7a8e9bd44c647d07c", \
           from:gist, as:command, of:describe_number, do:"chmod +x describe_number"
+    zplug "miy4/9ad22d7270c1f1a08fed", \
+          from:gist, as:command, of:tomato, do:"chmod +x tomato"
 
     zplug check || zplug install
     zplug load
