@@ -64,6 +64,7 @@
 
   ;; https://github.com/bbatsov/solarized-emacs
   (use-package solarized-theme :ensure t
+    :if (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
     :init
     (custom-set-variables '(solarized-high-contrast-mode-line t))
     :config
@@ -73,6 +74,13 @@
       (unless (display-graphic-p (selected-frame))
         (set-face-background 'default "unspecified-bg" (selected-frame))))
     (add-hook 'window-setup-hook 'my/on-after-init))
+
+  ;; http://github.com/oneKelvinSmith/monokai-emacs
+  (use-package monokai-theme :ensure t
+    :if (eq system-type 'cygwin)
+    :config
+    (load-theme 'monokai t)
+    (enable-theme 'monokai))
 
   ;; https://github.com/Malabarba/smart-mode-line
   (use-package smart-mode-line :ensure t
