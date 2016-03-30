@@ -251,7 +251,20 @@
     :config
     (setq dired-recursive-deletes 'always)
     (setq dired-recursive-copies 'always)
-    (setq dired-dwim-target t))
+    (setq dired-dwim-target t)
+    (when (eq system-type 'cygwin)
+      (setq dired-guess-shell-alist-user
+            '((".png"  "cygstart")
+              (".jpeg" "cygstart")
+              (".jpg"  "cygstart")
+              (".gif"  "cygstart")
+              (".pdf"  "cygstart")
+              (".doc"  "cygstart")
+              (".docx" "cygstart")
+              (".xls"  "cygstart")
+              (".xlsx" "cygstart")
+              (".ppt"  "cygstart")
+              (".pptx" "cygstart")))))
 
   ;; https://github.com/crocket/dired-single
   (use-package dired-single :ensure t
