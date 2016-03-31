@@ -283,8 +283,17 @@ my-zsh::zplug() {
     fi
 
     if zplug check "miy4/4365cc3f45a23061f36dbb3e96c2c2c6"; then
-        pick_dateformat() { date_cat | fzf --ansi --multi | awk 'BEGIN {FS=" *# *"} {print $1}' | pbcopy }
-        pick_date() { date_cat | fzf --ansi --multi | awk 'BEGIN {FS=" *# *"} {print $2}' | pbcopy }
+        pick_dateformat() {
+            date_cat | fzf --ansi --multi \
+                | awk 'BEGIN {FS="|"} {print $2}' \
+                | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*#.*$//' | pbcopy
+        }
+
+        pick_date() {
+            date_cat | fzf --ansi --multi \
+                | awk 'BEGIN {FS="|"} {print $1}' \
+                | sed 's/[[:space:]]*$//' | pbcopy
+        }
     fi
 }
 
