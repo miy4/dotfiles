@@ -252,6 +252,7 @@
     (setq dired-recursive-deletes 'always)
     (setq dired-recursive-copies 'always)
     (setq dired-dwim-target t)
+    (setq dired-listing-switches "-lahGF --group-directories-first --time-style=long-iso")
     (when (eq system-type 'cygwin)
       (setq dired-guess-shell-alist-user
             '((".png"  "cygstart")
