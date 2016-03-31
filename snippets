@@ -16,9 +16,25 @@
 [上下に並べる] od -Ax -tx1c @file
 
 : date
-[UNIX時間] date +%s
 [日付→UNIX時間] date -d @datestr +%s
-[UNIX時間→日付] date -d @unixtime +"%Y/%m/%d %T"
+[UNIX時間→日付] date -d @@unixtime +"%Y/%m/%d %T"
+[UNIX時間]                             date +%s
+[1970/01/01]                           date +%Y/%m/%d
+[1970/01/01 09:00:00]                  date +"%Y/%m/%d %T"
+[1970/1/1(木)]                         date +"%Y/%-m/%-d(%a)"
+[1970/1/1(Thu)]                        LANG=C  date +"%Y/%-m/%-d(%a)"
+[木曜日]                               date +%A
+[Thursday]                             LANG=C  date +%A
+[JST]                                  date +%Z
+[1970-01-01]                           date --iso-8601
+[1970-01-01T09+09:00]                  date --iso-8601=hours
+[1970-01-01T09:00+09:00]               date --iso-8601=minutes
+[1970-01-01T09:00:00+09:00]            date --iso-8601=seconds
+[1970-01-01T09:00:00,000000000+09:00]  date --iso-8601=ns
+[Thu, 01 Jan 1970 09:00:00 +0900]      date --rfc-2822
+[1970-01-01]                           date --rfc-3339=date
+[1970-01-01 09:00:00+09:00]            date --rfc-3339=seconds
+[1970-01-01 09:00:00.000000000+09:00]  date --rfc-3339=ns
 
 : fileutil
 [100MB超えのファイル] find . -size +100M -type f -exec du {} \;
