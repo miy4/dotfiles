@@ -145,9 +145,9 @@ my-zsh::env() {
 
 my-zsh::alias() {
     if hash gls >/dev/null 2>&1; then
-        alias d='gls -G -F --color=auto --group-directories-first'
+        alias d='gls -G -F --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
     elif ls --version | grep -q coreutils; then
-        alias d='ls -G -F --color=auto --group-directories-first'
+        alias d='ls -G -F --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
     else
         alias d='ls -F -G'
     fi
