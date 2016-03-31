@@ -17,7 +17,7 @@
 
 : date
 [UNIX時間] date +%s
-[日付→UNIX時間] date -d datestr@ +%s
+[日付→UNIX時間] date -d @datestr +%s
 [UNIX時間→日付] date -d @unixtime +"%Y/%m/%d %T"
 
 : fileutil
