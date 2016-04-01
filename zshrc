@@ -364,8 +364,6 @@ my-zsh::filter() {
     fi
 }
 
-ulimit -c unlimited
-
 my-zsh::history
 my-zsh::command_line_editting
 my-zsh::completion
