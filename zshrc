@@ -320,15 +320,14 @@
     fi
 }
 
-# 環境依存の設定を読み込む
-# ロケによって異なる設定なので、~/.zshrc_site は共有しない
-local zshrc_site=~/.zshrc_site
-if [[ -f $zshrc_site ]]; then
-    . $zshrc_site
-fi
+: "Loading a site local rc file" && () {
+    local zshrc_site=~/.zshrc_site
+    [[ -f $zshrc_site ]] && source "$zshrc_site"
+}
 
-# プロファイルを取得
-# .zshenv で zmodload zsh/zprof && zprof すること
-if type zprof >/dev/null 2>&1; then
-    zprof | less
-fi
+: "Profiling for zsh startup" && () {
+    if type zprof >/dev/null 2>&1; then
+        # `zmodload zsh/zprof && zprof` in advance
+        zprof | less
+    fi
+}
