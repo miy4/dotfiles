@@ -183,7 +183,7 @@
 
 : "Clipboard" && () {
     if [[ -f /tmp/.X0-lock && -x /usr/bin/VBoxClient ]]; then
-        export DISPLAY=:0 /usr/bin/VBoxClient --clipboard
+        DISPLAY=:0 /usr/bin/VBoxClient --clipboard
         if hash xsel 2>/dev/null; then
             alias pbcopy='xsel --display :0 --input --clipboard'
             alias pbpaste='xsel --display :0 --output --clipboard'
