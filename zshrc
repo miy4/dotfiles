@@ -1,12 +1,14 @@
 # -*- mode: sh -*-
 
-# http://zsh.sourceforge.net/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
-# http://zsh.sourceforge.net/Doc/Release/Options.html#History
 : "History" && () {
+    # man zshparam
+    # http://zsh.sourceforge.net/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
     export HISTFILE=~/.zsh-history
     export HISTSIZE=100000
     export SAVEHIST=100000
 
+    # man zshoptions
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#History
     setopt EXTENDED_HISTORY
     setopt HIST_IGNORE_DUPS
     setopt HIST_IGNORE_SPACE
@@ -15,9 +17,10 @@
     setopt SHARE_HISTORY
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Zle
-# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
 : "Line Editing" && () {
+    # man zshoptions, zshzle
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Zle
+    # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
     setopt EMACS
     unsetopt BEEP
 
@@ -28,15 +31,17 @@
     zstyle ':zle:*' word-style unspecified
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Input_002fOutput
 : "Input/Output" && () {
+    # man zshoptions
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Input_002fOutput
     setopt CORRECT
     setopt PRINT_EIGHT_BIT
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Prompting
-# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 : "Prompt Expansion" && () {
+    # man zshoptions, zshmisc
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Prompting
+    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
     autoload -Uz vcs_info
     zstyle ':vcs_info:*' enable git svn
     zstyle ':vcs_info:*' max-exports 6
@@ -63,14 +68,15 @@
     export PS1='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%B%F{magenta}❯%f%b "
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Completion-2
-# http://zsh.sourceforge.net/Doc/Release/Completion-System.html#Initialization
-# http://zsh.sourceforge.net/Doc/Release/Completion-System.html#Standard-Styles
 : "Completion" && () {
+    # man zshcompsys
+    # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
     autoload -Uz compinit && compinit -C
     local zsh_completions="/usr/local/share/zsh-completions"
     [[ -d $zsh_completions ]] && fpath=($zsh_completions $fpath)
 
+    # man zshoptions
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Completion-2
     setopt AUTO_LIST
     setopt AUTO_MENU
     zstyle ':completion:*:default' menu select=1
@@ -82,22 +88,24 @@
     setopt AUTO_PARAM_SLASH
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Changing-Directories
 : "Changing Directories" && () {
+    # man zshoptions
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Changing-Directories
     setopt AUTO_CD
 }
 
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
 : "Expansion and Globbing" && () {
+    # man zshoptions
+    # http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
     setopt EXTENDED_GLOB
     setopt MAGIC_EQUAL_SUBST
     setopt NUMERIC_GLOB_SORT
     setopt REMATCH_PCRE
 }
 
-# man zshmisc
-# http://zsh.sourceforge.net/Doc/Release/Shell-Grammar.html#Aliasing
 : "Aliasing" && () {
+    # man zshmisc
+    # http://zsh.sourceforge.net/Doc/Release/Shell-Grammar.html#Aliasing
     if hash gls 2>/dev/null; then
         alias d='gls -G -F --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
     elif ls --version | grep -q coreutils; then
