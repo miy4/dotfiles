@@ -38,7 +38,7 @@
     setopt PRINT_EIGHT_BIT
 }
 
-: "Prompt Expansion" && () {
+: "Prompting" && () {
     # man zshoptions, zshmisc
     # http://zsh.sourceforge.net/Doc/Release/Options.html#Prompting
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
