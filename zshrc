@@ -217,7 +217,7 @@
     zplug "miy4/9ad22d7270c1f1a08fed", \
           from:gist, as:command, of:tomato, do:"chmod +x tomato"
     zplug "miy4/4365cc3f45a23061f36dbb3e96c2c2c6", \
-          from:gist, as:command, of:date_cat, do:"chmod +x date_cat"
+          from:gist, as:command, of:date_cat
 
     zplug check || zplug install
     zplug load
