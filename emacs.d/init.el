@@ -558,6 +558,10 @@
     (with-eval-after-load 'typescript-mode
       (add-hook 'typescript-mode-hook 'tide-setup))))
 
+(defun setup-scala()
+  (use-package scala-mode2 :ensure t
+     :mode "\\.scala\\'"))
+
 (defun setup-markdown ()
   ;; https://github.com/jrblevin/markdown-mode
   (use-package markdown-mode :ensure t
