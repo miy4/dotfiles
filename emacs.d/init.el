@@ -702,6 +702,7 @@
 (setup-web-development)
 (setup-javascript)
 (setup-typescript)
+(setup-scala)
 (setup-markdown)
 (setup-docker)
 (setup-note-taking)
