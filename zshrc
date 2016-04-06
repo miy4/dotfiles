@@ -218,6 +218,8 @@
           from:gist, as:command, of:tomato
     zplug "miy4/4365cc3f45a23061f36dbb3e96c2c2c6", \
           from:gist, as:command, of:date_cat
+    zplug "miy4/7617a9a7336ff87df98b054cbc2776f0", \
+          from:gist, as:command, of:longman
 
     zplug check || zplug install
     zplug load
