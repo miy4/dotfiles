@@ -181,7 +181,7 @@
                 done
             fi
 
-            if hash zplug 2>/dev/null; then
+            if type zplug >/dev/null 2>&1; then
                 printf "\033[32m%s\033[m\n" "==> zplug"
                 zplug update
             fi
