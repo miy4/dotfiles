@@ -220,6 +220,8 @@
           from:gist, as:command, of:date_cat
     zplug "miy4/7617a9a7336ff87df98b054cbc2776f0", \
           from:gist, as:command, of:longman, if:"which jq"
+    zplug "miy4/6796014b815af1b4d01546143c5ea1be", \
+          from:gist, as:command, of:wordnet, if:"which wn"
 
     zplug check || zplug install
     zplug load
