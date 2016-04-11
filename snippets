@@ -217,7 +217,7 @@
 [イメージの情報] docker inspect @image:@tag
 [イメージを削除する] docker rmi @imageid
 [コンテナの作成と実行(フォアグラウンド)] docker run -it @image:@tag @command
-[コンテナの作成と実行(コマンド完了後、コンテナ破棄)] docker run -rm -it @image:@tag @command
+[コンテナの作成と実行(コマンド完了後、コンテナ破棄)] docker run --rm -it @image:@tag @command
 [コンテナの作成と実行(バックグラウンド)] docker run -d @image:@tag @command
 [ホストのディレクトリをマウントする] docker run -v @hostdir:@mountpoint @image:@tag @command
 [コンテナからイメージを作成する] docker commit -m "..." @containerid @username/@image
