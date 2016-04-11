@@ -233,6 +233,7 @@
 [コンテナのログ] docker logs @containerid
 [コンテナのプロセス] docker top @containerid
 [停止中のコンテナを削除する] docker rm @containerid
+[未使用のデータボリュームを削除する] docker volume ls -qf dangling=true | xargs -r docker volume rm
 [Virtualbox上でboot2docker] docker-machine create --driver virtualbox @machine
 [マシンを削除する] docker-machine rm @machine
 [マシンの一覧] docker-machine ls
