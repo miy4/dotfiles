@@ -561,7 +561,10 @@
 (defun setup-scala()
   (use-package scala-mode2 :ensure t
     :mode (("\\.scala\\'" . scala-mode)
-           ("\\.sbt\\'"   . scala-mode)))
+           ("\\.sbt\\'"   . scala-mode))
+    :config
+    (add-hook 'scala-mode-hook 'autopair-mode)
+    (add-hook 'scala-mode-hook 'linum-mode))
 
   (use-package ensime :ensure t
     :commands ensime ensime-mode
