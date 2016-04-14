@@ -560,12 +560,14 @@
 
 (defun setup-scala()
   (use-package scala-mode2 :ensure t
-    :mode "\\.scala\\'")
+    :mode (("\\.scala\\'" . scala-mode)
+           ("\\.sbt\\'"   . scala-mode)))
 
   (use-package ensime :ensure t
     :commands ensime ensime-mode
     :init
-    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
+    (with-eval-after-load 'scala-mode
+      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))))
 
 (defun setup-markdown ()
   ;; https://github.com/jrblevin/markdown-mode
