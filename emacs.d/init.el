@@ -1,4 +1,20 @@
-(defun setup-general ()
+;; emacs -q -l path/to/somewhere/init.el
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
+
+;; Package Manager
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(package-initialize)
+
+;; Package Configuration
+(eval-when-compile
+  (require 'use-package))
+(package-install 'use-package)
+
+
+(progn "Set up general purpose vars and key bindings"
   (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8-unix)
 
@@ -32,7 +48,7 @@
   (forward-line -1)
   (indent-according-to-mode))
 
-(defun setup-package ()
+(progn "Package Manager"
   ;; https://github.com/Malabarba/paradox
   (use-package paradox :ensure t
     :defer t
@@ -40,16 +56,16 @@
     (setq paradox-github-token t)
     (load (locate-user-emacs-file ".paradox-github-token") :noerror :nomessage)))
 
-(defun setup-console-integration ()
+(progn "Console Integration"
   (use-package exec-path-from-shell :ensure t))
 
-(defun setup-server-daemon ()
+(progn "Server Daemon"
   (use-package server
   :config
   (unless (server-running-p)
     (server-start))))
 
-(defun setup-visual ()
+(progn "Looks of Emacs"
   (setq frame-title-format "%f")
   (setq inhibit-startup-screen t)
   (if window-system
@@ -117,7 +133,7 @@
     :config
     (global-undo-tree-mode 1)))
 
-(defun setup-interface-enhancement ()
+(progn "Interface Enhancement"
   ;; https://github.com/knu/elscreen
   (use-package elscreen :ensure t
     :config
@@ -236,7 +252,7 @@
      ("G"     . end-of-buffer)
      ("f"     . avy-goto-char))))
 
-(defun setup-keys-cheat-sheet ()
+(progn "Keys Cheatsheet"
   ;; https://github.com/justbur/emacs-which-key
   (use-package which-key :ensure t
     :config
@@ -245,7 +261,7 @@
     (setq which-key-idle-delay 1.0)
     (which-key-mode)))
 
-(defun setup-file-manager ()
+(progn "File Manager"
   (use-package dired
     :defer t
     :config
@@ -304,7 +320,7 @@
      ("C-c d"       . neotree-delete-node)
      ("C-c r"       . neotree-rename-node))))
 
-(defun setup-navigation ()
+(progn "Navigation"
   ;; https://github.com/abo-abo/avy
   (use-package avy :ensure t
     :bind
@@ -321,7 +337,7 @@
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
     (ace-window-display-mode 1)))
 
-(defun setup-editing ()
+(progn "Editing"
   ;; https://github.com/rejeep/wrap-region.el
   (use-package wrap-region :ensure t
     :config
@@ -367,7 +383,7 @@
     :bind
     ([remap zap-to-char] . zop-up-to-char)))
 
-(defun setup-programming ()
+(progn "Programming"
   (use-package subword
     :defer t
     :init
@@ -429,14 +445,14 @@
     (setq yas-snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
     (yas-reload-all)))
 
-(defun setup-emacs-lisp ()
+(progn "Emacs Lisp"
   ;; https://github.com/tarsius/auto-compile
   (use-package auto-compile :ensure t
     :defer t
     :init
     (add-hook 'emacs-lisp-mode-hook 'auto-compile-mode)))
 
-(defun setup-shell-script ()
+(progn "Shell Script"
   ;; depends: http://www.shellcheck.net/
   (use-package sh-script
     :defer t
@@ -444,7 +460,7 @@
     (add-hook 'sh-mode-hook 'yas-minor-mode)
     (add-hook 'sh-mode-hook 'flycheck-mode)))
 
-(defun setup-golang ()
+(progn "Golang"
   ;; https://github.com/dominikh/go-mode.el
   ;; depends: go get github.com/nsf/gocode
   ;; depends: go get github.com/rogpeppe/godef
@@ -489,7 +505,7 @@
     (with-eval-after-load 'go-mode
       (add-hook 'go-mode-hook 'company-mode))))
 
-(defun setup-web-development ()
+(progn "Web Development"
   ;; https://github.com/fxbois/web-mode
   (use-package web-mode :ensure t
     :mode
@@ -502,7 +518,7 @@
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-auto-pairing t)))
 
-(defun setup-javascript ()
+(progn "Javascript"
   ;; https://github.com/mooz/js2-mode
   ;; depends: npm install -g tern
   ;; depends: npm install -g eslint
@@ -535,7 +551,7 @@
     (with-eval-after-load 'js2-mode
       (add-hook 'js2-mode-hook 'company-mode))))
 
-(defun setup-typescript ()
+(progn "Typescript"
   ;; https://github.com/ananthakumaran/tide
   (use-package typescript-mode :ensure t
     :mode "\\.ts\\'"
@@ -558,7 +574,7 @@
     (with-eval-after-load 'typescript-mode
       (add-hook 'typescript-mode-hook 'tide-setup))))
 
-(defun setup-scala()
+(progn "Scala"
   (use-package scala-mode2 :ensure t
     :mode (("\\.scala\\'" . scala-mode)
            ("\\.sbt\\'"   . scala-mode))
@@ -572,7 +588,7 @@
     (with-eval-after-load 'scala-mode
       (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))))
 
-(defun setup-markdown ()
+(progn "Markdown"
   ;; https://github.com/jrblevin/markdown-mode
   (use-package markdown-mode :ensure t
     :mode
@@ -592,12 +608,12 @@
                (shell-quote-argument (buffer-file-name)))))
     (define-key markdown-mode-map (kbd "C-c m") 'my/markdown-preview-file)))
 
-(defun setup-docker ()
+(progn "Docker"
   ;; https://github.com/spotify/dockerfile-mode
   (use-package dockerfile-mode :ensure t
   :mode "Dockerfile\\'"))
 
-(defun setup-web-browser ()
+(progn "Web Browser"
   (use-package eww
     :defer t
     :config
@@ -626,7 +642,7 @@
      ("B" . eww-back-url)
      ("r" . eww-reload))))
 
-(defun setup-note-taking ()
+(progn "Note-taking"
   ;; https://github.com/alpha22jp/simplenote2.el
   (use-package simplenote2 :ensure t
     :defer t
@@ -641,7 +657,8 @@
      ("C-c s" . simplenote2-push-buffer)
      ("C-c l" . simplenote2-pull-buffer))))
 
-(defun setup-darwin ()
+
+(when (eq system-type 'darwin)
   ;; Use command-key as meta
   (setq ns-command-modifier 'meta)
 
@@ -660,7 +677,8 @@
   (setq interprogram-paste-function
         '(lambda () (shell-command-to-string "pbpaste"))))
 
-(defun setup-linux ()
+
+(when (eq system-type 'gnu/linux)
   ;; Clipboard integration
   (when (executable-find "xsel")
     (setq interprogram-cut-function
@@ -671,49 +689,3 @@
                  (process-send-eof proc)))))
     (setq interprogram-paste-function
           '(lambda () (shell-command-to-string "xsel --display :0 --output --clipboard")))))
-
-
-;; emacs -q -l path/to/somewhere/init.el
-(when load-file-name
-  (setq user-emacs-directory (file-name-directory load-file-name)))
-
-;; Package Manager
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(package-initialize)
-
-;; Package Configuration
-(eval-when-compile
-  (require 'use-package))
-(package-install 'use-package)
-
-(setup-general)
-
-(setup-package)
-(setup-console-integration)
-(setup-server-daemon)
-(setup-visual)
-(setup-interface-enhancement)
-(setup-keys-cheat-sheet)
-(setup-file-manager)
-(setup-navigation)
-(setup-editing)
-
-(setup-programming)
-(setup-emacs-lisp)
-(setup-shell-script)
-(setup-golang)
-(setup-web-development)
-(setup-javascript)
-(setup-typescript)
-(setup-scala)
-(setup-markdown)
-(setup-docker)
-(setup-note-taking)
-
-(when (eq system-type 'darwin)
-  (setup-darwin))
-
-(when (eq system-type 'gnu/linux)
-  (setup-linux))
