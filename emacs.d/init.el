@@ -120,6 +120,7 @@
 
   ;; https://github.com/Malabarba/beacon
   (use-package beacon :ensure t
+    :disabled t
     :config
     (setq beacon-size 20)
     (setq beacon-color "yellow")
