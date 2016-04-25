@@ -361,18 +361,19 @@
 
   ;; https://github.com/magnars/multiple-cursors.el
   (use-package multiple-cursors :ensure t
-    :bind
-    (:map region-bindings-mode-map
-          ("a" . mc/mark-all-like-this)
-          ("p" . mc/mark-previous-like-this)
-          ("n" . mc/mark-next-like-this)
-          ("u" . mc/unmark-next-like-this)
-          ("U" . mc/unmark-previous-like-this)
-          ("s" . mc/skip-to-next-like-this)
-          ("S" . mc/skip-to-previous-like-this)
-          ("e" . mc/edit-lines)
-          ("^" . mc/edit-beginnings-of-lines)
-          ("$" . mc/edit-ends-of-lines)))
+    :config
+    (bind-keys
+     :map region-bindings-mode-map
+     ("a" . mc/mark-all-like-this)
+     ("p" . mc/mark-previous-like-this)
+     ("n" . mc/mark-next-like-this)
+     ("u" . mc/unmark-next-like-this)
+     ("U" . mc/unmark-previous-like-this)
+     ("s" . mc/skip-to-next-like-this)
+     ("S" . mc/skip-to-previous-like-this)
+     ("e" . mc/edit-lines)
+     ("^" . mc/edit-beginnings-of-lines)
+     ("$" . mc/edit-ends-of-lines)))
 
   ;; https://github.com/alezost/mwim.el
   (use-package mwim :ensure t
