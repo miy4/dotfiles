@@ -198,7 +198,8 @@
     :config
     (bind-keys
      :map helm-read-file-map
-     ("TAB" . helm-execute-persistent-action)
+     ("TAB" . helm-execute-persistent-action))
+    (bind-keys
      :map helm-find-files-map
      ("TAB" . helm-execute-persistent-action)
      ("C-h" . delete-backward-char)))
