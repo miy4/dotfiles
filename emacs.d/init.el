@@ -614,7 +614,7 @@
 (progn "Docker"
   ;; https://github.com/spotify/dockerfile-mode
   (use-package dockerfile-mode :ensure t
-  :mode "Dockerfile\\'"))
+    :mode "Dockerfile\\'"))
 
 (progn "Web Browser"
   (use-package eww
