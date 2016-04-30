@@ -208,20 +208,20 @@
     zplug "mollifier/anyframe"
     export ENHANCD_COMMAND=ed
     export ENHANCD_FILTER=fzf:peco
-    zplug "b4b4r07/enhancd", of:enhancd.sh
+    zplug "b4b4r07/enhancd", use:enhancd.sh
     export EASY_ONE_KEYBIND="^xs"
     zplug "b4b4r07/easy-oneliner", if:"which fzf"
     zplug "zsh-users/zsh-autosuggestions"
     zplug "miy4/acc7a8e9bd44c647d07c", \
-          from:gist, as:command, of:describe_number
+          from:gist, as:command, use:describe_number
     zplug "miy4/9ad22d7270c1f1a08fed", \
-          from:gist, as:command, of:tomato
+          from:gist, as:command, use:tomato
     zplug "miy4/4365cc3f45a23061f36dbb3e96c2c2c6", \
-          from:gist, as:command, of:date_cat
+          from:gist, as:command, use:date_cat
     zplug "miy4/7617a9a7336ff87df98b054cbc2776f0", \
-          from:gist, as:command, of:longman, if:"which jq"
+          from:gist, as:command, use:longman, if:"which jq"
     zplug "miy4/6796014b815af1b4d01546143c5ea1be", \
-          from:gist, as:command, of:wordnet, if:"which wn"
+          from:gist, as:command, use:wordnet, if:"which wn"
 
     zplug check || zplug install
     zplug load
