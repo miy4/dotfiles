@@ -589,7 +589,11 @@
     :commands ensime ensime-mode
     :init
     (with-eval-after-load 'scala-mode
-      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))))
+      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
+
+  (use-package groovy-mode :ensure t
+    :mode (("\\.groovy\\'" . groovy-mode)
+           ("\\.gradle\\'" . groovy-mode))))
 
 (progn "Markdown"
   ;; https://github.com/jrblevin/markdown-mode
