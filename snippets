@@ -139,6 +139,10 @@
 [退避した作業を削除] git stash drop
 [リモートの一覧] git remote -v
 
+: svn
+[ロックしたファイルの一覧] svn list -R --verbose | awk '$3 == "O" {print $8}'
+[リモートリポジトリのURL] svn info $(svn info @file | sed -n 's/^URL: \(.*\)$/\1/p')
+
 : tcpdump/ngrep
 [キャプチャ、ファイル保存] tcpdump -i any -s0 -w @file
 [-wのデータを読み込み、80番ポートを出力] tcpdump -r @file port 80
