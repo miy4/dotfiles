@@ -508,6 +508,33 @@
     (with-eval-after-load 'go-mode
       (add-hook 'go-mode-hook 'company-mode))))
 
+(progn "Rust"
+  (use-package rust-mode :ensure t
+    :mode "\\.rs\\'"
+    :config
+    (add-hook 'before-save-hook 'rust-format-buffer))
+
+  (use-package racer :ensure t
+    :defer t
+    :init
+    (with-eval-after-load 'rust-mode
+      (add-hook 'rust-mode-hook #'racer-mode))
+    :config
+    (add-hook 'racer-mode-hook #'eldoc-mode)
+    (add-hook 'racer-mode-hook #'company-mode))
+
+  (use-package flycheck-rust :ensure t
+    :defer t
+    :init
+    (with-eval-after-load 'flycheck-mode
+      (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)))
+
+  (use-package cargo :ensure t
+    :defer t
+    :init
+    (with-eval-after-load 'rust-mode
+      (add-hook 'rust-mode-hook 'cargo-minor-mode))))
+
 (progn "Web Development"
   ;; https://github.com/fxbois/web-mode
   (use-package web-mode :ensure t
@@ -619,6 +646,10 @@
   ;; https://github.com/spotify/dockerfile-mode
   (use-package dockerfile-mode :ensure t
     :mode "Dockerfile\\'"))
+
+(progn "TOML"
+  (use-package toml-mode :ensure t
+    :mode "\\.toml\\'"))
 
 (progn "Web Browser"
   (use-package eww

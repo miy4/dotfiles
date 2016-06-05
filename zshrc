@@ -294,6 +294,12 @@
     export PATH=$PATH:$GOPATH/bin:$(go env GOROOT)/bin
 }
 
+: "Rust" && () {
+    export PATH=$PATH:~/.cargo/bin
+    export RUST_SRC_PATH=~/src/github.com/rust-lang/rust/src
+    export CARGO_HOME=~/.cargo
+}
+
 : "Java" && () {
     local java_home_cmd=/usr/libexec/java_home
     if [ -x $java_home_cmd ]; then
