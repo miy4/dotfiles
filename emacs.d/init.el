@@ -638,7 +638,7 @@
       "run Marked on the current file and revert the buffer"
       (interactive)
       (shell-command
-       (format "open -a ~/Applications/Marked\\ 2.app %s"
+       (format "open -a /Applications/Marked\\ 2.app %s"
                (shell-quote-argument (buffer-file-name)))))
     (define-key markdown-mode-map (kbd "C-c m") 'my/markdown-preview-file)))
 

@@ -176,7 +176,7 @@
                 done
                 [[ $? -eq 0 ]] || return
 
-                for c in /opt/homebrew-cask/Caskroom/*; do
+                for c in $(brew --repository)/Caskroom/*; do
                     versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done;
                 done
             fi
