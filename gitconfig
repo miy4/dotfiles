@@ -27,3 +27,5 @@
 	ff = false
 [pull]
 	rebase = true
+[diff]
+	compactionHeuristic = true
