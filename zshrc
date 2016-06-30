@@ -172,7 +172,7 @@
                 brew cask >/dev/null 2>&1 || return
                 printf "\033[32m%s\033[m\n" "==> Homebrew Cask"
                 for c in $(brew cask list); do
-                    ! brew cask info $c | grep -qF "Not installed" || brew cask install $c;
+                    ! brew cask info $c | grep -qF "Not installed" || brew cask install --force $c;
                 done
                 [[ $? -eq 0 ]] || return
 
