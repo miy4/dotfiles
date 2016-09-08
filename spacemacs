@@ -28,7 +28,7 @@ values."
      dockerfile
      emacs-lisp
      eyebrowse
-     ;; git
+     git
      go
      markdown
      rust
