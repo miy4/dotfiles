@@ -256,6 +256,7 @@ you should place your code here."
 
   (my/init-beacon)
   (my/init-helm))
+  (my/init-simplenote))
 
 (defun my/config-font-mac ()
   (when (and (>= emacs-major-version 24) (not (null window-system)))
@@ -309,6 +310,21 @@ you should place your code here."
     (bind-keys
      :map helm-find-files-map
      ("C-h" . delete-backward-char))))
+
+(defun my/init-simplenote ()
+  "Configuring simplenote2"
+  (use-package simplenote2 :ensure t
+               :defer t
+               :init
+               (setq simplenote2-notes-mode 'markdown-mode)
+               (setq simplenote2-markdown-notes-mode 'markdown-mode)
+               (spacemacs/set-leader-keys
+                 "ant" 'simplenote2-add-tag
+                 "anc" 'simplenote2-create-note-from-buffer
+                 "anp" 'simplenote2-push-buffer
+                 "ans" 'simplenote2-sync-notes)
+               :config
+               (simplenote2-setup)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
