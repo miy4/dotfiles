@@ -241,7 +241,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;(setq ns-use-srgb-colorspace nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -255,6 +254,7 @@ you should place your code here."
     (my/config-font-mac))
 
   (my/init-generic)
+  (my/init-evil)
   (my/init-beacon)
   (my/init-helm)
   (my/init-simplenote))
@@ -289,9 +289,6 @@ you should place your code here."
   "Set up general purpose vars and key bindings"
   (global-set-key (kbd "C-h") 'delete-backward-char))
 
-  (setq ns-use-srgb-colorspace nil)
-  (setq powerline-default-separator 'slant)
-  (spaceline-compile))
 (defun my/init-evil ()
   "Configuring evil-mode"
   (global-set-key (kbd "C-;") 'evil-escape))
