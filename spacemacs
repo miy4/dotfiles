@@ -107,7 +107,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("NasuM"
                                :size 13
                                :weight normal
                                :width normal
@@ -250,41 +250,12 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (when (spacemacs/system-is-mac)
-    (my/config-font-mac))
-
   (my/init-generic)
   (my/init-evil)
   (my/init-beacon)
   (my/init-helm)
   (my/init-simplenote))
 
-(defun my/config-font-mac ()
-  (when (and (>= emacs-major-version 24) (not (null window-system)))
-    (let* ((font-family "Menlo")
-           (font-size 12)
-           (font-height (* font-size 10))
-           (jp-font-family "ヒラギノ角ゴ ProN"))
-      (set-face-attribute 'default nil :family font-family :height font-height)
-      (let ((name (frame-parameter nil 'font))
-            (jp-font-spec (font-spec :family jp-font-family))
-            (jp-characters '(katakana-jisx0201
-                             cp932-2-byte
-                             japanese-jisx0212
-                             japanese-jisx0213-2
-                             japanese-jisx0213.2004-1))
-            (font-spec (font-spec :family font-family))
-            (characters '((?\u00A0 . ?\u00FF)    ; Latin-1
-                          (?\u0100 . ?\u017F)    ; Latin Extended-A
-                          (?\u0180 . ?\u024F)    ; Latin Extended-B
-                          (?\u0250 . ?\u02AF)    ; IPA Extensions
-                          (?\u0370 . ?\u03FF)))) ; Greek and Coptic
-        (dolist (jp-character jp-characters)
-          (set-fontset-font name jp-character jp-font-spec))
-        (dolist (character characters)
-          (set-fontset-font name character font-spec))
-        (add-to-list 'face-font-rescale-alist (cons jp-font-family 1.2)))
-      (setq-default line-spacing 2)))
 (defun my/init-generic ()
   "Set up general purpose vars and key bindings"
   (global-set-key (kbd "C-h") 'delete-backward-char))
