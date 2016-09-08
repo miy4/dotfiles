@@ -254,8 +254,9 @@ you should place your code here."
   (when (spacemacs/system-is-mac)
     (my/config-font-mac))
 
+  (my/init-generic)
   (my/init-beacon)
-  (my/init-helm))
+  (my/init-helm)
   (my/init-simplenote))
 
 (defun my/config-font-mac ()
@@ -284,6 +285,9 @@ you should place your code here."
           (set-fontset-font name character font-spec))
         (add-to-list 'face-font-rescale-alist (cons jp-font-family 1.2)))
       (setq-default line-spacing 2)))
+(defun my/init-generic ()
+  "Set up general purpose vars and key bindings"
+  (global-set-key (kbd "C-h") 'delete-backward-char))
 
   (setq ns-use-srgb-colorspace nil)
   (setq powerline-default-separator 'slant)
