@@ -289,6 +289,7 @@ you should place your code here."
   (spaceline-compile))
 
 (defun my/init-beacon ()
+  "Configuring beacon-mode"
   (setq beacon-size 20)
   (setq beacon-color "yellow")
   (setq beacon-blink-delay 0.1)
@@ -296,6 +297,7 @@ you should place your code here."
   (beacon-mode t))
 
 (defun my/init-helm ()
+  "Configuring helm"
   (with-eval-after-load 'helm
     (bind-keys
      :map helm-map

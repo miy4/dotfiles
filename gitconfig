@@ -1,7 +1,7 @@
 [ghq]
 	root = ~/src
 [core]
-	editor = emacsclient -t -a vi
+	editor = vim
 [user]
 	email = miy4t7l@gmail.com
 	name = miy4
