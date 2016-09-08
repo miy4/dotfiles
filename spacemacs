@@ -287,6 +287,9 @@ you should place your code here."
   (setq ns-use-srgb-colorspace nil)
   (setq powerline-default-separator 'slant)
   (spaceline-compile))
+(defun my/init-evil ()
+  "Configuring evil-mode"
+  (global-set-key (kbd "C-;") 'evil-escape))
 
 (defun my/init-beacon ()
   "Configuring beacon-mode"
