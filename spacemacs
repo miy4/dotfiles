@@ -299,5 +299,9 @@ you should place your code here."
                :config
                (simplenote2-setup)))
 
+(defun insert-current-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d(%a) %H:%M:%S" (current-time))))
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
