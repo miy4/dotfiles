@@ -191,6 +191,20 @@ end
       history | fzf | read line
       commandline $line
     end
+
+    function .. --description 'Select an ancestor directory and go back there'
+      set -l dir (pwd)
+      while string length --quiet $dir
+        set -l dir (string split -r -m1 / $dir)[1]
+
+        if string length --quiet $dir
+          echo $dir
+        else
+          echo '/'
+        end
+      end | fzf | read line
+      cd $line
+    end
   end
 end
 
