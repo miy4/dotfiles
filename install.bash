@@ -45,9 +45,9 @@ dotfiles_dir=${this%/*}
 ! test_dir_exists ~/.emacs.d/snippets && ln -s ${dotfiles_dir}/emacs.d/snippets ~/.emacs.d/snippets && echo_green "ln -s: $_"
 ! test_dir_exists ~/.peco && mkdir ~/.peco && echo_green "mkdir: $_"
 
-link_file ${dotfiles_dir}/zshrc ~/.zshrc 
-link_file ${dotfiles_dir}/zshenv ~/.zshenv 
-link_file ${dotfiles_dir}/tmux.conf ~/.tmux.conf 
+link_file ${dotfiles_dir}/zshrc ~/.zshrc
+link_file ${dotfiles_dir}/zshenv ~/.zshenv
+link_file ${dotfiles_dir}/tmux.conf ~/.tmux.conf
 link_file ${dotfiles_dir}/emacs.d/init.el ~/.emacs.d/init.el
 link_file ${dotfiles_dir}/spacemacs ~/.spacemacs
 link_file ${dotfiles_dir}/peco/config.json ~/.peco/config.json
