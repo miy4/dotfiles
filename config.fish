@@ -182,11 +182,13 @@ end
   # https://github.com/junegunn/fzf
   if type --quiet --no-functions fzf
     set -gx FZF_DEFAULT_OPTS "--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+
     function select_ghq_repository
       ghq list --full-path | fzf | read line
       builtin cd $line
       commandline -f repaint
     end
+
     function select_history
       history | fzf | read line
       commandline $line
@@ -233,8 +235,11 @@ end
 
 : "Key bindings"; and begin
   function fish_user_key_bindings
-    if type --quiet --no-functions fzf
+    if functions --query select_ghq_repository
       bind \cx\cg select_ghq_repository
+    end
+
+    if functions --query select_history
       bind \cx\cr select_history
     end
 
