@@ -205,6 +205,22 @@ end
       end | fzf | read line
       cd $line
     end
+
+    if type --quiet --no-functions sman
+      function select_commandline_snippet
+        set -lx SMAN_APPEND_HISTORY false
+        set -lx SMAN_SNIPPET_DIR '~/.config/sman/snippets'
+
+        sman ls | fzf --ansi | awk -F " " '{print $1}' | read line
+        sman run --copy $line
+        if type --quiet pbpaste
+          commandline -i -- (pbpaste)
+        else if type --quiet xsel
+          commandline -i -- (xsel --clipboard)
+        end
+      end
+      alias s select_commandline_snippet
+    end
   end
 end
 
@@ -220,6 +236,10 @@ end
     if type --quiet --no-functions fzf
       bind \cx\cg select_ghq_repository
       bind \cx\cr select_history
+    end
+
+    if functions --query select_commandline_snippet
+      bind \cx\cs select_commandline_snippet
     end
   end
 end
