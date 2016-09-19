@@ -147,6 +147,20 @@ end
     echo "$argv" | bc -l
   end
 
+  if type --quiet pandoc; and type --quiet groff
+    function md --description 'Markdown viewer in terminal'
+      set -lx LESS_TERMCAP_mb (printf "\e[1m")
+      set -lx LESS_TERMCAP_md (printf "\e[1;34m")
+	    set -lx LESS_TERMCAP_me (printf "\e[0m")
+	    set -lx LESS_TERMCAP_se (printf "\e[0m")
+	    set -lx LESS_TERMCAP_so (printf "\e[1;33m")
+	    set -lx LESS_TERMCAP_ue (printf "\e[24;0m")
+	    set -lx LESS_TERMCAP_us (printf "\e[4;32m")
+
+      pandoc -s -f markdown -t man $argv[1] | groff -t -T utf8 -man | sed 1,4d | less
+    end
+  end
+
   if [ (uname) = "Darwin" ]
     alias suspend '/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
   end
