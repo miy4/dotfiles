@@ -65,6 +65,20 @@ end
   set -g fish_color_cwd          $yellow
 end
 
+: "Visual"; and begin
+  function man --description "Colorize man page"
+	  set -lx LESS_TERMCAP_mb (printf "\e[1m")
+    set -lx LESS_TERMCAP_md (printf "\e[1;34m")
+	  set -lx LESS_TERMCAP_me (printf "\e[0m")
+	  set -lx LESS_TERMCAP_se (printf "\e[0m")
+	  set -lx LESS_TERMCAP_so (printf "\e[1;33m")
+	  set -lx LESS_TERMCAP_ue (printf "\e[24;0m")
+	  set -lx LESS_TERMCAP_us (printf "\e[4;32m")
+
+    command man $argv
+  end
+end
+
 : "Prompting"; and begin
   set __fish_git_prompt_showdirtystate 'yes'
   set __fish_git_prompt_showstashstate 'yes'
