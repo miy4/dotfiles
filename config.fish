@@ -85,6 +85,8 @@ end
       switch (basename $argv[1])
         case .zshrc
           pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -l sh $argv[1]
+        case .spacemacs
+          pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -l emacs-lisp $argv[1]
         case '*'
           if head -n 1 $argv[1] | grep -qE '^#!.*/(ba)?sh'
             pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -l sh $argv[1]
