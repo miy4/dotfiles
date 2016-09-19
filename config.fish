@@ -77,6 +77,26 @@ end
 
     command man $argv
   end
+
+  if type --quiet pygmentize
+    # requires: pip install Pygments
+    # requires: pip install pygments-style-solarized
+    function source-highlight-pygments
+      switch (basename $argv[1])
+        case .zshrc
+          pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -l sh $argv[1]
+        case '*'
+          if head -n 1 $argv[1] | grep -qE '^#!.*/(ba)?sh'
+            pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -l sh $argv[1]
+          else
+            pygmentize -O encoding=utf-8 -O style=solarizeddark -f terminal256 -g $argv[1]
+          end
+      end
+    end
+    set -gx LESSOPEN '| source-highlight-pygments %s'
+  else if type src-hilite-lesspipe.sh
+    set -gx LESSOPEN '| src-hilite-lesspipe.sh %s'
+  end
 end
 
 : "Prompting"; and begin
@@ -113,19 +133,8 @@ end
   alias da 'd -a'
   alias va 'v -a'
 
-  if type --quiet src-hilite-lesspipe.sh
-    function l
-      set -lx LESSOPEN '| src-hilite-lesspipe.sh %s\\'
-      less -sNRi $argv
-    end
-    function lF
-      set -lx LESSOPEN '| src-hilite-lesspipe.sh %s\\'
-      less -sNRij10 +F $argv
-    end
-  else
-    alias l  'less -sNRi'
-    alias lF 'less -sNRij10 +F'
-  end
+  alias l  'less -sNRi'
+  alias lF 'less -sNRij10 +F'
 
   alias g 'grep --color=auto'
   alias psv 'ps auxww'
