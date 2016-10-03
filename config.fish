@@ -96,7 +96,7 @@ end
       end
     end
     set -gx LESSOPEN '| source-highlight-pygments %s'
-  else if type src-hilite-lesspipe.sh
+  else if type --quiet src-hilite-lesspipe.sh
     set -gx LESSOPEN '| src-hilite-lesspipe.sh %s'
   end
 end
