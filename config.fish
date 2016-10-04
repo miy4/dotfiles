@@ -22,7 +22,10 @@ alias : true
     set -gx HOMEBREW_NO_ANALYTICS 1
   end
 
-  set PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin /usr/X11/bin ~/bin
+  set PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin ~/bin
+  if [ -d /usr/X11/bin ]
+    set PATH /usr/X11/bin $PATH
+  end
   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]
     # use coreutils instead of BSD
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
