@@ -280,6 +280,11 @@ you should place your code here."
     (bind-keys
      :map helm-map
      ("C-h" . delete-backward-char)))
+  (with-eval-after-load 'helm-buffers
+    (setq helm-mini-default-sources '(helm-source-buffers-list
+                                      helm-source-bookmarks
+                                      helm-source-files-in-current-dir
+                                      helm-source-recentf)))
   (with-eval-after-load 'helm-files
     (bind-keys
      :map helm-find-files-map
