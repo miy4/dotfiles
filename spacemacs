@@ -42,7 +42,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(beacon)
+   dotspacemacs-additional-packages '(beacon simplenote2)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -292,18 +292,15 @@ you should place your code here."
 
 (defun my/init-simplenote ()
   "Configuring simplenote2"
-  (use-package simplenote2 :ensure t
-               :defer t
-               :init
-               (setq simplenote2-notes-mode 'markdown-mode)
-               (setq simplenote2-markdown-notes-mode 'markdown-mode)
-               (spacemacs/set-leader-keys
-                 "ant" 'simplenote2-add-tag
-                 "anc" 'simplenote2-create-note-from-buffer
-                 "anp" 'simplenote2-push-buffer
-                 "ans" 'simplenote2-sync-notes)
-               :config
-               (simplenote2-setup)))
+  (setq simplenote2-notes-mode 'markdown-mode)
+  (setq simplenote2-markdown-notes-mode 'markdown-mode)
+  (spacemacs/set-leader-keys
+    "ant" 'simplenote2-add-tag
+    "anc" 'simplenote2-create-note-from-buffer
+    "anp" 'simplenote2-push-buffer
+    "ans" 'simplenote2-sync-notes)
+  (with-eval-after-load 'simplenote2
+    (simplenote2-setup)))
 
 (defun insert-current-date ()
   (interactive)
