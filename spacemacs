@@ -27,7 +27,6 @@ values."
      better-defaults
      dockerfile
      emacs-lisp
-     eyebrowse
      git
      go
      markdown
