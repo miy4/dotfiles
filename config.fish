@@ -196,6 +196,13 @@ end
   end
 end
 
+: "Node.js"; and begin
+  if [ -x ~/.nodebrew/current/bin/nodebrew ]
+     set -gx NODEBREW_ROOT ~/.nodebrew
+     set -gx PATH $PATH ./node_modules/.bin $NODEBREW_ROOT/current/bin
+  end
+end
+
 : "Java"; and begin
   set -l java_home_cmd /usr/libexec/java_home
   if [ -x $java_home_cmd ]
