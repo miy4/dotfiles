@@ -1,7 +1,6 @@
 # -*- mode: fish -*-
-alias : true
 
-: "Environment variables"; and begin
+begin ## Environment variables
   ulimit -c unlimited
 
   set -g fish_greeting ''
@@ -33,7 +32,7 @@ alias : true
   set -gx PATH $PATH
 end
 
-: "Color scheme"; and begin
+begin ## Color scheme
   # Solarized Dark
   set -l base03  002b36
   set -l base02  073642
@@ -68,7 +67,7 @@ end
   set -g fish_color_cwd          $yellow
 end
 
-: "Visual"; and begin
+begin ## Visual
   function man --description "Colorize man page"
 	  set -lx LESS_TERMCAP_mb (printf "\e[1m")
     set -lx LESS_TERMCAP_md (printf "\e[1;34m")
@@ -104,7 +103,7 @@ end
   end
 end
 
-: "Prompting"; and begin
+begin ## Prompting
   set __fish_git_prompt_showdirtystate 'yes'
   set __fish_git_prompt_showstashstate 'yes'
   set __fish_git_prompt_showuntrackedfiles 'yes'
@@ -126,7 +125,7 @@ end
   end
 end
 
-: "Aliasing"; and begin
+begin ## Aliasing
   if type --quiet gls
     alias d 'gls -F -G --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
   else if ls --version | grep -q coreutils
@@ -169,7 +168,7 @@ end
   end
 end
 
-: "Clipboard"; and begin
+begin ## Clipboard
   if [ -f /tmp/.X0-lock -a -x /usr/bin/VBoxClient ]
     set -lx DISPLAY :0
     /usr/bin/VBoxClient --clipboard
@@ -181,14 +180,14 @@ end
   end
 end
 
-: "Golang"; and begin
+begin ## Golang
   if type --quiet --no-functions go
     set -gx GOPATH $HOME
     set -gx PATH $PATH $GOPATH/bin (go env GOROOT)/bin
   end
 end
 
-: "Rust"; and begin
+begin ## Rust
   if [ -d ~/.cargo/bin ]
     set -gx PATH $PATH ~/.cargo/bin
     set -gx RUST_SRC_PATH ~/src/github.com/rust-lang/rust/src
@@ -196,21 +195,21 @@ end
   end
 end
 
-: "Node.js"; and begin
+begin ## Node.js
   if [ -x ~/.nodebrew/current/bin/nodebrew ]
      set -gx NODEBREW_ROOT ~/.nodebrew
      set -gx PATH $PATH ./node_modules/.bin $NODEBREW_ROOT/current/bin
   end
 end
 
-: "Java"; and begin
+begin ## Java
   set -l java_home_cmd /usr/libexec/java_home
   if [ -x $java_home_cmd ]
     set -gx JAVA_HOME (eval $java_home_cmd -v 1.8)
   end
 end
 
-: "Android"; and begin
+begin ## Android
   if [ -d /opt/android-sdk ]
     set -gx ANDROID_HOME /opt/android-sdk
     set -gx PATH $PATH /opt/android-sdk/tools /opt/android-sdk/platform-tools
@@ -219,7 +218,7 @@ end
   end
 end
 
-: "Git"; and begin
+begin ## Git
   if [ -x /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight ]
     set -gx PATH $PATH /usr/local/opt/git/share/git-core/contrib/diff-highlight
   else if [ -x /usr/share/git/diff-highlight/diff-highlight ]
@@ -227,7 +226,7 @@ end
   end
 end
 
-: "Commandline filter"; and begin
+begin ## Commandline filter
   # https://github.com/junegunn/fzf
   if type --quiet --no-functions fzf
     set -gx FZF_DEFAULT_OPTS "--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
@@ -275,14 +274,14 @@ end
   end
 end
 
-: "Managing environment variables"; and begin
+begin ## Managing environment variables
   # https://github.com/direnv/direnv
   if type --quiet --no-functions direnv
     eval (direnv hook fish)
   end
 end
 
-: "Key bindings"; and begin
+begin ## Key bindings
   function fish_user_key_bindings
     if functions --query select_ghq_repository
       bind \cx\cg select_ghq_repository
@@ -298,7 +297,7 @@ end
   end
 end
 
-: "Loading a site local configuration"; and begin
+begin ## Loading a site local configuration
   set -l config_site ~/.config/fish/config_site.fish
   if [ -r $config_site ]
     source $config_site
