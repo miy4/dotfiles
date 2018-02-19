@@ -172,11 +172,11 @@ begin ## Clipboard
   if [ -f /tmp/.X0-lock -a -x /usr/bin/VBoxClient ]
     set -lx DISPLAY :0
     /usr/bin/VBoxClient --clipboard
+  end
 
-    if type --quiet xsel
-      alias pbcopy  'xsel --display :0 --input --clipboard'
-      alias pbpaste 'xsel --display :0 --output --clipboard'
-    end
+  if type --quiet xsel
+      alias pbcopy  'xsel --input --clipboard'
+      alias pbpaste 'xsel --output --clipboard'
   end
 end
 
