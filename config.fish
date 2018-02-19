@@ -218,6 +218,14 @@ begin ## Android
   end
 end
 
+begin ## Python
+    if [ -d ~/.pyenv ]
+        set -gx PYENV_ROOT ~/.pyenv
+        set -gx PATH $PYENV_ROOT/bin $PATH
+        status --is-interactive; and . (pyenv init - | psub)
+    end
+end
+
 begin ## Git
   if [ -x /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight ]
     set -gx PATH $PATH /usr/local/opt/git/share/git-core/contrib/diff-highlight
