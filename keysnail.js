@@ -130,14 +130,6 @@ local["^https?://www.google.(co.jp|com)/reader/view/"] = [
     ["-", null]
 ];
 
-local["^http://reader.livedoor.com/reader/"] = [
-    ['r', null]
-];
-
-local["^https?://feedly.com/"] = [
-    ['j', null],
-    ['k', null]
-];
 // HoK setting
 plugins.options["hok.unique_only"] = true;
 
@@ -169,23 +161,6 @@ plugins.options["tanything_opt.keymap"] = {
     "C"     : "localClipU",                     //選択したタブのURLをHTMLタグつきでコピー
     "e"     : "localMovetoend",                 //選択したタブを末尾に移動
     "p"     : "localTogglePin",                 
-};
-
-// 2012.01.25 LDRnail setting
-plugins.options["ldrnail.exclude_urls"] = [
-    "^https?://mail.google.com/mail/.*",
-    "^https?://www.google.(co.jp|com)/reader/view/.*",
-];
- 
-plugins.options["ldrnail.keybind"] = {
-    'j': 'next',
-    'k': 'prev',
-    'p': 'pin',
-    'l': 'list',
-    'f': 'focus',
-    'v': 'view',
-    'o': 'open',
-    's': 'siteinfo',
 };
 
 // 2012.01.25 Caret hint setting
@@ -704,11 +679,6 @@ key.setViewKey(['C-c', 'C-e'], function (aEvent, aArg) {
     ext.exec("hok-start-continuous-mode", aArg);
 }, 'リンクを連続して開く Hit a Hint を開始', true);
 
-// 2010.06.28 kungfloo setting ============================================
-key.defineKey([key.modes.VIEW, key.modes.CARET], 'r', function (ev, arg) {
-    ext.exec("kungfloo-reblog", arg, ev);
-}, 'kungfloo - Reblog', true);
-
 // 2012.01.24 Tanything setting ===========================================
 key.setViewKey("C-;", function (ev, arg) {
     ext.exec("tanything", arg);
@@ -732,4 +702,3 @@ key.setCaretKey('i', function (ev, arg) {
 key.setGlobalKey(['C-c', 't'], function (ev, arg) {
     ext.exec('linksnail', arg, ev);
 }, 'LinkSnail', true);
-
