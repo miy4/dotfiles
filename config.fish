@@ -190,7 +190,7 @@ end
 begin ## Rust
   if [ -d ~/.cargo/bin ]
     set -gx PATH $PATH ~/.cargo/bin
-    set -gx RUST_SRC_PATH ~/src/github.com/rust-lang/rust/src
+    set -gx RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
     set -gx CARGO_HOME ~/.cargo
   end
 end
