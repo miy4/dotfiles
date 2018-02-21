@@ -121,7 +121,7 @@ begin ## Prompting
     set -l __n (set_color normal)
     set -l __m (set_color magenta)
     printf '%s%s%s@%s%s%s:%s%s%s%s\n' "$__b" "$USER" "$__n" "$__b" "$__fish_prompt_hostname" "$__n" "$__b" "$PWD" "$__n" (__fish_git_prompt)
-    printf "%s❯ %s" "$__m" "$__n"
+    printf "%s> %s" "$__m" "$__n"
   end
 end
 
