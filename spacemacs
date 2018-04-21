@@ -100,9 +100,7 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(challenger-deep
                          solarized-dark
-                         solarized-light
-                         spacemacs-dark
-                         spacemacs-light)
+                         spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
