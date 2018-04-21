@@ -98,7 +98,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-dark
+   dotspacemacs-themes '(challenger-deep
+                         solarized-dark
                          solarized-light
                          spacemacs-dark
                          spacemacs-light)
@@ -311,6 +312,8 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(package-selected-packages
    (quote
     (livid-mode skewer-mode web-beautify simple-httpd js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic winum uuidgen unfill toc-org powerline request-deferred deferred spinner org-plus-contrib org-bullets mwim markdown-mode link-hint hydra parent-mode projectile request go-guru gitignore-mode git-link fuzzy pos-tip flycheck pkg-info epl flx evil-visual-mark-mode evil-unimpaired magit git-commit ghub let-alist with-editor smartparens iedit evil-ediff anzu evil goto-chg undo-tree highlight dumb-jump f s magit-popup diminish company-shell go-mode company column-enforce-mode cargo rust-mode bind-map bind-key seq yasnippet packed helm avy helm-core async auto-complete popup docker json-mode tablist docker-tramp json-snatcher json-reformat insert-shebang hide-comnt simplenote2 zenburn-theme yaml-mode ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle restart-emacs rainbow-delimiters racer quelpa popwin persp-mode pcre2el paradox page-break-lines orgit open-junk-file neotree move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-rust flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav dockerfile-mode define-word company-statistics company-racer company-quickhelp company-go clean-aindent-mode buffer-move bracketed-paste beacon auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
