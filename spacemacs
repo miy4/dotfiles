@@ -101,10 +101,7 @@ values."
    dotspacemacs-themes '(solarized-dark
                          solarized-light
                          spacemacs-dark
-                         spacemacs-light
-                         leuven
-                         monokai
-                         zenburn)
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
