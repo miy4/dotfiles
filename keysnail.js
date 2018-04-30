@@ -167,6 +167,12 @@ plugins.options["tanything_opt.keymap"] = {
 plugins.options["caret_hint.head_key"] = "m"; // c -> m
 plugins.options["caret_hint.tail_key"] = "M"; // C -> M
 
+plugins.options["linksnail.formats"] = {
+    "Scrapbox": "[{uri} {text}]",
+    "Markdown": "[{text}]({uri})",
+    "Title": "{text}",
+    "URL": "{uri}"
+};
 
 //}}%PRESERVE%
 // ========================================================================= //
