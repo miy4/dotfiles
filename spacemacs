@@ -43,7 +43,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(beacon simplenote2)
+   dotspacemacs-additional-packages '(beacon)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -252,8 +252,7 @@ you should place your code here."
   (my/init-generic)
   (my/init-evil)
   (my/init-beacon)
-  (my/init-helm)
-  (my/init-simplenote))
+  (my/init-helm))
 
 (defun my/init-generic ()
   "Set up general purpose vars and key bindings"
@@ -286,18 +285,6 @@ you should place your code here."
     (bind-keys
      :map helm-find-files-map
      ("C-h" . delete-backward-char))))
-
-(defun my/init-simplenote ()
-  "Configuring simplenote2"
-  (setq simplenote2-notes-mode 'markdown-mode)
-  (setq simplenote2-markdown-notes-mode 'markdown-mode)
-  (spacemacs/set-leader-keys
-    "ant" 'simplenote2-add-tag
-    "anc" 'simplenote2-create-note-from-buffer
-    "anp" 'simplenote2-push-buffer
-    "ans" 'simplenote2-sync-notes)
-  (with-eval-after-load 'simplenote2
-    (simplenote2-setup)))
 
 (defun insert-current-date ()
   (interactive)
