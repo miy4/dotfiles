@@ -263,7 +263,9 @@ begin ## Commandline filter
           echo '/'
         end
       end | fzf | read line
-      cd $line
+      if [ -n "$line" ]
+        cd $line
+      end
     end
 
     function select_script
