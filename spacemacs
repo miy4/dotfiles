@@ -252,7 +252,8 @@ you should place your code here."
   (my/init-generic)
   (my/init-evil)
   (my/init-beacon)
-  (my/init-helm))
+  (my/init-helm)
+  (my/init-rust-mode))
 
 (defun my/init-generic ()
   "Set up general purpose vars and key bindings"
@@ -289,6 +290,11 @@ you should place your code here."
 (defun insert-current-date ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d(%a) %H:%M:%S" (current-time))))
+
+(defun my/init-rust-mode ()
+  "Configuring rust-mode"
+  (with-eval-after-load 'rust-mode
+    (setq rust-format-on-save t)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
