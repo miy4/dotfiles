@@ -266,20 +266,18 @@ begin ## Commandline filter
       cd $line
     end
 
-    if type --quiet --no-functions sman
-      function select_commandline_snippet
-        set -lx SMAN_APPEND_HISTORY false
-        set -lx SMAN_SNIPPET_DIR '~/.config/sman/snippets'
-
-        sman ls | fzf --ansi | awk -F " " '{print $1}' | read line
-        sman run --copy $line
-        if type --quiet pbpaste
-          commandline -i -- (pbpaste)
-        else if type --quiet xsel
-          commandline -i -- (xsel --clipboard)
+    function select_script
+        set -l script_dir ~/.snippet
+        for file in $script_dir/*.bash
+            echo -n (basename $file)"	"
+            sed -e 1,2d "$file" | tr "\n" " "
+            echo
+        end \
+        | fzf --exact --preview "cd $script_dir; "'set -l query (echo {q} | tr " " "|"); echo {1} | grep -E "^|$query" -i --color=always; sed -e 1d {1} | grep -E "^|$query" -i --color=always' \
+        | cut -f 1 | read script
+        if [ -n "$script" ]
+            commandline "$script_dir/$script"
         end
-      end
-      alias s select_commandline_snippet
     end
   end
 end
@@ -301,8 +299,8 @@ begin ## Key bindings
       bind \cx\cr select_history
     end
 
-    if functions --query select_commandline_snippet
-      bind \cx\cs select_commandline_snippet
+    if functions --query select_script
+      bind \cx\cs select_script
     end
   end
 end
