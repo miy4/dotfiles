@@ -143,6 +143,17 @@ begin ## Aliasing
   alias reload 'exec fish -l'
   alias ec 'emacsclient -n'
 
+  function new --description 'Create new directories and empty files'
+    if not count $argv >/dev/null
+      echo "Usage: new FILE..." >&2
+      return 1
+    end
+
+    for f in $argv
+      mkdir -p (dirname $f); and touch $f
+    end
+  end
+
   function = --description 'Basic calculator for your terminal'
     echo "$argv" | bc -l
   end
