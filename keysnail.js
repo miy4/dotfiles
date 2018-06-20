@@ -168,6 +168,7 @@ plugins.options["caret_hint.head_key"] = "m"; // c -> m
 plugins.options["caret_hint.tail_key"] = "M"; // C -> M
 
 plugins.options["linksnail.formats"] = {
+    "pinboard.py": "pinboard add --title '{text}' --url {uri} --read --tags ",
     "Scrapbox": "[{uri} {text}]",
     "Markdown": "[{text}]({uri})",
     "Title": "{text}",
