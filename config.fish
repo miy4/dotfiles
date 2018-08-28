@@ -29,6 +29,11 @@ begin ## Environment variables
     # use coreutils instead of BSD
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
   end
+  if [ -d ~/.linuxbrew ]
+    set PATH ~/.linuxbrew/bin ~/.linuxbrew/sbin $PATH
+  else if [ -d /home/linuxbrew/.linuxbrew ]
+    set PATH /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin $PATH
+  end
   set -gx PATH $PATH
 end
 
@@ -244,6 +249,8 @@ begin ## Git
     set -gx PATH $PATH /usr/local/opt/git/share/git-core/contrib/diff-highlight
   else if [ -x /usr/share/git/diff-highlight/diff-highlight ]
     set -gx PATH $PATH /usr/share/git/diff-highlight
+  else if [ -x (brew --prefix)/share/git-core/contrib/diff-highlight ]
+    set -gx PATH $PATH (brew --prefix)/share/git-core/contrib/diff-highlight
   end
 end
 
