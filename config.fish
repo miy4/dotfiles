@@ -199,6 +199,12 @@ begin ## Clipboard
 end
 
 begin ## Golang
+  if [ -d ~/.goenv ]
+    set -gx GOENV_ROOT ~/.goenv
+    set -gx PATH $PATH $GOENV_ROOT/bin
+    goenv init - | source
+  end
+
   if type --quiet --no-functions go
     set -gx GOPATH $HOME
     set -gx PATH $PATH $GOPATH/bin (go env GOROOT)/bin
