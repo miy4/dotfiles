@@ -198,13 +198,17 @@ begin ## Clipboard
   end
 end
 
-begin ## Golang
-  if [ -d ~/.goenv ]
-    set -gx GOENV_ROOT ~/.goenv
-    set -gx PATH $PATH $GOENV_ROOT/bin
-    goenv init - | source
+begin ## Managing dev environment
+  if [ -d ~/.anyenv ]
+    set -gx PATH ~/.anyenv/bin $PATH
+    anyenv init - fish | source
   end
+end
 
+begin ## Golang
+  # requires: anyenv install goenv
+  # requires: goenv install *.*.*
+  # requires: goenv global *.*.*
   if type --quiet --no-functions go
     set -gx GOPATH $HOME
     set -gx PATH $PATH $GOPATH/bin (go env GOROOT)/bin
@@ -220,6 +224,10 @@ begin ## Rust
 end
 
 begin ## Node.js
+  # requires: anyenv install nodenv
+  # requires: nodenv install *.*.*
+  # requires: nodenv global *.*.*
+  # or
   if [ -x ~/.nodebrew/current/bin/nodebrew ]
      set -gx NODEBREW_ROOT ~/.nodebrew
      set -gx PATH $PATH ./node_modules/.bin $NODEBREW_ROOT/current/bin
@@ -243,6 +251,10 @@ begin ## Android
 end
 
 begin ## Python
+    # requires: anyenv install pyenv
+    # requires: pyenv install x.x.x
+    # requires: pyenv global x.x.x
+    # or
     if [ -d ~/.pyenv ]
         set -gx PYENV_ROOT ~/.pyenv
         set -gx PATH $PYENV_ROOT/bin $PATH
