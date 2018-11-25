@@ -1,6 +1,11 @@
 # -*- mode: fish -*-
 
 begin ## Environment variables
+  if [ (umask) = "0000" ]
+    # WSL does not apply default umask
+    umask 022
+  end
+
   ulimit -c unlimited
 
   set -g fish_greeting ''
