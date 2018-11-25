@@ -56,6 +56,3 @@ link_file ${dotfiles_dir}/peco/config.json ~/.peco/config.json
 link_file ${dotfiles_dir}/keysnail.js ~/.keysnail.js
 link_file ${dotfiles_dir}/snippets ~/.snippets
 link_file ${dotfiles_dir}/gitconfig ~/.gitconfig
-#link_file ${dotfiles_dir}/minttyrc ~/.minttyrc
-link_file ${dotfiles_dir}/eslintrc ~/.eslintrc
-link_file ${dotfiles_dir}/tern-config ~/.tern-config
