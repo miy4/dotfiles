@@ -308,3 +308,28 @@ you should place your code here."
  '(default ((((class color) (min-colors 257)) (:background "#1b182c" :foreground "#cbe3e7")) (((class color) (min-colors 89)) (:background "#1c1c1c" :foreground "#eeeeee"))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
+ '(package-selected-packages
+   (quote
+    (yasnippet-snippets writeroom-mode visual-fill-column symon string-inflection spaceline-all-the-icons prettier-js pippel pipenv password-generator overseer nameless magit-svn json-navigator hierarchy importmagic epc ctable concurrent helm-xref helm-purpose window-purpose imenu-list helm-git-grep godoctor go-tag go-rename go-impl go-gen-test go-fill-struct gitignore-templates flycheck-bashate treepy graphql evil-lion evil-goggles evil-cleverparens paredit editorconfig doom-modeline eldoc-eval shrink-path all-the-icons memoize counsel-projectile counsel swiper ivy challenger-deep-theme centered-cursor-mode font-lock+ dotenv-mode dash livid-mode skewer-mode web-beautify simple-httpd js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic winum uuidgen unfill toc-org powerline request-deferred deferred spinner org-plus-contrib org-bullets mwim markdown-mode link-hint hydra parent-mode projectile request go-guru gitignore-mode git-link fuzzy pos-tip flycheck pkg-info epl flx evil-visual-mark-mode evil-unimpaired magit git-commit ghub let-alist with-editor smartparens iedit evil-ediff anzu evil goto-chg undo-tree highlight dumb-jump f s magit-popup diminish company-shell go-mode company column-enforce-mode cargo rust-mode bind-map bind-key seq yasnippet packed helm avy helm-core async auto-complete popup docker json-mode tablist docker-tramp json-snatcher json-reformat insert-shebang hide-comnt simplenote2 zenburn-theme yaml-mode ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package toml-mode spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle restart-emacs rainbow-delimiters racer quelpa popwin persp-mode pcre2el paradox page-break-lines orgit open-junk-file neotree move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-rust flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav dockerfile-mode define-word company-statistics company-racer company-quickhelp company-go clean-aindent-mode buffer-move bracketed-paste beacon auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-github-token t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 257)) (:background "#1b182c" :foreground "#cbe3e7")) (((class color) (min-colors 89)) (:background "#1c1c1c" :foreground "#eeeeee"))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+)
