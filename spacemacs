@@ -34,7 +34,11 @@ values."
      markdown
      rust
      python
-     javascript
+     prettier
+     (javascript :variables
+                 javascript-backend 'lsp
+                 javascript-fmt-tool 'prettier
+                 js2-basic-offset 2)
      ;; spell-checking
      syntax-checking
      shell-scripts
