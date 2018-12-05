@@ -28,7 +28,9 @@ values."
      docker
      emacs-lisp
      git
-     (go :variables go-tab-width 4)
+     (go :variables
+         go-tab-width 4
+         go-format-before-save t)
      markdown
      rust
      python
