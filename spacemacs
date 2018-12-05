@@ -37,8 +37,8 @@ values."
      syntax-checking
      shell-scripts
      ;; version-control
-     yaml
-     )
+     yaml)
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -249,52 +249,37 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (my/init-generic)
-  (my/init-evil)
-  (my/init-beacon)
-  (my/init-helm)
-  (my/init-rust-mode))
-
-(defun my/init-generic ()
-  "Set up general purpose vars and key bindings"
-  (global-set-key (kbd "C-h") 'delete-backward-char))
-
-(defun my/init-evil ()
-  "Configuring evil-mode"
-  (global-set-key (kbd "C-;") 'evil-escape))
-
-(defun my/init-beacon ()
-  "Configuring beacon-mode"
-  (setq beacon-size 20)
-  (setq beacon-color "yellow")
-  (setq beacon-blink-delay 0.1)
-  (setq beacon-blink-duration 0.1)
-  (beacon-mode t))
-
-(defun my/init-helm ()
-  "Configuring helm"
-  (with-eval-after-load 'helm
-    (bind-keys
-     :map helm-map
-     ("C-h" . delete-backward-char)))
-  (with-eval-after-load 'helm-buffers
-    (setq helm-mini-default-sources '(helm-source-buffers-list
-                                      helm-source-bookmarks
-                                      helm-source-files-in-current-dir
-                                      helm-source-recentf)))
-  (with-eval-after-load 'helm-files
-    (bind-keys
-     :map helm-find-files-map
-     ("C-h" . delete-backward-char))))
+  (progn "Set up general purpose vars and key bindings"
+    (global-set-key (kbd "C-h") 'delete-backward-char))
+  (progn "Configuring evil-mode"
+    (global-set-key (kbd "C-;") 'evil-escape))
+  (progn "Configuring beacon-mode"
+    (setq beacon-size 20)
+    (setq beacon-color "yellow")
+    (setq beacon-blink-delay 0.1)
+    (setq beacon-blink-duration 0.1)
+    (beacon-mode t))
+  (progn "Configuring helm"
+    (with-eval-after-load 'helm
+      (bind-keys
+       :map helm-map
+       ("C-h" . delete-backward-char)))
+    (with-eval-after-load 'helm-buffers
+      (setq helm-mini-default-sources '(helm-source-buffers-list
+                                        helm-source-bookmarks
+                                        helm-source-files-in-current-dir
+                                        helm-source-recentf)))
+    (with-eval-after-load 'helm-files
+      (bind-keys
+       :map helm-find-files-map
+       ("C-h" . delete-backward-char))))
+  (progn "Configuring rust-mode"
+    (with-eval-after-load 'rust-mode
+      (setq rust-format-on-save t))))
 
 (defun insert-current-date ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d(%a) %H:%M:%S" (current-time))))
-
-(defun my/init-rust-mode ()
-  "Configuring rust-mode"
-  (with-eval-after-load 'rust-mode
-    (setq rust-format-on-save t)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
