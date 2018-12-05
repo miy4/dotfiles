@@ -17,32 +17,25 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
+   '(better-defaults
      auto-completion
-     better-defaults
-     docker
-     emacs-lisp
-     git
+     syntax-checking
      (go :variables
          go-tab-width 4
          go-format-before-save t)
-     markdown
-     rust
-     python
      prettier
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
                  js2-basic-offset 2)
-     ;; spell-checking
-     syntax-checking
+     rust
+     python
+     emacs-lisp
      shell-scripts
      ;; version-control
+     git
+     docker
+     markdown
      yaml)
 
    ;; List of additional packages that will be installed without being
