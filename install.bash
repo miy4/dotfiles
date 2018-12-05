@@ -43,7 +43,6 @@ dotfiles_dir=${this%/*}
 
 ! test_dir_exists ~/.emacs.d && mkdir ~/.emacs.d && echo_green "mkdir: $_"
 ! test_dir_exists ~/.emacs.d/snippets && ln -s ${dotfiles_dir}/emacs.d/snippets ~/.emacs.d/snippets && echo_green "ln -s: $_"
-! test_dir_exists ~/.peco && mkdir ~/.peco && echo_green "mkdir: $_"
 ! test_dir_exists ~/.config/fish && mkdir ~/.config/fish && echo_green "mkdir: $_"
 
 link_file ${dotfiles_dir}/zshrc ~/.zshrc
@@ -52,7 +51,7 @@ link_file ${dotfiles_dir}/config.fish ~/.config/fish/config.fish
 link_file ${dotfiles_dir}/tmux.conf ~/.tmux.conf
 link_file ${dotfiles_dir}/emacs.d/init.el ~/.emacs.d/init.el
 link_file ${dotfiles_dir}/spacemacs ~/.spacemacs
-link_file ${dotfiles_dir}/peco/config.json ~/.peco/config.json
 link_file ${dotfiles_dir}/keysnail.js ~/.keysnail.js
 link_file ${dotfiles_dir}/snippets ~/.snippets
 link_file ${dotfiles_dir}/gitconfig ~/.gitconfig
+
