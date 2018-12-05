@@ -133,86 +133,6 @@ begin ## Prompting
   end
 end
 
-begin ## Aliasing
-  if type --quiet gls
-    alias d 'gls -F -G --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
-  else if ls --version | grep -q coreutils
-    alias d 'ls -F -G --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
-  else
-    alias d 'ls -F -G'
-  end
-  alias v  'd -l'
-  alias da 'd -a'
-  alias va 'v -a'
-
-  alias l  'less -sNRi'
-  alias lF 'less -sNRij10 +F'
-
-  alias g 'grep --color=auto'
-  alias psv 'ps auxww'
-  alias reload 'exec fish -l'
-  alias ec 'emacsclient -n'
-
-  function new --description 'Create new directories and empty files'
-    if not count $argv >/dev/null
-      echo "Usage: new FILE..." >&2
-      return 1
-    end
-
-    for f in $argv
-      mkdir -p (dirname $f); and touch $f
-    end
-  end
-
-  function = --description 'Basic calculator for your terminal'
-    echo "$argv" | bc -l
-  end
-
-  if type --quiet mdcat
-    function mdview --description 'Markdown viewer in terminal'
-      mdcat -c yes $argv[1] | less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
-    end
-  else if type --quiet pandoc; and type --quiet groff
-    function mdview --description 'Markdown viewer in terminal'
-      set -lx LESS_TERMCAP_mb (printf "\e[1m")
-      set -lx LESS_TERMCAP_md (printf "\e[1;34m")
-	    set -lx LESS_TERMCAP_me (printf "\e[0m")
-	    set -lx LESS_TERMCAP_se (printf "\e[0m")
-	    set -lx LESS_TERMCAP_so (printf "\e[1;33m")
-	    set -lx LESS_TERMCAP_ue (printf "\e[24;0m")
-	    set -lx LESS_TERMCAP_us (printf "\e[4;32m")
-
-      pandoc -s -f markdown -t man $argv[1] | groff -t -T utf8 -man | sed 1,4d | less
-    end
-  end
-
-  if type --quiet mdcat; and type --quiet pandoc
-    function orgview --description 'Org file viewer in terminal'
-      pandoc -s -f org -t markdown $argv[1] | \
-        mdcat -c yes | \
-        less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
-    end
-  else if type --quiet pandoc
-    function orgview --description 'Org file viewer in terminal'
-      pandoc -s -f org -t man $argv[1] | \
-      groff -t -T utf8 -man | \
-      sed 1,4d | \
-      env LESS_TERMCAP_mb=(printf "\e[1m") \
-          LESS_TERMCAP_md=(printf "\e[1;34m") \
-	        LESS_TERMCAP_me=(printf "\e[0m") \
-	        LESS_TERMCAP_se=(printf "\e[0m") \
-	        LESS_TERMCAP_so=(printf "\e[1;33m") \
-	        LESS_TERMCAP_ue=(printf "\e[24;0m") \
-	        LESS_TERMCAP_us=(printf "\e[4;32m") \
-          less
-    end
-  end
-
-  if [ (uname) = "Darwin" ]
-    alias suspend '/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
-  end
-end
-
 begin ## Clipboard
   if [ -f /tmp/.X0-lock -a -x /usr/bin/VBoxClient ]
     set -lx DISPLAY :0
@@ -351,6 +271,86 @@ begin ## Managing environment variables
   # https://github.com/direnv/direnv
   if type --quiet --no-functions direnv
     eval (direnv hook fish)
+  end
+end
+
+begin ## Aliasing
+  if type --quiet gls
+    alias d 'gls -F -G --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
+  else if ls --version | grep -q coreutils
+    alias d 'ls -F -G --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
+  else
+    alias d 'ls -F -G'
+  end
+  alias v  'd -l'
+  alias da 'd -a'
+  alias va 'v -a'
+
+  alias l  'less -sNRi'
+  alias lF 'less -sNRij10 +F'
+
+  alias g 'grep --color=auto'
+  alias psv 'ps auxww'
+  alias reload 'exec fish -l'
+  alias ec 'emacsclient -n'
+
+  function new --description 'Create new directories and empty files'
+    if not count $argv >/dev/null
+      echo "Usage: new FILE..." >&2
+      return 1
+    end
+
+    for f in $argv
+      mkdir -p (dirname $f); and touch $f
+    end
+  end
+
+  function = --description 'Basic calculator for your terminal'
+    echo "$argv" | bc -l
+  end
+
+  if type --quiet mdcat
+    function mdview --description 'Markdown viewer in terminal'
+      mdcat -c yes $argv[1] | less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
+    end
+  else if type --quiet pandoc; and type --quiet groff
+    function mdview --description 'Markdown viewer in terminal'
+      set -lx LESS_TERMCAP_mb (printf "\e[1m")
+      set -lx LESS_TERMCAP_md (printf "\e[1;34m")
+	    set -lx LESS_TERMCAP_me (printf "\e[0m")
+	    set -lx LESS_TERMCAP_se (printf "\e[0m")
+	    set -lx LESS_TERMCAP_so (printf "\e[1;33m")
+	    set -lx LESS_TERMCAP_ue (printf "\e[24;0m")
+	    set -lx LESS_TERMCAP_us (printf "\e[4;32m")
+
+      pandoc -s -f markdown -t man $argv[1] | groff -t -T utf8 -man | sed 1,4d | less
+    end
+  end
+
+  if type --quiet mdcat; and type --quiet pandoc
+    function orgview --description 'Org file viewer in terminal'
+      pandoc -s -f org -t markdown $argv[1] | \
+        mdcat -c yes | \
+        less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
+    end
+  else if type --quiet pandoc
+    function orgview --description 'Org file viewer in terminal'
+      pandoc -s -f org -t man $argv[1] | \
+      groff -t -T utf8 -man | \
+      sed 1,4d | \
+      env LESS_TERMCAP_mb=(printf "\e[1m") \
+          LESS_TERMCAP_md=(printf "\e[1;34m") \
+	        LESS_TERMCAP_me=(printf "\e[0m") \
+	        LESS_TERMCAP_se=(printf "\e[0m") \
+	        LESS_TERMCAP_so=(printf "\e[1;33m") \
+	        LESS_TERMCAP_ue=(printf "\e[24;0m") \
+	        LESS_TERMCAP_us=(printf "\e[4;32m") \
+          less
+    end
+  end
+
+  if [ (uname) = "Darwin" ]
+    alias suspend '/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
   end
 end
 
