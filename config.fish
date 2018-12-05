@@ -186,6 +186,28 @@ begin ## Aliasing
     end
   end
 
+  if type --quiet mdcat; and type --quiet pandoc
+    function orgview --description 'Org file viewer in terminal'
+      pandoc -s -f org -t markdown $argv[1] | \
+        mdcat -c yes | \
+        less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
+    end
+  else if type --quiet pandoc
+    function orgview --description 'Org file viewer in terminal'
+      pandoc -s -f org -t man $argv[1] | \
+      groff -t -T utf8 -man | \
+      sed 1,4d | \
+      env LESS_TERMCAP_mb=(printf "\e[1m") \
+          LESS_TERMCAP_md=(printf "\e[1;34m") \
+	        LESS_TERMCAP_me=(printf "\e[0m") \
+	        LESS_TERMCAP_se=(printf "\e[0m") \
+	        LESS_TERMCAP_so=(printf "\e[1;33m") \
+	        LESS_TERMCAP_ue=(printf "\e[24;0m") \
+	        LESS_TERMCAP_us=(printf "\e[4;32m") \
+          less
+    end
+  end
+
   if [ (uname) = "Darwin" ]
     alias suspend '/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
   end
