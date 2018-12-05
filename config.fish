@@ -169,11 +169,11 @@ begin ## Aliasing
   end
 
   if type --quiet mdcat
-    function md --description 'Markdown viewer in terminal'
+    function mdview --description 'Markdown viewer in terminal'
       mdcat -c yes $argv[1] | less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
     end
   else if type --quiet pandoc; and type --quiet groff
-    function md --description 'Markdown viewer in terminal'
+    function mdview --description 'Markdown viewer in terminal'
       set -lx LESS_TERMCAP_mb (printf "\e[1m")
       set -lx LESS_TERMCAP_md (printf "\e[1;34m")
 	    set -lx LESS_TERMCAP_me (printf "\e[0m")
