@@ -5,9 +5,7 @@ font = Cica, bold 15
 foreground      = #e9e9f4
 foreground_bold = #f1f2f8
 cursor          = #f1f2f8
-background      = #282936
-
-# 16 color space
+background      = rgba(40, 41, 54, 0.9)
 
 # Black, Gray, Silver, White
 color0  = #282936
