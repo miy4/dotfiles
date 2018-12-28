@@ -330,7 +330,7 @@ begin ## Aliasing
   if type --quiet mdcat; and type --quiet pandoc
     function orgview --description 'Org file viewer in terminal'
       pandoc -s -f org -t markdown $argv[1] | \
-        mdcat -c yes | \
+        mdcat | \
         less --squeeze-blank-lines --RAW-CONTROL-CHARS --ignore-case
     end
   else if type --quiet pandoc
