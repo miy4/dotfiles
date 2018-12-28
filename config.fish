@@ -308,6 +308,8 @@ begin ## Aliasing
   function = --description 'Basic calculator for your terminal'
     echo "$argv" | bc -l
   end
+  alias =hex 'printf "%x\n"'
+  alias =dec 'printf "%d\n"'
 
   if type --quiet mdcat
     function mdview --description 'Markdown viewer in terminal'
