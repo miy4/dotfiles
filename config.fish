@@ -185,6 +185,8 @@ begin ## Java
   set -l java_home_cmd /usr/libexec/java_home
   if [ -x $java_home_cmd ]
     set -gx JAVA_HOME (eval $java_home_cmd -v 1.8)
+  else if type --quiet jenv
+    set -gx JAVA_HOME (jenv javahome)
   end
 end
 
