@@ -234,6 +234,7 @@
     (setq helm-yas-space-match-any-greedy t))
 
   (use-package view
+    :ensure nil
     :bind
     ("C-c v" . view-mode)
     :config
@@ -266,6 +267,7 @@
 
 (progn "File Manager"
   (use-package dired
+    :ensure nil
     :defer t
     :config
     (setq dired-recursive-deletes 'always)
@@ -288,6 +290,7 @@
 
   ;; https://github.com/crocket/dired-single
   (use-package dired-single
+    :after dired
     :bind
     ("C-x C-d" . dired-single-magic-buffer-current-dir)
     ("C-x C-j" . dired-single-magic-buffer)
