@@ -608,24 +608,6 @@
     (with-eval-after-load 'typescript-mode
       (add-hook 'typescript-mode-hook 'tide-setup))))
 
-(progn "Scala"
-  (use-package scala-mode2
-    :mode (("\\.scala\\'" . scala-mode)
-           ("\\.sbt\\'"   . scala-mode))
-    :config
-    (add-hook 'scala-mode-hook 'autopair-mode)
-    (add-hook 'scala-mode-hook 'linum-mode))
-
-  (use-package ensime
-    :commands ensime ensime-mode
-    :init
-    (with-eval-after-load 'scala-mode
-      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
-
-  (use-package groovy-mode
-    :mode (("\\.groovy\\'" . groovy-mode)
-           ("\\.gradle\\'" . groovy-mode))))
-
 (progn "Markdown"
   ;; https://github.com/jrblevin/markdown-mode
   (use-package markdown-mode
