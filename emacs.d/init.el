@@ -143,7 +143,12 @@
     :config
     (global-undo-tree-mode 1)))
 
-(progn "Interface Enhancement"
+(progn "Window management"
+  (use-package winner
+    :ensure nil
+    :config
+    (winner-mode))
+
   ;; https://github.com/knu/elscreen
   (use-package elscreen
     :config
@@ -153,9 +158,20 @@
     (setq elscreen-tab-display-control nil)
     (elscreen-start))
 
-  (global-set-key (kbd "M-g M-g") 'winner-undo)
-  (winner-mode)
+  ;; https://github.com/abo-abo/ace-window
+  (use-package ace-window
+    :after avy
+    :config
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (ace-window-display-mode 1))
 
+  (define-prefix-command 'my-window-map)
+  (global-set-key (kbd "C-c w") 'my-window-map)
+  (define-key my-window-map (kbd "u") 'winner-undo)
+  (define-key my-window-map (kbd "U") 'winner-redo)
+  (define-key my-window-map (kbd "W") 'ace-window))
+
+(progn "Interface Enhancement"
   ;; https://github.com/wasamasa/shackle
   (use-package shackle
     :config
@@ -341,15 +357,7 @@
     (("M-c" . avy-goto-char)
      ("M-l" . avy-goto-line))
     :config
-    (setq avy-background t))
-
-  ;; https://github.com/abo-abo/ace-window
-  (use-package ace-window
-    :bind
-    (("M-p" . ace-window))
-    :config
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    (ace-window-display-mode 1)))
+    (setq avy-background t)))
 
 (progn "Editing"
   ;; https://github.com/rejeep/wrap-region.el
