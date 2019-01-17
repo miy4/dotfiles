@@ -23,17 +23,21 @@
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode nil)
   (setq-default kill-whole-line t)
-  (global-set-key (kbd "C-c l") 'toggle-truncate-lines)
-  (global-set-key (kbd "C-h") 'delete-backward-char)
-  (global-set-key (kbd "C-m") 'newline-and-indent)
-  (global-set-key (kbd "M-o") 'my/open-line-below)
-  (global-set-key (kbd "M-O") 'my/open-line-above)
 
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq mouse-yank-at-point t) 
 
   (setq show-paren-delay 0)
-  (show-paren-mode t))
+  (show-paren-mode t)
+
+  (global-set-key (kbd "C-h") 'delete-backward-char)
+  (global-set-key (kbd "C-m") 'newline-and-indent)
+  (global-set-key (kbd "M-o") 'my/open-line-below)
+  (global-set-key (kbd "M-O") 'my/open-line-above)
+
+  (define-prefix-command 'my-toggle-map)
+  (global-set-key (kbd "C-c t") 'my-toggle-map)
+  (define-key my-toggle-map (kbd "l") 'toggle-truncate-lines))
 
 (defun my/open-line-below ()
   (interactive)
