@@ -106,7 +106,6 @@
 
   ;; https://github.com/Malabarba/beacon
   (use-package beacon
-    :disabled t
     :config
     (setq beacon-size 20)
     (setq beacon-color "#62d6e8")
