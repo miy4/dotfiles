@@ -79,25 +79,10 @@
   (size-indication-mode t)
   (setq ring-bell-function 'ignore)
 
-  ;; https://github.com/bbatsov/solarized-emacs
-  (use-package solarized-theme
-    :if (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
-    :init
-    (custom-set-variables '(solarized-high-contrast-mode-line t))
+  ;; https://github.com/challenger-deep-theme/emacs
+  (use-package challenger-deep-theme
     :config
-    (load-theme 'solarized-dark t)
-    (enable-theme 'solarized-dark)
-    (defun my/on-after-init ()
-      (unless (display-graphic-p (selected-frame))
-        (set-face-background 'default "unspecified-bg" (selected-frame))))
-    (add-hook 'window-setup-hook 'my/on-after-init))
-
-  ;; http://github.com/oneKelvinSmith/monokai-emacs
-  (use-package monokai-theme
-    :if (eq system-type 'cygwin)
-    :config
-    (load-theme 'monokai t)
-    (enable-theme 'monokai))
+    (load-theme 'challenger-deep t))
 
   ;; https://github.com/Malabarba/smart-mode-line
   (use-package smart-mode-line
@@ -124,7 +109,7 @@
     :disabled t
     :config
     (setq beacon-size 20)
-    (setq beacon-color "yellow")
+    (setq beacon-color "#62d6e8")
     (setq beacon-blink-delay 0.1)
     (setq beacon-blink-duration 0.1)
     (beacon-mode 1))
