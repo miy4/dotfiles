@@ -3,16 +3,17 @@
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
 ;; Package Manager
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(package-initialize)
-
-;; Package Configuration
 (eval-when-compile
-  (require 'use-package))
-(package-install 'use-package)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t))
 
 (progn "Set up general purpose vars and key bindings"
   (set-language-environment "Japanese")
