@@ -37,7 +37,28 @@
 
   (define-prefix-command 'my-toggle-map)
   (global-set-key (kbd "C-c t") 'my-toggle-map)
-  (define-key my-toggle-map (kbd "l") 'toggle-truncate-lines))
+  (define-key my-toggle-map (kbd "l") 'toggle-truncate-lines)
+  (define-key my-toggle-map (kbd "t") 'my/toggle-transparency))
+
+(defvar my/active-transparency 90)
+(defvar my/inactive-transparency 100)
+(defun my/toggle-transparency ()
+  (interactive)
+  (let ((alpha-setting (cons my/active-transparency my/inactive-transparency))
+        (alpha-current (frame-parameter nil 'alpha)))
+    (if (equal alpha-current alpha-setting)
+        (my/disable-transparency)
+      (my/enable-transparency alpha-setting))))
+
+(defun my/enable-transparency (&optional alpha)
+  (interactive)
+  (let ((setting (or alpha (90 . 90))))
+    (set-frame-parameter nil 'alpha setting)))
+
+(defun my/disable-transparency ()
+  (interactive)
+  (set-frame-parameter nil 'alpha '(100 . 100)))
+
 
 (defun my/open-line-below ()
   (interactive)
