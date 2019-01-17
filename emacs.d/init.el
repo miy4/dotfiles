@@ -120,8 +120,7 @@
   (use-package linum
     :defer t
     :config
-    (setq linum-format "%4d ")
-    (set-face-attribute 'linum nil :background "unspecified-bg"))
+    (setq linum-format "%4d "))
 
   ;; https://github.com/k-talo/volatile-highlights.el
   (use-package volatile-highlights
