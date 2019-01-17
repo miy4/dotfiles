@@ -51,14 +51,14 @@
 
 (progn "Package Manager"
   ;; https://github.com/Malabarba/paradox
-  (use-package paradox :ensure t
+  (use-package paradox
     :defer t
     :init
     (setq paradox-github-token t)
     (load (locate-user-emacs-file ".paradox-github-token") :noerror :nomessage)))
 
 (progn "Console Integration"
-  (use-package exec-path-from-shell :ensure t))
+  (use-package exec-path-from-shell))
 
 (progn "Server Daemon"
   (use-package server
@@ -80,7 +80,7 @@
   (setq ring-bell-function 'ignore)
 
   ;; https://github.com/bbatsov/solarized-emacs
-  (use-package solarized-theme :ensure t
+  (use-package solarized-theme
     :if (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
     :init
     (custom-set-variables '(solarized-high-contrast-mode-line t))
@@ -93,14 +93,14 @@
     (add-hook 'window-setup-hook 'my/on-after-init))
 
   ;; http://github.com/oneKelvinSmith/monokai-emacs
-  (use-package monokai-theme :ensure t
+  (use-package monokai-theme
     :if (eq system-type 'cygwin)
     :config
     (load-theme 'monokai t)
     (enable-theme 'monokai))
 
   ;; https://github.com/Malabarba/smart-mode-line
-  (use-package smart-mode-line :ensure t
+  (use-package smart-mode-line
     :init
     (setq sml/theme 'dark)
     :config
@@ -114,13 +114,13 @@
     (set-face-attribute 'linum nil :background "unspecified-bg"))
 
   ;; https://github.com/k-talo/volatile-highlights.el
-  (use-package volatile-highlights :ensure t
+  (use-package volatile-highlights
     :diminish volatile-highlights-mode
     :config
     (volatile-highlights-mode 1))
 
   ;; https://github.com/Malabarba/beacon
-  (use-package beacon :ensure t
+  (use-package beacon
     :disabled t
     :config
     (setq beacon-size 20)
@@ -130,14 +130,14 @@
     (beacon-mode 1))
 
   ;; http://www.dr-qubit.org/emacs.php
-  (use-package undo-tree :ensure t
+  (use-package undo-tree
     :diminish undo-tree-mode 
     :config
     (global-undo-tree-mode 1)))
 
 (progn "Interface Enhancement"
   ;; https://github.com/knu/elscreen
-  (use-package elscreen :ensure t
+  (use-package elscreen
     :config
     (setq elscreen-prefix-key (kbd "C-c z"))
     (setq elscreen-display-tab nil)
@@ -149,7 +149,7 @@
   (winner-mode)
 
   ;; https://github.com/wasamasa/shackle
-  (use-package shackle :ensure t
+  (use-package shackle
     :config
     (setq shackle-default-alignment 'below)
     (setq shackle-default-size 0.3)
@@ -162,7 +162,7 @@
     (shackle-mode 1))
 
   ;; https://github.com/emacs-helm/helm
-  (use-package helm :ensure t
+  (use-package helm
     :defer t
     :diminish helm-mode
     :config
@@ -206,7 +206,7 @@
      ("C-h" . delete-backward-char)))
 
   ;; https://github.com/emacs-helm/helm-descbinds
-  (use-package helm-descbinds :ensure t
+  (use-package helm-descbinds
     :commands (helm-descbinds helm-descbinds-mode)
     :init
     (with-eval-after-load 'helm-config
@@ -215,7 +215,7 @@
     (helm-descbinds-mode))
 
   ;; https://github.com/ShingoFukuyama/helm-swoop
-  (use-package helm-swoop :ensure t
+  (use-package helm-swoop
     :defer t
     :init
     (with-eval-after-load 'helm-config
@@ -225,7 +225,7 @@
     (setq helm-swoop-move-to-line-cycle t))
 
   ;; https://github.com/emacs-jp/helm-c-yasnippet
-  (use-package helm-c-yasnippet :ensure t
+  (use-package helm-c-yasnippet
     :defer t
     :init
     (with-eval-after-load 'helm-config
@@ -257,7 +257,7 @@
 
 (progn "Keys Cheatsheet"
   ;; https://github.com/justbur/emacs-which-key
-  (use-package which-key :ensure t
+  (use-package which-key
     :config
     (setq which-key-popup-type 'side-window)
     (setq which-key-side-window-location 'bottom)
@@ -287,7 +287,7 @@
               (".pptx" "cygstart")))))
 
   ;; https://github.com/crocket/dired-single
-  (use-package dired-single :ensure t
+  (use-package dired-single
     :bind
     ("C-x C-d" . dired-single-magic-buffer-current-dir)
     ("C-x C-j" . dired-single-magic-buffer)
@@ -304,7 +304,7 @@
      ("^"        . dired-single-up-directory)))
 
   ;; https://github.com/jaypei/emacs-neotree
-  (use-package neotree :ensure t
+  (use-package neotree
     :init
     (setq-default neo-smart-open t)
     (setq-default neo-dont-be-alone t)
@@ -325,7 +325,7 @@
 
 (progn "Navigation"
   ;; https://github.com/abo-abo/avy
-  (use-package avy :ensure t
+  (use-package avy
     :bind
     (("M-c" . avy-goto-char)
      ("M-l" . avy-goto-line))
@@ -333,7 +333,7 @@
     (setq avy-background t))
 
   ;; https://github.com/abo-abo/ace-window
-  (use-package ace-window :ensure t
+  (use-package ace-window
     :bind
     (("M-p" . ace-window))
     :config
@@ -342,13 +342,13 @@
 
 (progn "Editing"
   ;; https://github.com/rejeep/wrap-region.el
-  (use-package wrap-region :ensure t
+  (use-package wrap-region
     :config
     (wrap-region-global-mode t)
     (wrap-region-add-wrapper "`" "`" nil 'markdown-mode))
 
   ;; https://github.com/magnars/expand-region.el
-  (use-package expand-region :ensure t
+  (use-package expand-region
     :bind
     (("M-m" . er/expand-region))
     :config
@@ -356,12 +356,12 @@
     (setq expand-region-reset-fast-key "*"))
 
   ;; https://github.com/fgallina/region-bindings-mode
-  (use-package region-bindings-mode :ensure t
+  (use-package region-bindings-mode
     :config
     (region-bindings-mode-enable))
 
   ;; https://github.com/magnars/multiple-cursors.el
-  (use-package multiple-cursors :ensure t
+  (use-package multiple-cursors
     :config
     (bind-keys
      :map region-bindings-mode-map
@@ -377,13 +377,13 @@
      ("$" . mc/edit-ends-of-lines)))
 
   ;; https://github.com/alezost/mwim.el
-  (use-package mwim :ensure t
+  (use-package mwim
     :bind
     (("C-a" . mwim-beginning-of-code-or-line)
      ("C-e" . mwim-end-of-code-or-line)))
 
   ;; https://github.com/thierryvolpiatto/zop-to-char
-  (use-package zop-to-char :ensure t
+  (use-package zop-to-char
     :bind
     ([remap zap-to-char] . zop-up-to-char)))
 
@@ -394,7 +394,7 @@
     (add-hook 'prog-mode-hook 'subword-mode))
 
   ;; http://company-mode.github.io/
-  (use-package company :ensure t
+  (use-package company
     :defer t
     :config
     (setq company-idle-delay 0.1)
@@ -408,20 +408,20 @@
      ("C-p" . company-select-previous)))
 
   ;; https://github.com/syohex/emacs-quickrun
-  (use-package quickrun :ensure t
+  (use-package quickrun
     :bind
     (("C-c C-q" . quickrun)
      ("C-c C-w" . quickrun-with-arg)))
 
   ;; https://github.com/ReanGD/emacs-multi-compile
-  (use-package multi-compile :ensure t
+  (use-package multi-compile
     :bind
     ("C-c C-r" . multi-compile-run)
     :config
     (setq multi-compile-completion-system 'ido))
 
   ;; https://github.com/nschum/highlight-symbol.el
-  (use-package highlight-symbol :ensure t
+  (use-package highlight-symbol
     :defer t
     :init
     (setq highlight-symbol-idle-delay 0.3)
@@ -430,15 +430,15 @@
     (set-face-attribute 'highlight-symbol-face nil :background "green" :foreground "black"))
 
   ;; https://github.com/capitaomorte/autopair
-  (use-package autopair :ensure t
+  (use-package autopair
     :defer t)
 
   ;; https://github.com/flycheck/flycheck
-  (use-package flycheck :ensure t
+  (use-package flycheck
     :defer t)
 
   ;; https://github.com/capitaomorte/yasnippet
-  (use-package yasnippet :ensure t
+  (use-package yasnippet
     :defer t
     :config
     (bind-keys
@@ -451,7 +451,7 @@
 
 (progn "Emacs Lisp"
   ;; https://github.com/tarsius/auto-compile
-  (use-package auto-compile :ensure t
+  (use-package auto-compile
     :defer t
     :init
     (add-hook 'emacs-lisp-mode-hook 'auto-compile-mode)))
@@ -469,7 +469,7 @@
   ;; depends: go get github.com/nsf/gocode
   ;; depends: go get github.com/rogpeppe/godef
   ;; depends: go get golang.org/x/tools/cmd/goimports
-  (use-package go-mode :ensure t
+  (use-package go-mode
     :mode "\\.go\\'"
     :init
     (with-eval-after-load 'multi-compile
@@ -493,7 +493,7 @@
      ("M-," . pop-tag-mark)))
 
   ;; https://github.com/syohex/emacs-go-eldoc
-  (use-package go-eldoc :ensure t
+  (use-package go-eldoc
     :defer t
     :config
     (set-face-attribute 'eldoc-highlight-function-argument nil
@@ -501,7 +501,7 @@
                         :weight 'bold))
 
   ;; https://github.com/nsf/gocode
-  (use-package company-go :ensure t
+  (use-package company-go
     :defer t
     :init
     (with-eval-after-load 'company
@@ -510,12 +510,12 @@
       (add-hook 'go-mode-hook 'company-mode))))
 
 (progn "Rust"
-  (use-package rust-mode :ensure t
+  (use-package rust-mode
     :mode "\\.rs\\'"
     :config
     (add-hook 'before-save-hook 'rust-format-buffer))
 
-  (use-package racer :ensure t
+  (use-package racer
     :defer t
     :init
     (with-eval-after-load 'rust-mode
@@ -524,13 +524,13 @@
     (add-hook 'racer-mode-hook #'eldoc-mode)
     (add-hook 'racer-mode-hook #'company-mode))
 
-  (use-package flycheck-rust :ensure t
+  (use-package flycheck-rust
     :defer t
     :init
     (with-eval-after-load 'flycheck-mode
       (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)))
 
-  (use-package cargo :ensure t
+  (use-package cargo
     :defer t
     :init
     (with-eval-after-load 'rust-mode
@@ -538,7 +538,7 @@
 
 (progn "Web Development"
   ;; https://github.com/fxbois/web-mode
-  (use-package web-mode :ensure t
+  (use-package web-mode
     :mode
     (("\\.html?\\'" . web-mode)
      ("\\.css\\'"   . web-mode))
@@ -553,7 +553,7 @@
   ;; https://github.com/mooz/js2-mode
   ;; depends: npm install -g tern
   ;; depends: npm install -g eslint
-  (use-package js2-mode :ensure t
+  (use-package js2-mode
     :mode "\\.js\\'"
     :config
     (defun my/js2-mode-hook ()
@@ -567,14 +567,14 @@
     (add-hook 'js2-mode-hook 'my/js2-mode-hook))
 
   ;; https://github.com/ternjs/tern
-  (use-package tern :ensure t
+  (use-package tern
     :defer t
     :init
     (with-eval-after-load 'js2-mode
       (add-hook 'js2-mode-hook 'tern-mode)))
 
   ;; https://github.com/proofit404/company-tern
-  (use-package company-tern :ensure t
+  (use-package company-tern
     :defer t
     :init
     (with-eval-after-load 'company
@@ -584,7 +584,7 @@
 
 (progn "Typescript"
   ;; https://github.com/ananthakumaran/tide
-  (use-package typescript-mode :ensure t
+  (use-package typescript-mode
     :mode "\\.ts\\'"
     :config
     (add-hook 'typescript-mode-hook
@@ -599,33 +599,33 @@
     (setq company-tooltip-align-annotations t))
 
   ;; https://github.com/ananthakumaran/tide
-  (use-package tide :ensure t
+  (use-package tide
     :defer t
     :init
     (with-eval-after-load 'typescript-mode
       (add-hook 'typescript-mode-hook 'tide-setup))))
 
 (progn "Scala"
-  (use-package scala-mode2 :ensure t
+  (use-package scala-mode2
     :mode (("\\.scala\\'" . scala-mode)
            ("\\.sbt\\'"   . scala-mode))
     :config
     (add-hook 'scala-mode-hook 'autopair-mode)
     (add-hook 'scala-mode-hook 'linum-mode))
 
-  (use-package ensime :ensure t
+  (use-package ensime
     :commands ensime ensime-mode
     :init
     (with-eval-after-load 'scala-mode
       (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
 
-  (use-package groovy-mode :ensure t
+  (use-package groovy-mode
     :mode (("\\.groovy\\'" . groovy-mode)
            ("\\.gradle\\'" . groovy-mode))))
 
 (progn "Markdown"
   ;; https://github.com/jrblevin/markdown-mode
-  (use-package markdown-mode :ensure t
+  (use-package markdown-mode
     :mode
     (("\\`README\\.md\\'" . gfm-mode)
      ("\\.md\\'"          . markdown-mode)
@@ -645,11 +645,11 @@
 
 (progn "Docker"
   ;; https://github.com/spotify/dockerfile-mode
-  (use-package dockerfile-mode :ensure t
+  (use-package dockerfile-mode
     :mode "Dockerfile\\'"))
 
 (progn "TOML"
-  (use-package toml-mode :ensure t
+  (use-package toml-mode
     :mode "\\.toml\\'"))
 
 (progn "Web Browser"
@@ -683,7 +683,7 @@
 
 (progn "Note-taking"
   ;; https://github.com/alpha22jp/simplenote2.el
-  (use-package simplenote2 :ensure t
+  (use-package simplenote2
     :defer t
     :init
     (setq simplenote2-notes-mode 'markdown-mode)
