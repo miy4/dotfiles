@@ -679,8 +679,9 @@
 
 (progn "Docker"
   ;; https://github.com/spotify/dockerfile-mode
+  ;; requires: hadolint
   (use-package dockerfile-mode
-    :mode "Dockerfile\\'"))
+    :mode "\\Dockerfile\\'"))
 
 (progn "TOML"
   (use-package toml-mode
