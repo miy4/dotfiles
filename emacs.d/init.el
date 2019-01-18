@@ -472,7 +472,23 @@
      ("TAB"  . nil)
      ("<backtab>" . yas-expand))
     (setq yas-snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
-    (yas-reload-all)))
+    (yas-reload-all))
+
+  ;; https://github.com/emacs-lsp/lsp-mode
+  (use-package lsp-mode
+    :commands lsp
+    :config
+    (setq lsp-inhibit-message t)
+    (setq lsp-message-project-root-warning t)
+    (setq lsp-prefer-flymake nil))
+
+  ;; https://github.com/emacs-lsp/lsp-ui
+  (use-package lsp-ui
+    :commands lsp-ui-mode)
+
+  ;; https://github.com/tigersoldier/company-lsp
+  (use-package company-lsp
+    :commands company-lsp))
 
 (progn "Emacs Lisp"
   ;; https://github.com/tarsius/auto-compile
@@ -482,8 +498,19 @@
     (add-hook 'emacs-lisp-mode-hook 'auto-compile-mode)))
 
 (progn "Shell Script"
+  ;; depends: npm install bash-language-server
+  ;; TODO add sh-shellcheck to checkers in sh-mode
+  ;; currently lsp-ui (LSP diagnostics) is selected
+  (use-package sh-mode
+    :ensure nil
+    :commands sh-mode
+    :hook
+    (sh-mode . lsp))
+
+  ;; **DISABLED**
   ;; depends: http://www.shellcheck.net/
   (use-package sh-script
+    :disabled
     :defer t
     :config
     (add-hook 'sh-mode-hook 'yas-minor-mode)
