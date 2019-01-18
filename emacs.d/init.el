@@ -25,7 +25,7 @@
   (setq-default kill-whole-line t)
 
   (fset 'yes-or-no-p 'y-or-n-p)
-  (setq mouse-yank-at-point t) 
+  (setq mouse-yank-at-point t)
 
   (setq show-paren-delay 0)
   (show-paren-mode t)
@@ -139,7 +139,7 @@
 
   ;; http://www.dr-qubit.org/emacs.php
   (use-package undo-tree
-    :diminish undo-tree-mode 
+    :diminish undo-tree-mode
     :config
     (global-undo-tree-mode 1)))
 
