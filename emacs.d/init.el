@@ -458,7 +458,9 @@
 
   ;; https://github.com/flycheck/flycheck
   (use-package flycheck
-    :defer t)
+    :defer t
+    :init
+    (global-flycheck-mode))
 
   ;; https://github.com/capitaomorte/yasnippet
   (use-package yasnippet
