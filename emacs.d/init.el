@@ -83,7 +83,11 @@
     (load (locate-user-emacs-file ".paradox-github-token") :noerror :nomessage)))
 
 (progn "Console Integration"
-  (use-package exec-path-from-shell))
+  ;; https://github.com/purcell/exec-path-from-shell
+  (use-package exec-path-from-shell
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize))))
 
 (progn "Server Daemon"
   (use-package server
