@@ -238,14 +238,15 @@ begin ## Commandline filter
     end
 
     function .. --description 'Select an ancestor directory and go back there'
-      set -l dir (pwd)
-      while string length --quiet $dir
-        set -l dir (string split -r -m1 / $dir)[1]
+      set -l dir $PWD
+      while true
+        set dir (string split -r -m1 / $dir)[1]
 
         if string length --quiet $dir
           echo $dir
         else
           echo '/'
+          break
         end
       end | fzf | read line
       if [ -n "$line" ]
