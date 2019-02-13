@@ -498,19 +498,8 @@
     (add-hook 'emacs-lisp-mode-hook 'auto-compile-mode)))
 
 (progn "Shell Script"
-  ;; depends: npm install bash-language-server
-  ;; TODO add sh-shellcheck to checkers in sh-mode
-  ;; currently lsp-ui (LSP diagnostics) is selected
-  (use-package sh-mode
-    :ensure nil
-    :commands sh-mode
-    :hook
-    (sh-mode . lsp))
-
-  ;; **DISABLED**
   ;; depends: http://www.shellcheck.net/
   (use-package sh-script
-    :disabled
     :defer t
     :config
     (add-hook 'sh-mode-hook 'yas-minor-mode)
