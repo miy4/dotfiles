@@ -165,15 +165,6 @@
     :config
     (winner-mode))
 
-  ;; https://github.com/knu/elscreen
-  (use-package elscreen
-    :config
-    (setq elscreen-prefix-key (kbd "C-c z"))
-    (setq elscreen-display-tab nil)
-    (setq elscreen-tab-display-kill-screen nil)
-    (setq elscreen-tab-display-control nil)
-    (elscreen-start))
-
   ;; https://github.com/abo-abo/ace-window
   (use-package ace-window
     :after avy
@@ -227,8 +218,7 @@
     (require 'helm)
     (bind-keys
      :map helm-command-prefix
-     ("m" . helm-imenu)
-     ("s" . helm-elscreen))
+     ("m" . helm-imenu))
     (setq helm-delete-minibuffer-contents-from-point t)
     (defadvice helm-delete-minibuffer-contents (before helm-emulate-kill-line activate)
       "Emulate `kill-line' in helm minibuffer"
