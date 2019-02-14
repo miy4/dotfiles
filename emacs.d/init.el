@@ -218,7 +218,8 @@
     (require 'helm)
     (bind-keys
      :map helm-command-prefix
-     ("m" . helm-imenu))
+     ("i" . helm-imenu)
+     ("m" . helm-mini))
     (setq helm-delete-minibuffer-contents-from-point t)
     (defadvice helm-delete-minibuffer-contents (before helm-emulate-kill-line activate)
       "Emulate `kill-line' in helm minibuffer"
@@ -249,8 +250,8 @@
     :defer t
     :init
     (with-eval-after-load 'helm-config
-      (bind-key "i" 'helm-swoop helm-command-map)
-      (bind-key "I" 'helm-swoop-back-to-last-point helm-command-map))
+      (bind-key "s" 'helm-swoop helm-command-map)
+      (bind-key "S" 'helm-swoop-back-to-last-point helm-command-map))
     :config
     (setq helm-swoop-move-to-line-cycle t))
 
