@@ -483,7 +483,7 @@
      ("<tab>".  nil)
      ("TAB"  . nil)
      ("<backtab>" . yas-expand))
-    (setq yas-snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+    (setq yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
     (yas-reload-all))
 
   ;; https://github.com/emacs-lsp/lsp-mode
