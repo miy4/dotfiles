@@ -118,6 +118,10 @@
 
   ;; https://github.com/challenger-deep-theme/emacs
   (use-package challenger-deep-theme
+    :init
+    (add-hook 'window-setup-hook
+              '(lambda () (unless (display-graphic-p (selected-frame))
+                            (set-face-background 'default "unspecified-bg" (selected-frame)))))
     :config
     (load-theme 'challenger-deep t))
 
