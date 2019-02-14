@@ -1,3 +1,11 @@
+;; init.el --- Personal Emacs configuration
+
+;;; Commentary:
+
+;; This package represents my personal Emacs configuration. That's all :)
+
+;;; Code:
+
 ;; emacs -q -l path/to/somewhere/init.el
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
