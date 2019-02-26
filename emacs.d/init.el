@@ -475,21 +475,11 @@
     (setq yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
     (yas-reload-all))
 
-  ;; https://github.com/emacs-lsp/lsp-mode
-  (use-package lsp-mode
-    :commands lsp
+  ;; https://github.com/joaotavora/eglot
+  (use-package eglot
     :config
-    (setq lsp-inhibit-message t)
-    (setq lsp-message-project-root-warning t)
-    (setq lsp-prefer-flymake nil))
-
-  ;; https://github.com/emacs-lsp/lsp-ui
-  (use-package lsp-ui
-    :commands lsp-ui-mode)
-
-  ;; https://github.com/tigersoldier/company-lsp
-  (use-package company-lsp
-    :commands company-lsp))
+    (when (executable-find "bingo")
+      (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio"))))))
 
 (progn "Emacs Lisp"
   ;; https://github.com/tarsius/auto-compile
@@ -508,48 +498,18 @@
 
 (progn "Golang"
   ;; https://github.com/dominikh/go-mode.el
-  ;; depends: go get github.com/nsf/gocode
-  ;; depends: go get github.com/rogpeppe/godef
-  ;; depends: go get golang.org/x/tools/cmd/goimports
+  ;; depends: https://github.com/saibing/bingo
   (use-package go-mode
     :mode "\\.go\\'"
-    :init
-    (with-eval-after-load 'multi-compile
-      (add-to-list 'multi-compile-alist
-                   '(go-mode . (("build" . "go build -v")
-                                ("test"  . "go build -v && go test -v")
-                                ("clean" . "go clean")))))
-    :config
-    (add-hook 'go-mode-hook 'highlight-symbol-mode)
-    (add-hook 'go-mode-hook 'flycheck-mode)
-    (add-hook 'go-mode-hook 'autopair-mode)
-    (add-hook 'go-mode-hook 'linum-mode)
-    (add-hook 'go-mode-hook 'yas-minor-mode)
-    (add-hook 'go-mode-hook '(lambda ()
-                               (require 'go-eldoc)
-                               (setq gofmt-command "goimports")))
-    (add-hook 'before-save-hook 'gofmt-before-save)
-    (bind-keys
-     :map go-mode-map
-     ("M-." . godef-jump)
-     ("M-," . pop-tag-mark)))
-
-  ;; https://github.com/syohex/emacs-go-eldoc
-  (use-package go-eldoc
-    :defer t
-    :config
-    (set-face-attribute 'eldoc-highlight-function-argument nil
-                        :underline t :foreground "green"
-                        :weight 'bold))
-
-  ;; https://github.com/nsf/gocode
-  (use-package company-go
-    :defer t
-    :init
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-go))
-    (with-eval-after-load 'go-mode
-      (add-hook 'go-mode-hook 'company-mode))))
+    :hook
+    (go-mode . eglot-ensure)
+    (go-mode . company-mode)
+    (go-mode . autopair-mode)
+    (go-mode . highlight-symbol-mode)
+    (before-save . gofmt-before-save) ;; instead of 'eglot-format
+    :bind
+    (:map go-mode-map
+     ("M-/" . company-complete))))
 
 (progn "Rust"
   (use-package rust-mode
