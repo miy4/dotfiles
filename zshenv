@@ -7,6 +7,7 @@ if [[ $(umask) = "0000" ]]; then
     umask 022
 fi
 
+export SHELL=/usr/bin/zsh
 export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
