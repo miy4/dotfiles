@@ -23,10 +23,18 @@ if [[ $(uname) = "Darwin" ]]; then
     export HOMEBREW_NO_ANALYTICS=1
 fi
 
-PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:/usr/X11/bin:~/bin
+PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/X11/bin
+if [ -d /usr/X11/bin ]; then
+    PATH=$PATH:/usr/X11/bin
+fi
 if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
     # use coreutils instead of BSD
     PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+fi
+if [ -d ~/.linuxbrew ]; then
+    PATH=~/.linuxbrew/bin:~/.linuxbrew/sbin:$PATH
+elif [ -d /home/linuxbrew/.linuxbrew ]; then
+    PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
 fi
 export PATH
 
