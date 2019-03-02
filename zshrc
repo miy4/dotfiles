@@ -103,6 +103,16 @@
     setopt REMATCH_PCRE
 }
 
+: "Color and Theme" && () {
+    if (( ${+commands[vivid]} )); then
+        if [[ -r ~/.config/vivid/themes/challengerdeep.yml ]]; then
+            export LS_COLORS=$(vivid generate challengerdeep)
+        else
+            export LS_COLORS=$(vivid generate snazzy)
+        fi
+    fi
+}
+
 : "Aliasing" && () {
     # man zshmisc
     # http://zsh.sourceforge.net/Doc/Release/Shell-Grammar.html#Aliasing
