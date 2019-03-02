@@ -163,26 +163,6 @@
     zplugin light zsh-users/zsh-autosuggestions
     zplugin light zdharma/fast-syntax-highlighting
 
-}
-
-: "Node.js" && () {
-    # https://github.com/hokaccha/nodebrew
-    [ -x ~/.nodebrew/current/bin/nodebrew ] || return
-
-    export NODEBREW_ROOT=~/.nodebrew
-    export PATH=$PATH:./node_modules/.bin:$NODEBREW_ROOT/current/bin
-    
-    node-update() {
-        local prev_version=$(nodebrew ls | sed -n 's/^current: \(.*\)$/\1/p')
-        printf "\033[32m%s\033[m\n" "==> nodebrew install-binary stable"
-        nodebrew install-binary stable || return
-        printf "\033[32m%s\033[m\n" "==> nodebrew use stable"
-        nodebrew use stable
-        
-        [[ -z $prev_version || $prev_version == "none" ]] && return
-        printf "\033[32m%s\033[m\n" "==> nodebrew migrate-package $prev_version"
-        nodebrew migrate-package $prev_version
-    }
     zplugin ice silent wait'0' as'program' pick'bin/anyenv' atload'export ANYENV_ROOT=$PWD; eval "$(anyenv init -)"'
     zplugin light anyenv/anyenv
     zplugin ice silent as'program' pick'bin/anyenv-update'
@@ -190,28 +170,31 @@
 }
 
 : "Golang" && () {
-    hash go 2>/dev/null || return
-
-    export GOPATH=$HOME
-    export PATH=$PATH:$GOPATH/bin:$(go env GOROOT)/bin
-}
-
-: "Rust" && () {
-    export PATH=$PATH:~/.cargo/bin
-    export RUST_SRC_PATH=~/src/github.com/rust-lang/rust/src
-    export CARGO_HOME=~/.cargo
-}
-
-: "Java" && () {
-}
-
-: "Android" && () {
-    if [ -d /opt/android-sdk ]; then
-        export ANDROID_HOME=/opt/android-sdk
-        export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
-    elif [ -d /usr/local/opt/android-sdk ]; then
-        export ANDROID_HOME=/usr/local/opt/android-sdk
+    if (( ${+commands[go]} )); then
+        export GOPATH=$HOME
     fi
+
+    get-go-tool() {
+        [[ -z $1 ]] && { echo "$0 package" 1>&2; return 1 }
+        readonly package="$1"
+        readonly tool_name="${package##*/}"
+
+        GO111MODULE=on
+        cat <<EOF1 > .envrc
+export GO111MODULE=on
+EOF1
+        direnv allow
+
+        go mod init "example.com/$package"
+        cat <<EOF2 > tools.go
+// +build tools
+package tools
+import (
+	_ "$package"
+)
+EOF2
+        go build -o $tool_name $package
+    }
 }
 
 : "Git" && () {
