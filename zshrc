@@ -156,71 +156,13 @@
 }
 
 : "Managing plugins" && () {
-    local zplug_zsh=~/.zplug/zplug
-    [[ -e $zplug_zsh ]] || return
+    source "${ZDOTDIR:-$HOME}/.zplugin/bin/zplugin.zsh"
+    autoload -Uz _zplugin
+    (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-    source $zplug_zsh
-    zplug "zsh-users/zsh-syntax-highlighting"
-    zplug "mollifier/anyframe"
-    export ENHANCD_COMMAND=ed
-    export ENHANCD_FILTER=fzf:peco
-    zplug "b4b4r07/enhancd", use:enhancd.sh
-    export EASY_ONE_KEYBIND="^xs"
-    zplug "b4b4r07/easy-oneliner", if:"which fzf"
-    zplug "zsh-users/zsh-autosuggestions"
-    zplug "miy4/acc7a8e9bd44c647d07c", \
-          from:gist, as:command, use:describe_number
-    zplug "miy4/9ad22d7270c1f1a08fed", \
-          from:gist, as:command, use:tomato
-    zplug "miy4/4365cc3f45a23061f36dbb3e96c2c2c6", \
-          from:gist, as:command, use:date_cat
-    zplug "miy4/7617a9a7336ff87df98b054cbc2776f0", \
-          from:gist, as:command, use:longman, if:"which jq"
-    zplug "miy4/6796014b815af1b4d01546143c5ea1be", \
-          from:gist, as:command, use:wordnet, if:"which wn"
+    zplugin light zsh-users/zsh-autosuggestions
+    zplugin light zdharma/fast-syntax-highlighting
 
-    zplug check || zplug install
-    zplug load
-
-    if zplug check "mollifier/anyframe"; then
-        if hash fzf 2>/dev/null; then
-            zstyle ":anyframe:selector:" use fzf
-        fi
-        bindkey '^xr' anyframe-widget-put-history
-        bindkey '^xg' anyframe-widget-cd-ghq-repository
-    fi
-
-    if zplug check "b4b4r07/easy-oneliner"; then
-        export EASY_ONE_REFFILE=~/.snippets
-        export EASY_ONE_FZF_OPTS="--no-sort --reverse"
-    fi
-
-    if zplug check "zsh-users/zsh-autosuggestions"; then
-        [[ $(echotc Co 2>/dev/null) == "256" ]] && export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=232'
-        export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line vi-end-of-line)
-        export ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(
-            forward-char
-	        forward-word
-	        vi-forward-word
-	        vi-forward-word-end
-	        vi-forward-blank-word
-	        vi-forward-blank-word-end
-        )
-    fi
-
-    if zplug check "miy4/4365cc3f45a23061f36dbb3e96c2c2c6"; then
-        pick_dateformat() {
-            date_cat | fzf --ansi --multi \
-                | awk 'BEGIN {FS="|"} {print $2}' \
-                | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*#.*$//' | pbcopy
-        }
-
-        pick_date() {
-            date_cat | fzf --ansi --multi \
-                | awk 'BEGIN {FS="|"} {print $1}' \
-                | sed 's/[[:space:]]*$//' | pbcopy
-        }
-    fi
 }
 
 : "Node.js" && () {
@@ -241,6 +183,10 @@
         printf "\033[32m%s\033[m\n" "==> nodebrew migrate-package $prev_version"
         nodebrew migrate-package $prev_version
     }
+    zplugin ice silent wait'0' as'program' pick'bin/anyenv' atload'export ANYENV_ROOT=$PWD; eval "$(anyenv init -)"'
+    zplugin light anyenv/anyenv
+    zplugin ice silent as'program' pick'bin/anyenv-update'
+    zplugin light znz/anyenv-update
 }
 
 : "Golang" && () {
