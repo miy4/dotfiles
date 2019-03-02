@@ -5,6 +5,10 @@ ulimit -c unlimited
 export LANG=ja_JP.UTF-8
 export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=''
+if [[ $(umask) = "0000" ]]; then
+    # WSL does not apply default umask
+    umask 022
+fi
 
 export EDITOR='emacsclient'
 
