@@ -3,7 +3,7 @@
 : "History" && () {
     # man zshparam
     # http://zsh.sourceforge.net/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
-    export HISTFILE=~/.zsh-history
+    export HISTFILE=~/.local/share/zsh/history
     export HISTSIZE=100000
     export SAVEHIST=100000
 
