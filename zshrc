@@ -198,6 +198,37 @@
     fi
 }
 
+: "Pager and Manual" && () {
+    export PAGER=less
+    export MANPAGER='less -X'
+    export LESSCHARSET=utf-8
+    export LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+
+    man() {
+        LESS_TERMCAP_mb=$(printf "\e[1m") \
+        LESS_TERMCAP_md=$(printf "\e[1;34m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[24;0m") \
+        LESS_TERMCAP_us=$(printf "\e[4;32m") \
+        command man "$@"
+    }
+
+    if (( ${+commands[pandoc]} )); then
+        md() {
+            LESS_TERMCAP_mb=$(printf "\e[1m") \
+            LESS_TERMCAP_md=$(printf "\e[1;34m") \
+            LESS_TERMCAP_me=$(printf "\e[0m") \
+            LESS_TERMCAP_se=$(printf "\e[0m") \
+            LESS_TERMCAP_so=$(printf "\e[1;33m") \
+            LESS_TERMCAP_ue=$(printf "\e[24;0m") \
+            LESS_TERMCAP_us=$(printf "\e[4;32m") \
+            pandoc -s -f markdown -t man "$1" | groff -t -T utf8 -man | sed 1,4d | less
+        }
+    fi
+}
+
 : "Managing plugins" && () {
     source "${ZDOTDIR:-$HOME}/.zplugin/bin/zplugin.zsh"
     autoload -Uz _zplugin

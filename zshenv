@@ -13,11 +13,6 @@ export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
 
-export PAGER=less
-export MANPAGER='less -X'
-export LESSCHARSET=utf-8
-export LESS='-R -f -X -i -P ?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
-
 if [[ $(uname) = "Darwin" ]]; then
     export HOMEBREW_NO_ANALYTICS=1
 fi
