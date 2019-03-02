@@ -311,10 +311,6 @@
 }
 
 : "Java" && () {
-    local java_home_cmd=/usr/libexec/java_home
-    if [ -x $java_home_cmd ]; then
-        export JAVA_HOME=$($java_home_cmd -v 1.8)
-    fi
 }
 
 : "Android" && () {
