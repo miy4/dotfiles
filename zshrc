@@ -345,7 +345,7 @@
 }
 
 : "Loading a site local rc file" && () {
-    local zshrc_site=~/.zshrc_site
+    local zshrc_site=~/.config/zsh/.zshrc.site
     [[ -f $zshrc_site ]] && source "$zshrc_site"
 }
 
