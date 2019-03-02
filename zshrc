@@ -92,6 +92,25 @@
     # man zshoptions
     # http://zsh.sourceforge.net/Doc/Release/Options.html#Changing-Directories
     setopt AUTO_CD
+
+    if (( ${+commands[fzf]} )); then
+        ..() {
+            local dir="$PWD"
+            local togo
+            while true; do
+                dir=${dir%/*}
+                if ((${#dir})); then
+                    echo $dir
+                else
+                    echo '/'
+                    break
+                fi
+            done | fzf | read togo
+            if [ -n "$togo" ]; then
+               cd "$togo"
+            fi
+        }
+    fi
 }
 
 : "Expansion and Globbing" && () {
@@ -205,11 +224,38 @@ EOF2
     fi
 }
 
-: "Filter" && () {
-    # https://github.com/junegunn/fzf
-    if hash fzf 2>/dev/null; then
-        export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
-    fi
+: "Commandline Filter" && () {
+    (( ${+commands[fzf]} )) || return
+
+    export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+
+    select-ghq-repository() {
+        local dir=$(ghq list --full-path | fzf)
+	if [[ -n "$dir" ]]; then
+	    cd "$dir"
+	    if zle; then
+                zle reset-prompt
+            fi
+	fi
+    }
+    zle -N select-ghq-repository
+    bindkey '^xg' select-ghq-repository
+
+    select-history() {
+        local selected num
+        selected=( $(fc -rl 1 | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2.. --query=${(qqq)LBUFFER} +m" fzf) )
+        local ret=$?
+        if [ -n "$selected" ]; then
+            num=$selected[1]
+            if [ -n "$num" ]; then
+                zle vi-fetch-history -n $num
+            fi
+        fi
+        zle reset-prompt
+	return $ret
+    }
+    zle -N select-history
+    bindkey '^xr' select-history
 }
 
 : "Managing Environment Variables" && () {
