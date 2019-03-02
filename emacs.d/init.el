@@ -99,9 +99,9 @@
 
 (progn "Server Daemon"
   (use-package server
-  :config
-  (unless (server-running-p)
-    (server-start))))
+    :config
+    (unless (server-running-p)
+      (server-start))))
 
 (progn "Looks of Emacs"
   (setq frame-title-format "%f")
