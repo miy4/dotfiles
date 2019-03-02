@@ -116,7 +116,7 @@
 : "Aliasing" && () {
     # man zshmisc
     # http://zsh.sourceforge.net/Doc/Release/Shell-Grammar.html#Aliasing
-    if hash gls 2>/dev/null; then
+    if (( ${+commands[gls]} )); then
         alias d='gls -G -F --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
     elif ls --version | grep -q coreutils; then
         alias d='ls -G -F --color=auto --group-directories-first --time-style="+ %Y-%m-%d %T"'
@@ -127,7 +127,7 @@
     alias da='d -a'
     alias va='v -a'
 
-    if hash src-hilite-lesspipe.sh 2>/dev/null; then
+    if (( ${+commands[src-hilite-lesspipe.sh]} )); then
         alias l="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRi"
         alias lF="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRij10 +F"
     else
@@ -148,7 +148,7 @@
         alias suspend='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
     fi
 
-    if hash tmux 2>/dev/null; then
+    if (( ${+commands[tmux]} )); then
         notify-tmux() {
             IFS=" " tmux set status-right "#[fg=colour255,bg=colour27,bold]$*#[default]"
         }
@@ -213,8 +213,7 @@ EOF2
 }
 
 : "Managing Environment Variables" && () {
-    # https://github.com/direnv/direnv
-    if hash direnv 2>/dev/null; then
+    if (( ${+commands[direnv]} )); then
         eval "$(direnv hook zsh)"
     fi
 }
@@ -225,7 +224,7 @@ EOF2
 }
 
 : "Profiling for zsh startup" && () {
-    if type zprof >/dev/null 2>&1; then
+    if (( ${+commands[zprof]} )); then
         # `zmodload zsh/zprof && zprof` in advance
         zprof | less
     fi
