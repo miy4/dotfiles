@@ -155,60 +155,6 @@
     fi
 }
 
-: "Updating System" && () {
-    if [[ $(uname) == "Linux" ]]; then
-        if [[ $(lsb_release -is 2>/dev/null) == "Arch" ]]; then
-            # https://wiki.archlinux.org/index.php/Pacman
-            alias update="sudo -E pacman -Syu; zplug update"
-        fi
-    elif [[ $(uname) == "Darwin" ]]; then
-        # https://github.com/argon/mas/
-        # http://brew.sh
-        # https://caskroom.github.io/
-        update() {
-            printf "\033[32m%s\033[m\n" "==> Software Update Tool"
-            sudo softwareupdate -i -a
-
-            if hash mas 2>/dev/null; then
-                printf "\033[32m%s\033[m\n" "==> Mac App Store Update"
-                mas upgrade
-            fi
-
-            if hash brew 2>/dev/null; then
-                printf "\033[32m%s\033[m\n" "==> Homebrew"
-                brew update && brew upgrade
-                [[ $? -eq 0 ]] || return
-
-                brew cask >/dev/null 2>&1 || return
-                printf "\033[32m%s\033[m\n" "==> Homebrew Cask"
-                for c in $(brew cask list); do
-                    ! brew cask info $c | grep -qF "Not installed" || brew cask install --force $c;
-                done
-                [[ $? -eq 0 ]] || return
-
-                for c in $(brew --repository)/Caskroom/*; do
-                    versions=($(ls -t $c)) && for v in "${versions[@]:1}"; do \rm -rf "$c/$v"; done;
-                done
-            fi
-
-            if type zplug >/dev/null 2>&1; then
-                printf "\033[32m%s\033[m\n" "==> zplug"
-                zplug update
-            fi
-        }
-    fi
-}
-
-: "Clipboard" && () {
-    if [[ -f /tmp/.X0-lock && -x /usr/bin/VBoxClient ]]; then
-        DISPLAY=:0 /usr/bin/VBoxClient --clipboard
-        if hash xsel 2>/dev/null; then
-            alias pbcopy='xsel --display :0 --input --clipboard'
-            alias pbpaste='xsel --display :0 --output --clipboard'
-        fi
-    fi
-}
-
 : "Managing plugins" && () {
     local zplug_zsh=~/.zplug/zplug
     [[ -e $zplug_zsh ]] || return
