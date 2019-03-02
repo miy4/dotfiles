@@ -7,10 +7,10 @@ if [[ $(umask) = "0000" ]]; then
     umask 022
 fi
 
-export EDITOR='emacsclient'
 export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
+export EDITOR=vim
 
 export PAGER=less
 export MANPAGER='less -X'
