@@ -172,6 +172,30 @@
             IFS=" " tmux set status-right "#[fg=colour255,bg=colour27,bold]$*#[default]"
         }
     fi
+
+    if (( ${+commands[bat]} )); then
+        alias ccat='bat --plain --theme OneHalfLight'
+    fi
+
+    if (( ${+commands[prettyping]} )); then
+        alias pping='prettyping --nolegend'
+    fi
+
+    if (( ${+commands[htop]} )); then
+        alias ttop='htop'
+    fi
+
+    if (( ${+commands[diff-so-fancy]} )); then
+        ddiff() {
+            git diff "$@" \
+                | diff-so-fancy \
+                | less -R -f -X -i -P '?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
+        }
+    fi
+
+    if (( ${+commands[ncdu]} )); then
+        alias ddu='ncdu --color dark -rr -x'
+    fi
 }
 
 : "Managing plugins" && () {
