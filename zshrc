@@ -243,6 +243,12 @@
     zplugin light znz/anyenv-update
 }
 
+: "Managing Environment Variables" && () {
+    if (( ${+commands[direnv]} )); then
+        eval "$(direnv hook zsh)"
+    fi
+}
+
 : "Golang" && () {
     if (( ${+commands[go]} )); then
         export GOPATH=$HOME
@@ -311,12 +317,6 @@ EOF2
     }
     zle -N select-history
     bindkey '^xr' select-history
-}
-
-: "Managing Environment Variables" && () {
-    if (( ${+commands[direnv]} )); then
-        eval "$(direnv hook zsh)"
-    fi
 }
 
 : "Loading a site local rc file" && () {
