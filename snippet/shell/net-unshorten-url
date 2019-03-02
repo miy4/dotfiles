@@ -1,0 +1,4 @@
+# 短縮URLを展開して元のURLを取得する
+# URL 短縮URLのリスト
+curl --silent --output /dev/null --head --write-out "%{url_effective}\n" --location ${URL}
+

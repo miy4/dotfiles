@@ -1,0 +1,3 @@
+# 改行文字の違いを無視して差分をとる
+diff --strip-trailing-cr ${file1} ${file2}
+

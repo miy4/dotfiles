@@ -1,0 +1,4 @@
+# ステージング前のローカルでの変更を破棄する
+# TO_BE_DISCARDED 破棄するファイル(デフォルトはレポジトリ全体)
+git checkout ${TO_BE_DISCARDED:-.}
+

@@ -1,0 +1,7 @@
+# タグを注釈付きで作成する
+# https://git-scm.com/book/en/v2/Git-Basics-Tagging
+# TAG タグ名
+# LOG 注釈
+#               -a             -m
+git tag --annotate ${TAG} --message="${LOG}"
+

@@ -1,0 +1,3 @@
+# SHA1のメッセージダイジェストを取得する
+openssl sha1 ${FILE}
+

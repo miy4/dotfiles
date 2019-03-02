@@ -1,0 +1,4 @@
+# ステージング後、コミット前の変更を破棄する
+# TO_BE_DISCARDED 破棄するファイル(デフォルトはレポジトリ全体)
+git reset HEAD ${TO_BE_DISCARDED:-.}
+

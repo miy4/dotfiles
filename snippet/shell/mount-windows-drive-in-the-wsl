@@ -1,0 +1,3 @@
+# WSLからリムーバブルメディアやネットワークドライブをマウントする
+sudo mount -t drvfs ${DEVICE:-e:} ${DIR:-/mnt/e}
+

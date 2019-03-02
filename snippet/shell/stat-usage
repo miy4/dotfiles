@@ -1,0 +1,18 @@
+# statコマンドのいろいろな書式とその出力サンプル
+(
+    stat_format_examples() {
+        local file=${1:-/etc/passwd}
+        LANG=C stat --help | \
+            sed -n "/^The valid format /,/^  %Z/p" | sed '1,2d' | \
+            while read -r line; do
+                format="${line/% *}"
+                example="$(stat -c "$format" $file)"
+                description=$(sed "s/^  $format   //" <<< "$line")
+                printf "%s	\033[32;1m| %s  # %s\033[m\n" "$example" "stat -c \"$format\"" "$description"
+            done
+    }
+
+    {
+        stat_format_examples "$@"
+    } | column -t -s $'\t'
+)
