@@ -1,0 +1,2 @@
+# tmuxのキーバインドを確認する
+tmux list-keys
