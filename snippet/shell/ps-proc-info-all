@@ -1,0 +1,2 @@
+# プロセスに関する情報をできるだけたくさん取得する
+for f in $(ps L | cut -f 1 -d ' '); do; ps -q {{pid}} -o $f | perl -pe 's/^[ \t]+|[ \t]+$//g' | paste -s; done

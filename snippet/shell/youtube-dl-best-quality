@@ -1,0 +1,3 @@
+# 最高品質＋字幕埋め込みでビデオを保存する
+youtube-dl -f bestvideo+bestaudio/best --all-subs --embed-subs ${URL}
+
