@@ -107,12 +107,9 @@
 (progn "Looks of Emacs"
   (setq frame-title-format "%f")
   (setq inhibit-startup-screen t)
-  (if window-system
-      (menu-bar-mode 1) (menu-bar-mode -1))
-  (if window-system
-      (tool-bar-mode 0))
-  (if window-system
-      (scroll-bar-mode 0))
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
   (column-number-mode t)
   (size-indication-mode t)
   (setq ring-bell-function 'ignore)
