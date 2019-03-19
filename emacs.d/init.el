@@ -104,6 +104,14 @@
     (unless (server-running-p)
       (server-start))))
 
+(progn "Input Method"
+  (use-package mozc
+    :if (and (eq system-type 'gnu/linux)
+             (getenv "WSLENV"))
+    :init
+    (setq default-input-method "japanese-mozc")
+    (custom-set-variables '(mozc-leim-title "あ"))))
+
 (progn "Looks of Emacs"
   (setq frame-title-format "%f")
   (setq inhibit-startup-screen t)
