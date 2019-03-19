@@ -525,62 +525,6 @@
     (setq web-mode-enable-auto-closing t)
     (setq web-mode-enable-auto-pairing t)))
 
-(progn "Javascript"
-  ;; https://github.com/mooz/js2-mode
-  ;; depends: npm install -g tern
-  ;; depends: npm install -g eslint
-  (use-package js2-mode
-    :mode "\\.js\\'"
-    :config
-    (defun my/js2-mode-hook ()
-      (setq js2-basic-offset 2)
-      (setq-default flycheck-disabled-checkers
-                    (append flycheck-disabled-checkers
-                          '(javascript-jshint)))) ;; JSHint disabled
-    (add-hook 'js2-mode-hook 'flycheck-mode)
-    (add-hook 'js2-mode-hook 'autopair-mode)
-    (add-hook 'js2-mode-hook 'linum-mode)
-    (add-hook 'js2-mode-hook 'my/js2-mode-hook))
-
-  ;; https://github.com/ternjs/tern
-  (use-package tern
-    :defer t
-    :init
-    (with-eval-after-load 'js2-mode
-      (add-hook 'js2-mode-hook 'tern-mode)))
-
-  ;; https://github.com/proofit404/company-tern
-  (use-package company-tern
-    :defer t
-    :init
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-tern))
-    (with-eval-after-load 'js2-mode
-      (add-hook 'js2-mode-hook 'company-mode))))
-
-(progn "Typescript"
-  ;; https://github.com/ananthakumaran/tide
-  (use-package typescript-mode
-    :mode "\\.ts\\'"
-    :config
-    (add-hook 'typescript-mode-hook
-              (lambda ()
-                (flycheck-mode t)
-                (setq flycheck-check-syntax-automatically '(save mode-enabled))))
-    (add-hook 'typescript-mode-hook 'autopair-mode)
-    (add-hook 'typescript-mode-hook 'linum-mode)
-    (add-hook 'typescript-mode-hook 'company-mode)
-    (add-hook 'typescript-mode-hook 'eldoc-mode)
-    (setq company-idle-delay 0.1)
-    (setq company-tooltip-align-annotations t))
-
-  ;; https://github.com/ananthakumaran/tide
-  (use-package tide
-    :defer t
-    :init
-    (with-eval-after-load 'typescript-mode
-      (add-hook 'typescript-mode-hook 'tide-setup))))
-
 (progn "Markdown"
   ;; https://github.com/jrblevin/markdown-mode
   (use-package markdown-mode
