@@ -610,6 +610,10 @@
   (use-package toml-mode
     :mode "\\.toml\\'"))
 
+(progn "YAML"
+   (use-package yaml-mode
+     :mode "\\.yml\\'"))
+
 (progn "Web Browser"
   (use-package eww
     :defer t
