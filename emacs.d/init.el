@@ -119,10 +119,9 @@
 
   ;; https://github.com/challenger-deep-theme/emacs
   (use-package challenger-deep-theme
-    :init
-    (add-hook 'window-setup-hook
-              '(lambda () (unless (display-graphic-p (selected-frame))
-                            (set-face-background 'default "unspecified-bg" (selected-frame)))))
+    :hook
+    (window-setup . (lambda () (unless (display-graphic-p (selected-frame))
+                                 (set-face-background 'default "unspecified-bg" (selected-frame)))))
     :config
     (load-theme 'challenger-deep t))
 
@@ -417,8 +416,8 @@
 (progn "Programming"
   (use-package subword
     :defer t
-    :init
-    (add-hook 'prog-mode-hook 'subword-mode))
+    :hook
+    (prog-mode subword-mode))
 
   ;; http://company-mode.github.io/
   (use-package company
@@ -486,16 +485,16 @@
   ;; https://github.com/tarsius/auto-compile
   (use-package auto-compile
     :defer t
-    :init
-    (add-hook 'emacs-lisp-mode-hook 'auto-compile-mode)))
+    :hook
+    (emacs-lisp-mode auto-compile-mode)))
 
 (progn "Shell Script"
   ;; depends: http://www.shellcheck.net/
   (use-package sh-script
     :defer t
-    :config
-    (add-hook 'sh-mode-hook 'yas-minor-mode)
-    (add-hook 'sh-mode-hook 'flycheck-mode)))
+    :hook
+    (sh-mode yas-minor-mode)
+    (sh-mode flycheck-mode)))
 
 (progn "Golang"
   ;; https://github.com/dominikh/go-mode.el
