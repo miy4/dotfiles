@@ -93,9 +93,10 @@
 (progn "Console Integration"
   ;; https://github.com/purcell/exec-path-from-shell
   (use-package exec-path-from-shell
+    :if (memq window-system '(mac ns x))
     :config
-    (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize))))
+    (setq exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize)))
 
 (progn "Server Daemon"
   (use-package server
