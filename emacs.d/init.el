@@ -433,6 +433,19 @@
     :bind
     ([remap zap-to-char] . zop-up-to-char)))
 
+(progn "Development"
+  (use-package git-gutter
+    :custom
+    (git-gutter:modified-sign "~")
+    (git-gutter:added-sign    "+")
+    (git-gutter:deleted-sign  "-")
+    :custom-face
+    (git-gutter:modified ((t (:foreground "#ffb378"))))
+    (git-gutter:added    ((t (:foreground "#95ffa4"))))
+    (git-gutter:deleted  ((t (:foreground "#ff8080"))))
+    :config
+    (global-git-gutter-mode +1)))
+
 (progn "Programming"
   (use-package subword
     :ensure nil
