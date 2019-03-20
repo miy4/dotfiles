@@ -100,12 +100,14 @@
 
 (progn "Server Daemon"
   (use-package server
+    :ensure nil
     :config
     (unless (server-running-p)
       (server-start))))
 
 (progn "Input Method"
   (use-package mozc
+    :ensure nil
     :if (and (eq system-type 'gnu/linux)
              (getenv "WSLENV"))
     :init
@@ -144,6 +146,7 @@
       '(misc-info persp-name lsp debug minor-modes input-method buffer-encoding major-mode process vcs checker)))
 
   (use-package linum
+    :ensure nil
     :defer t
     :config
     (setq linum-format "%4d "))
@@ -425,6 +428,7 @@
 
 (progn "Programming"
   (use-package subword
+    :ensure nil
     :defer t
     :hook
     (prog-mode subword-mode))
