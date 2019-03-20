@@ -431,7 +431,7 @@
     :ensure nil
     :defer t
     :hook
-    (prog-mode subword-mode))
+    (prog-mode . subword-mode))
 
   ;; http://company-mode.github.io/
   (use-package company
@@ -500,15 +500,15 @@
   (use-package auto-compile
     :defer t
     :hook
-    (emacs-lisp-mode auto-compile-mode)))
+    (emacs-lisp . auto-compile-mode)))
 
 (progn "Shell Script"
   ;; depends: http://www.shellcheck.net/
   (use-package sh-script
     :defer t
     :hook
-    (sh-mode yas-minor-mode)
-    (sh-mode flycheck-mode)))
+    (sh-mode . yas-minor-mode)
+    (sh-mode . flycheck-mode)))
 
 (progn "Golang"
   ;; https://github.com/dominikh/go-mode.el
