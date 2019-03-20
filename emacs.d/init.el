@@ -121,6 +121,7 @@
   (column-number-mode t)
   (size-indication-mode t)
   (setq ring-bell-function 'ignore)
+  (add-to-list 'default-frame-alist '(font . "Cica"))
 
   ;; https://github.com/challenger-deep-theme/emacs
   (use-package challenger-deep-theme
