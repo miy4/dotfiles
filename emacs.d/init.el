@@ -608,22 +608,6 @@
      ("B" . eww-back-url)
      ("r" . eww-reload))))
 
-(progn "Note-taking"
-  ;; https://github.com/alpha22jp/simplenote2.el
-  (use-package simplenote2
-    :defer t
-    :init
-    (setq simplenote2-notes-mode 'markdown-mode)
-    (setq simplenote2-markdown-notes-mode 'markdown-mode)
-    :config
-    (simplenote2-setup)
-    (bind-keys
-     :map simplenote2-note-mode-map
-     ("C-c t" . simplenote2-add-tag)
-     ("C-c s" . simplenote2-push-buffer)
-     ("C-c l" . simplenote2-pull-buffer))))
-
-
 (when (eq system-type 'darwin)
   ;; Use command-key as meta
   (setq ns-command-modifier 'meta)
