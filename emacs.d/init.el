@@ -145,6 +145,13 @@
       '(bar workspace-number window-number god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
       '(misc-info persp-name lsp debug minor-modes input-method buffer-encoding major-mode process vcs checker)))
 
+  ;; https://github.com/DarthFennec/highlight-indent-guides
+  (use-package highlight-indent-guides
+    :hook
+    (prog-mode . highlight-indent-guides-mode)
+    :config
+    (setq highlight-indent-guides-method 'column))
+
   (use-package linum
     :ensure nil
     :defer t
