@@ -131,13 +131,17 @@
     :config
     (load-theme 'challenger-deep t))
 
-  ;; https://github.com/Malabarba/smart-mode-line
-  (use-package smart-mode-line
-    :init
-    (setq sml/theme 'dark)
+  ;; https://github.com/domtronn/all-the-icons.el
+  (use-package all-the-icons)
+
+  ;; https://github.com/seagle0128/doom-modeline
+  (use-package doom-modeline
+    :hook
+    (after-init . doom-modeline-mode)
     :config
-    (setq sml/no-confirm-load-theme t)
-    (sml/setup))
+    (doom-modeline-def-modeline 'main
+      '(bar workspace-number window-number god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
+      '(misc-info persp-name lsp debug minor-modes input-method buffer-encoding major-mode process vcs checker)))
 
   (use-package linum
     :defer t
