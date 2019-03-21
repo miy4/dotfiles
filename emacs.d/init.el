@@ -710,3 +710,5 @@
                  (process-send-eof proc)))))
     (setq interprogram-paste-function
           '(lambda () (shell-command-to-string "xsel --display :0 --output --clipboard")))))
+
+;;; init.el ends here
