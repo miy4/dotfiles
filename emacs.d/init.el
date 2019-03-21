@@ -375,7 +375,17 @@
      ("C-c w"       . neotree-create-node)
      ("C-c +"       . neotree-create-node)
      ("C-c d"       . neotree-delete-node)
-     ("C-c r"       . neotree-rename-node))))
+     ("C-c r"       . neotree-rename-node)))
+
+  ;; https://github.com/bmag/imenu-list
+  (use-package imenu-list
+    :commands imenu-list-smart-toggle
+    :custom-face
+    (imenu-list-entry-face-0 ((t (:foreground "#565575"))))
+    (imenu-list-entry-face-1 ((t (:foreground "#cbe3e7"))))
+    :custom
+    (imenu-list-focus-after-activation t)
+    (imenu-list-auto-resize nil)))
 
 (progn "Navigation"
   ;; https://github.com/abo-abo/avy
@@ -434,6 +444,13 @@
     ([remap zap-to-char] . zop-up-to-char)))
 
 (progn "Development"
+  ;; https://github.com/bbatsov/projectile
+  (use-package projectile
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :config
+    (projectile-mode +1))
+
   (use-package git-gutter
     :custom
     (git-gutter:modified-sign "~")
@@ -483,11 +500,10 @@
   ;; https://github.com/nschum/highlight-symbol.el
   (use-package highlight-symbol
     :defer t
-    :init
-    (setq highlight-symbol-idle-delay 0.3)
-    (setq highlight-symbol-colors '("magenta" "blue" "orange"))
-    :config
-    (set-face-attribute 'highlight-symbol-face nil :background "green" :foreground "black"))
+    :custom-face
+    (highlight-symbol-face ((nil (:background "#62d196" :foreground "#100e23"))))
+    :custom
+    (highlight-symbol-idle-delay 0.3)))
 
   ;; https://github.com/capitaomorte/autopair
   (use-package autopair
@@ -496,6 +512,15 @@
   ;; https://github.com/flycheck/flycheck
   (use-package flycheck
     :defer t)
+
+  ;; https://github.com/meqif/flymake-diagnostic-at-point
+  (use-package flymake-diagnostic-at-point
+    :after flymake
+    :custom
+    (flymake-diagnostic-at-point-timer-delay 0.1)
+    (flymake-diagnostic-at-point-display-diagnostic-function 'flymake-diagnostic-at-point-display-popup)
+    :hook
+    (flymake-mode . flymake-diagnostic-at-point-mode))
 
   ;; https://github.com/capitaomorte/yasnippet
   (use-package yasnippet
@@ -508,6 +533,38 @@
      ("<backtab>" . yas-expand))
     (setq yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
     (yas-reload-all))
+
+  ;; https://github.com/emacs-lsp/lsp-mode
+  (use-package lsp-mode
+    :commands lsp
+    :custom
+    (lsp-auto-require-clients t)
+    (lsp-auto-guess-root t)
+    (lsp-document-sync-method 'incremental)
+    (lsp-prefer-flymake 'flymake)
+    (lsp-auto-configure t))
+
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :custom
+    (lsp-ui-flycheck-enable nil)
+    (lsp-ui-sideline-enable nil)
+    (lsp-ui-doc-enable t)
+    (lsp-ui-doc-header t)
+    (lsp-ui-doc-include-signature t)
+    (lsp-ui-doc-position 'at-point)
+    (lsp-ui-doc-max-width 150)
+    (lsp-ui-doc-max-height 30)
+    (lsp-ui-doc-use-childframe t)
+    (lsp-ui-doc-use-webkit t)
+    (lsp-ui-peek-enable t))
+
+  (use-package company-lsp
+    :commands company-lsp
+    :custom
+    (company-lsp-cache-candidates t)
+    (company-lsp-async t)
+    (company-lsp-enable-recompletion nil))
 
   ;; https://github.com/joaotavora/eglot
   (use-package eglot
@@ -535,15 +592,13 @@
   ;; depends: https://github.com/saibing/bingo
   (use-package go-mode
     :mode "\\.go\\'"
+    :custom
+    (gofmt-command "goimports")
     :hook
-    (go-mode . eglot-ensure)
-    (go-mode . company-mode)
+    (go-mode . lsp)
     (go-mode . autopair-mode)
     (go-mode . highlight-symbol-mode)
-    (before-save . gofmt-before-save) ;; instead of 'eglot-format
-    :bind
-    (:map go-mode-map
-     ("M-/" . company-complete))))
+    (before-save . gofmt-before-save)))
 
 (progn "Web Development"
   ;; https://github.com/fxbois/web-mode
