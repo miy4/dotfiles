@@ -519,6 +519,9 @@
     :custom
     (flymake-diagnostic-at-point-timer-delay 0.1)
     (flymake-diagnostic-at-point-display-diagnostic-function 'flymake-diagnostic-at-point-display-popup)
+    (flymake-diagnostic-at-point-error-prefix " ")
+    :custom-face
+    (popup-tip-face ((t (:background "#100e23" :foreground "#c991e1"))))
     :hook
     (flymake-mode . flymake-diagnostic-at-point-mode))
 
