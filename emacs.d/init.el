@@ -573,7 +573,7 @@
   (use-package eglot
     :config
     (when (executable-find "bingo")
-      (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio"))))))
+      (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio")))))
 
 (progn "Emacs Lisp"
   ;; https://github.com/tarsius/auto-compile
