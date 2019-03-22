@@ -220,6 +220,38 @@
   :config
   (shackle-mode 1))
 
+(define-prefix-command 'ivy-command-map)
+(global-set-key (kbd "C-z") 'ivy-command-map)
+
+;; https://github.com/abo-abo/swiper
+(use-package ivy)
+(use-package swiper
+  :after ivy)
+(use-package counsel
+  :after swiper
+  :bind
+  (:map ivy-command-map
+   ("m" . ivy-switch-buffer)
+   ("s" . swiper)
+   ("y" . counsel-yank-pop)
+   ("d" . counsel-descbinds)
+   ("i" . counsel-imenu))
+  :custom
+  (ivy-format-function 'ivy-format-function-line)
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "")
+  (ivy-initial-inputs-alist nil)
+  (counsel-yank-pop-separator "\n-------\n")
+  :config
+  (ivy-mode 1))
+
+;; https://github.com/mkcms/ivy-yasnippet
+(use-package ivy-yasnippet
+  :after (ivy yasnippet)
+  :bind
+  (:map ivy-command-map
+   ("a" . ivy-yasnippet)))
+
 (use-package view
   :ensure nil
   :bind
