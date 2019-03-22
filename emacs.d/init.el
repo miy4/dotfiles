@@ -105,7 +105,7 @@
 
 ;; https://github.com/Malabarba/paradox
 (use-package paradox
-  :defer t
+  :commands (paradox-list-packages paradox-upgrade-packages)
   :init
   (setq paradox-github-token t)
   (load (locate-user-emacs-file ".paradox-github-token") :noerror :nomessage))
@@ -113,8 +113,9 @@
 ;; https://github.com/purcell/exec-path-from-shell
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns x))
+  :custom
+  (exec-path-from-shell-check-startup-files nil)
   :config
-  (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
 (use-package server
@@ -129,7 +130,8 @@
            (getenv "WSLENV"))
   :init
   (setq default-input-method "japanese-mozc")
-  (custom-set-variables '(mozc-leim-title "あ")))
+  :custom
+  (mozc-leim-title "あ"))
 
 ;; https://github.com/challenger-deep-theme/emacs
 (use-package challenger-deep-theme
@@ -155,14 +157,14 @@
 (use-package highlight-indent-guides
   :hook
   (prog-mode . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'column))
+  :custom
+  (highlight-indent-guides-method 'column))
 
 (use-package linum
   :ensure nil
-  :defer t
-  :config
-  (setq linum-format "%4d "))
+  :commands linum-mode
+  :custom
+  (linum-format "%4d "))
 
 ;; https://github.com/k-talo/volatile-highlights.el
 (use-package volatile-highlights
@@ -172,11 +174,12 @@
 
 ;; https://github.com/Malabarba/beacon
 (use-package beacon
+  :custom
+  (beacon-size 20)
+  (beacon-color "#62d6e8")
+  (beacon-blink-delay 0.1)
+  (beacon-blink-duration 0.1)
   :config
-  (setq beacon-size 20)
-  (setq beacon-color "#62d6e8")
-  (setq beacon-blink-delay 0.1)
-  (setq beacon-blink-duration 0.1)
   (beacon-mode 1))
 
 ;; http://www.dr-qubit.org/emacs.php
@@ -196,7 +199,6 @@
 
 ;; https://github.com/abo-abo/ace-window
 (use-package ace-window
-  :after avy
   :bind
   (:map my-window-map
         ("W" . ace-window))
@@ -206,30 +208,30 @@
 
 ;; https://github.com/wasamasa/shackle
 (use-package shackle
+  :custom
+  (shackle-default-alignment 'below)
+  (shackle-default-size 0.3)
+  (shackle-rules
+   '((compilation-mode :align t)
+     ("*Completions*"  :align t)
+     ("*quickrun*"     :select t :inhibit-window-quit t :other t)
+     ("*Help*"         :select t :inhibit-window-quit t :other t)
+     ("*Messages*"     :select t :inhibit-window-quit t :other t)))
   :config
-  (setq shackle-default-alignment 'below)
-  (setq shackle-default-size 0.3)
-  (setq shackle-rules
-        '((compilation-mode :align t)
-          ("*Completions*"  :align t)
-          ("*quickrun*"     :select t :inhibit-window-quit t :other t)
-          ("*Help*"         :select t :inhibit-window-quit t :other t)
-          ("*Messages*"     :select t :inhibit-window-quit t :other t)))
   (shackle-mode 1))
 
 ;; https://github.com/emacs-helm/helm
 (use-package helm
   :defer t
   :diminish helm-mode
-  :custom-face
-  (helm-selection ((nil (:background "magenta" :foreground "white"))))
-  :config
-  (bind-keys
-   :map helm-map
+  :bind
+  (:map helm-map
    ("C-M-n" . helm-next-source)
    ("C-M-p" . helm-previous-source)
    ("C-z"   . helm-select-action)
-   ("C-h"   . delete-backward-char)))
+   ("C-h"   . delete-backward-char))
+  :custom-face
+  (helm-selection ((nil (:background "magenta" :foreground "white")))))
 
 (use-package helm-config
   :ensure helm
@@ -295,42 +297,42 @@
 (use-package view
   :ensure nil
   :bind
-  ("C-c v" . view-mode)
-  :config
-  (bind-keys
+  (("C-c v" . view-mode)
    :map view-mode-map
-   ("h"     . backward-char)
-   ("j"     . next-line)
-   ("k"     . previous-line)
-   ("l"     . forward-char)
-   ("w"     . forward-word)
-   ("b"     . backward-word)
-   ("C-u"   . scroll-down)
-   ("SPC"   . scroll-up)
-   ("C-d"   . scroll-up)
-   ("^"     . mwim-beginning-of-code-or-line)
-   ("0"     . beginning-of-line)
-   ("$"     . end-of-line)
-   ("g"     . beginning-of-buffer)
-   ("G"     . end-of-buffer)
-   ("f"     . avy-goto-char)))
+   ("h"   . backward-char)
+   ("j"   . next-line)
+   ("k"   . previous-line)
+   ("l"   . forward-char)
+   ("w"   . forward-word)
+   ("b"   . backward-word)
+   ("C-u" . scroll-down)
+   ("SPC" . scroll-up)
+   ("C-d" . scroll-up)
+   ("^"   . mwim-beginning-of-code-or-line)
+   ("0"   . beginning-of-line)
+   ("$"   . end-of-line)
+   ("g"   . beginning-of-buffer)
+   ("G"   . end-of-buffer)
+   ("f"   . avy-goto-char)))
 
 ;; https://github.com/justbur/emacs-which-key
 (use-package which-key
+  :custom
+  (which-key-popup-type 'side-window)
+  (which-key-side-window-location 'bottom)
+  (which-key-idle-delay 1.0)
   :config
-  (setq which-key-popup-type 'side-window)
-  (setq which-key-side-window-location 'bottom)
-  (setq which-key-idle-delay 1.0)
   (which-key-mode))
 
 (use-package dired
   :ensure nil
-  :defer t
+  :commands dired
+  :custom
+  (dired-recursive-deletes 'always)
+  (dired-recursive-copies 'always)
+  (dired-dwim-target t)
+  (dired-listing-switches "-lahGF --group-directories-first --time-style=long-iso")
   :config
-  (setq dired-recursive-deletes 'always)
-  (setq dired-recursive-copies 'always)
-  (setq dired-dwim-target t)
-  (setq dired-listing-switches "-lahGF --group-directories-first --time-style=long-iso")
   (when (eq system-type 'cygwin)
     (setq dired-guess-shell-alist-user
           '((".png"  "cygstart")
@@ -365,13 +367,9 @@
 
 ;; https://github.com/jaypei/emacs-neotree
 (use-package neotree
-  :init
-  (setq-default neo-smart-open t)
-  (setq-default neo-dont-be-alone t)
-  :config
-  (setq neo-theme 'nerd)
-  (bind-keys
-   :map neotree-mode-map
+  :commands neotree
+  :bind
+  (:map neotree-mode-map
    ("C-c C-n"     . nil)
    ("C-c C-d"     . nil)
    ("C-c C-r"     . nil)
@@ -381,7 +379,10 @@
    ("C-c w"       . neotree-create-node)
    ("C-c +"       . neotree-create-node)
    ("C-c d"       . neotree-delete-node)
-   ("C-c r"       . neotree-rename-node)))
+   ("C-c r"       . neotree-rename-node))
+  :custom
+  (neo-theme 'nerd)
+  (neo-smart-open t))
 
 ;; https://github.com/bmag/imenu-list
 (use-package imenu-list
@@ -398,8 +399,8 @@
   :bind
   (("M-c" . avy-goto-char)
    ("M-l" . avy-goto-line))
-  :config
-  (setq avy-background t))
+  :custom
+  (avy-background t))
 
 ;; https://github.com/rejeep/wrap-region.el
 (use-package wrap-region
@@ -410,10 +411,10 @@
 ;; https://github.com/magnars/expand-region.el
 (use-package expand-region
   :bind
-  (("M-m" . er/expand-region))
-  :config
-  (setq expand-region-contract-fast-key "M")
-  (setq expand-region-reset-fast-key "*"))
+  ("M-m" . er/expand-region)
+  :custom
+  (expand-region-contract-fast-key "M")
+  (expand-region-reset-fast-key "*"))
 
 ;; https://github.com/fgallina/region-bindings-mode
 (use-package region-bindings-mode
@@ -422,9 +423,8 @@
 
 ;; https://github.com/magnars/multiple-cursors.el
 (use-package multiple-cursors
-  :config
-  (bind-keys
-   :map region-bindings-mode-map
+  :bind
+  (:map region-bindings-mode-map
    ("a" . mc/mark-all-like-this)
    ("p" . mc/mark-previous-like-this)
    ("n" . mc/mark-next-like-this)
@@ -468,23 +468,22 @@
 
 (use-package subword
   :ensure nil
-  :defer t
   :hook
   (prog-mode . subword-mode))
 
 ;; http://company-mode.github.io/
 (use-package company
   :defer t
-  :config
-  (setq company-idle-delay 0.1)
-  (setq company-minimum-prefix-length 2)
-  (setq company-selection-wrap-around t)
-  (bind-keys
-   :map company-active-map
+  :bind
+  (:map company-active-map
    ("M-n" . nil)
    ("M-p" . nil)
    ("C-n" . company-select-next)
-   ("C-p" . company-select-previous)))
+   ("C-p" . company-select-previous))
+  :custom
+  (company-idle-delay 0.1)
+  (company-minimum-prefix-length 2)
+  (company-selection-wrap-around t))
 
 ;; https://github.com/syohex/emacs-quickrun
 (use-package quickrun
@@ -496,8 +495,8 @@
 (use-package multi-compile
   :bind
   ("C-c C-r" . multi-compile-run)
-  :config
-  (setq multi-compile-completion-system 'ido))
+  :custom
+  (multi-compile-completion-system 'ido))
 
 ;; https://github.com/nschum/highlight-symbol.el
 (use-package highlight-symbol
@@ -518,25 +517,25 @@
 ;; https://github.com/meqif/flymake-diagnostic-at-point
 (use-package flymake-diagnostic-at-point
   :after flymake
+  :hook
+  (flymake-mode . flymake-diagnostic-at-point-mode)
   :custom
   (flymake-diagnostic-at-point-timer-delay 0.1)
   (flymake-diagnostic-at-point-display-diagnostic-function 'flymake-diagnostic-at-point-display-popup)
   (flymake-diagnostic-at-point-error-prefix " ")
   :custom-face
-  (popup-tip-face ((t (:background "#100e23" :foreground "#c991e1"))))
-  :hook
-  (flymake-mode . flymake-diagnostic-at-point-mode))
+  (popup-tip-face ((t (:background "#100e23" :foreground "#c991e1")))))
 
 ;; https://github.com/capitaomorte/yasnippet
 (use-package yasnippet
-  :defer t
-  :config
-  (bind-keys
-   :map yas-minor-mode-map
+  :bind
+  (:map yas-minor-mode-map
    ("<tab>".  nil)
    ("TAB"  . nil)
    ("<backtab>" . yas-expand))
-  (setq yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+  :custom
+  (yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+  :config
   (yas-reload-all))
 
 ;; https://github.com/emacs-lsp/lsp-mode
@@ -573,19 +572,18 @@
 
 ;; https://github.com/joaotavora/eglot
 (use-package eglot
+  :commands (eglot eglot-ensure) 
   :config
   (when (executable-find "bingo")
     (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio")))))
 
 ;; https://github.com/tarsius/auto-compile
 (use-package auto-compile
-  :defer t
   :hook
   (emacs-lisp . auto-compile-mode))
 
 ;; depends: http://www.shellcheck.net/
 (use-package sh-script
-  :defer t
   :hook
   (sh-mode . yas-minor-mode)
   (sh-mode . flycheck-mode))
@@ -595,25 +593,25 @@
 ;; depends: go get golang.org/x/tools/cmd/goimports
 (use-package go-mode
   :mode "\\.go\\'"
-  :custom
-  (gofmt-command "goimports")
   :hook
   (go-mode . lsp)
   (go-mode . autopair-mode)
   (go-mode . highlight-symbol-mode)
-  (before-save . gofmt-before-save))
+  (before-save . gofmt-before-save)
+  :custom
+  (gofmt-command "goimports"))
 
 ;; https://github.com/fxbois/web-mode
 (use-package web-mode
   :mode
   (("\\.html?\\'" . web-mode)
    ("\\.css\\'"   . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
   ;; https://github.com/fxbois/web-mode/issues/358
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-auto-pairing t))
+  (web-mode-enable-auto-closing t)
+  (web-mode-enable-auto-pairing t))
 
 ;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
@@ -625,14 +623,7 @@
   (bind-keys
    :map markdown-mode-map
    ("M-p" . nil)
-   ("M-n" . nil))
-  (defun my/markdown-preview-file ()
-    "run Marked on the current file and revert the buffer"
-    (interactive)
-    (shell-command
-     (format "open -a /Applications/Marked\\ 2.app %s"
-             (shell-quote-argument (buffer-file-name)))))
-  (define-key markdown-mode-map (kbd "C-c m") 'my/markdown-preview-file))
+   ("M-n" . nil)))
 
 ;; https://github.com/spotify/dockerfile-mode
 ;; requires: hadolint
@@ -648,7 +639,17 @@
   :mode "\\.yml\\'")
 
 (use-package eww
-  :defer t
+  :commands eww
+  :bind
+  (:map eww-mode-map
+   ("g" . beginning-of-buffer)
+   ("G" . end-of-buffer)
+   ("j" . scroll-up-line)
+   ("k" . scroll-down-line)
+   ("b" . scroll-down)
+   ("F" . eww-forward-url)
+   ("B" . eww-back-url)
+   ("r" . eww-reload))
   :config
   (defvar eww-disable-colorize t)
   (defun my/shr-colorize-region--disable (orig start end fg &optional bg &rest _)
@@ -663,17 +664,7 @@
   (defun my/eww-enable-color ()
     (interactive)
     (setq-local eww-disable-colorize nil)
-    (eww-reload))
-  (bind-keys
-   :map eww-mode-map
-   ("g" . beginning-of-buffer)
-   ("G" . end-of-buffer)
-   ("j" . scroll-up-line)
-   ("k" . scroll-down-line)
-   ("b" . scroll-down)
-   ("F" . eww-forward-url)
-   ("B" . eww-back-url)
-   ("r" . eww-reload)))
+    (eww-reload)))
 
 (when (eq system-type 'darwin)
   ;; Use command-key as meta
