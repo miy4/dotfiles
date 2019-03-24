@@ -230,7 +230,9 @@
 (use-package counsel
   :after swiper
   :bind
-  (:map ivy-command-map
+  (("M-x"     . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   :map ivy-command-map
    ("m" . ivy-switch-buffer)
    ("s" . swiper)
    ("y" . counsel-yank-pop)
@@ -244,6 +246,9 @@
   (counsel-yank-pop-separator "\n-------\n")
   :config
   (ivy-mode 1))
+
+;; https://github.com/DarwinAwardWinner/amx
+(use-package amx)
 
 ;; https://github.com/mkcms/ivy-yasnippet
 (use-package ivy-yasnippet
