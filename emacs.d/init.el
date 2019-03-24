@@ -100,6 +100,16 @@
 (setq ring-bell-function 'ignore)
 (add-to-list 'default-frame-alist '(font . "Cica"))
 
+;; macOS setting
+(when (eq system-type 'darwin)
+  ;; Use command-key as meta
+  (setq ns-command-modifier 'meta)
+
+  ;; File name coding system
+  (require 'ucs-normalize)
+  (set-file-name-coding-system 'utf-8-hfs)
+  (setq locale-coding-system 'utf-8-hfs))
+
 
 ;; Setup packages
 
@@ -629,14 +639,5 @@
     (interactive)
     (setq-local eww-disable-colorize nil)
     (eww-reload)))
-
-(when (eq system-type 'darwin)
-  ;; Use command-key as meta
-  (setq ns-command-modifier 'meta)
-
-  ;; File name coding system
-  (require 'ucs-normalize)
-  (set-file-name-coding-system 'utf-8-hfs)
-  (setq locale-coding-system 'utf-8-hfs))
 
 ;;; init.el ends here
