@@ -147,7 +147,7 @@
 ;; https://github.com/seagle0128/doom-modeline
 (use-package doom-modeline
   :hook
-  (after-init . doom-modeline-mode)
+  (emacs-startup . doom-modeline-mode)
   :config
   (doom-modeline-def-modeline 'main
     '(bar workspace-number window-number god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
