@@ -555,6 +555,7 @@
   (go-mode . lsp)
   (go-mode . autopair-mode)
   (go-mode . highlight-symbol-mode)
+  (go-mode . yas-minor-mode)
   (before-save . gofmt-before-save)
   :custom
   (gofmt-command "goimports"))
