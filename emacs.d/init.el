@@ -637,29 +637,6 @@
   ;; File name coding system
   (require 'ucs-normalize)
   (set-file-name-coding-system 'utf-8-hfs)
-  (setq locale-coding-system 'utf-8-hfs)
-
-  ;; Clipboard integration
-  (setq interprogram-cut-function
-        '(lambda (text &optional push)
-           (let ((process-connection-type nil))
-             (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-               (process-send-string proc text)
-               (process-send-eof proc)))))
-  (setq interprogram-paste-function
-        '(lambda () (shell-command-to-string "pbpaste"))))
-
-
-(when (eq system-type 'gnu/linux)
-  ;; Clipboard integration
-  (when (executable-find "xsel")
-    (setq interprogram-cut-function
-          '(lambda (text &optional push)
-             (let ((process-connection-type nil))
-               (let ((proc (start-process "xsel" "*Messages*" "xsel" "--display" ":0" "--input" "--clipboard")))
-                 (process-send-string proc text)
-                 (process-send-eof proc)))))
-    (setq interprogram-paste-function
-          '(lambda () (shell-command-to-string "xsel --display :0 --output --clipboard")))))
+  (setq locale-coding-system 'utf-8-hfs))
 
 ;;; init.el ends here
