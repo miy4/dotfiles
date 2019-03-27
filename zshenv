@@ -32,6 +32,15 @@ elif [ -d /home/linuxbrew/.linuxbrew ]; then
 fi
 export PATH
 
+if [[ -d ${HOME}/opt/cargo ]]; then
+    export CARGO_HOME=${HOME}/opt/cargo
+    export PATH=${CARGO_HOME}/bin:$PATH
+fi
+
+if [[ -d ${HOME}/opt/rustup ]]; then
+    export RUSTUP_HOME=${HOME}/opt/rustup
+fi
+
 if [ -r ~/ZPROF_ENABLE ]; then
     zmodload zsh/zprof && zprof
 fi
