@@ -196,6 +196,8 @@
     if (( ${+commands[ncdu]} )); then
         alias ddu='ncdu --color dark -rr -x'
     fi
+
+    (( ${+commands[nvim]} )) && alias vim='nvim'
 }
 
 : "Pager and Manual" && () {
