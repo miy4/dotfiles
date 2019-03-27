@@ -12,6 +12,7 @@ export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
+export LESSHISTFILE=-
 
 if [[ $(uname) = "Darwin" ]]; then
     export HOMEBREW_NO_ANALYTICS=1
