@@ -173,17 +173,11 @@
         }
     fi
 
-    if (( ${+commands[bat]} )); then
-        alias ccat='bat --plain --theme OneHalfLight'
-    fi
-
-    if (( ${+commands[prettyping]} )); then
-        alias pping='prettyping --nolegend'
-    fi
-
-    if (( ${+commands[htop]} )); then
-        alias ttop='htop'
-    fi
+    (( ${+commands[bat]} )) && alias ccat='bat --plain --theme OneHalfLight'
+    (( ${+commands[prettyping]} )) && alias pping='prettyping --nolegend'
+    (( ${+commands[htop]} )) && alias ttop='htop'
+    (( ${+commands[ncdu]} )) && alias ddu='ncdu --color dark -rr -x'
+    (( ${+commands[nvim]} )) && alias vim='nvim'
 
     if (( ${+commands[diff-so-fancy]} )); then
         ddiff() {
@@ -192,12 +186,6 @@
                 | less -R -f -X -i -P '?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
         }
     fi
-
-    if (( ${+commands[ncdu]} )); then
-        alias ddu='ncdu --color dark -rr -x'
-    fi
-
-    (( ${+commands[nvim]} )) && alias vim='nvim'
 }
 
 : "Pager and Manual" && () {
