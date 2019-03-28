@@ -38,6 +38,12 @@
 (setq-default indent-tabs-mode nil)
 (setq-default kill-whole-line t)
 
+;; Prevent from killing buffers
+(with-current-buffer "*scratch*"
+  (emacs-lock-mode 'kill))
+(with-current-buffer "*Messages*"
+  (emacs-lock-mode 'kill))
+
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq mouse-yank-at-point t)
 
