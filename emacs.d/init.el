@@ -31,6 +31,9 @@
 (prefer-coding-system 'utf-8-unix)
 
 (setq backup-inhibited t)
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+(setq auto-save-list-file-prefix (concat user-emacs-directory "auto-save/.saves-"))
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (setq-default kill-whole-line t)
