@@ -267,12 +267,23 @@ EOF2
     }
 }
 
+: "Javascript" && () {
+    if [[ -r ~/.config/npm/npmrc ]]; then
+        export NPM_CONFIG_USERCONFIG=~/.config/npm/npmrc
+    fi
+}
+
 : "Git" && () {
     if [ -x /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight ]; then
         export PATH=$PATH:/usr/local/opt/git/share/git-core/contrib/diff-highlight
     elif [ -x /usr/share/git/diff-highlight/diff-highlight ]; then
         export PATH=$PATH:/usr/share/git/diff-highlight
     fi
+}
+
+: "AWS" && () {
+    export AWS_SHARED_CREDENTIALS_FILE=~/.config/aws/credentials
+    export AWS_CONFIG_FILE=~/.config/aws/config
 }
 
 : "Commandline Filter" && () {
