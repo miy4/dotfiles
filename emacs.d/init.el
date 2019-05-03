@@ -528,7 +528,17 @@
   (lsp-auto-guess-root t)
   (lsp-document-sync-method 'incremental)
   (lsp-prefer-flymake 'flymake)
-  (lsp-auto-configure t))
+  (lsp-auto-configure t)
+  :config
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("rls"))
+    :major-modes '(rust-mode)
+    :priority 0
+    :server-id 'myrls
+    :initialized-fn (lambda (workspace)
+                      (with-lsp-workspace workspace (lsp--set-configuration `(:rust (:clippy_preference "on")))))
+    :notification-handlers (lsp-ht ("window/progress" 'lsp-clients--rust-window-progress)))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -583,6 +593,22 @@
   (before-save . gofmt-before-save)
   :custom
   (gofmt-command "goimports"))
+
+;; https://github.com/rust-lang/rust-mode
+;; depends: rustup component add rls
+;; depends: rustup component add rust-analysis
+;; depends: rustup component add rust-src
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :hook
+  (rust-mode . lsp)
+;  (rust-mode . (lambda () (let ((lsp-rust-configuration (make-hash-table)))
+;      (puthash :clippy_preference "on" lsp-rust-configuration)
+;      (lsp--set-configuration `(:rust ,lsp-rust-configuration)))))
+  (rust-mode . autopair-mode)
+  (rust-mode . highlight-symbol-mode)
+  :custom
+  (rust-format-on-save t))
 
 ;; https://github.com/fxbois/web-mode
 (use-package web-mode
