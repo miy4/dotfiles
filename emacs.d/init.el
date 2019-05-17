@@ -169,7 +169,7 @@
   (emacs-startup . doom-modeline-mode)
   :config
   (doom-modeline-def-modeline 'main
-    '(bar workspace-number window-number god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
+    '(bar workspace-name window-number god-state ryo-modal xah-fly-keys matches buffer-info remote-host buffer-position parrot selection-info)
     '(misc-info persp-name lsp debug minor-modes input-method buffer-encoding major-mode process vcs checker)))
 
 ;; https://github.com/DarthFennec/highlight-indent-guides
