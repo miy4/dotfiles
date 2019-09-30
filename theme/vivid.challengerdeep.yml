@@ -1,0 +1,98 @@
+colors:
+  # Original "Challenger Deep" theme by MaxSt
+  # https://challenger-deep-theme.github.io/
+  background_color: '1b182c'
+  white: 'cbe3e7'
+  red: 'ff5458'
+  green: '62d196'
+  yellow: 'ffb378'
+  blue: '65b2ff'
+  pink: '906cff'
+  cyan: '63f2f1'
+
+  light_red: 'ff8080'
+  light_green: '95ffa4'
+  light_yellow: 'ffe9aa'
+  light_blue: '91ddff'
+  light_pink: 'c991e1'
+  light_cyan: 'aaffe4'
+
+  black: '1b182c'
+  gray: 'cbe3e7'
+  darkgray: 'a6b3cc'
+
+core:
+  regular_file: {}
+
+  directory:
+    foreground: blue
+
+  executable_file:
+    foreground: red
+    font-style: bold
+
+  symlink:
+    foreground: pink
+
+  broken_symlink:
+    foreground: black
+    background: red
+    # font-style: blink
+
+  fifo:
+    foreground: black
+    background: blue
+
+  socket:
+    foreground: black
+    background: pink
+
+  normal_text:
+    {}
+
+text:
+  special:
+    foreground: background_color
+    background: yellow
+
+  todo:
+    font-style: bold
+
+  licenses:
+    foreground: gray
+
+  configuration:
+    foreground: yellow
+
+  other:
+    foreground: yellow
+
+markup:
+  foreground: yellow
+
+programming:
+  source:
+    foreground: green
+
+  tooling:
+    foreground: light_green
+
+    continuous-integration:
+      foreground: green
+
+media:
+  foreground: light_pink
+
+office:
+  foreground: red
+
+archives:
+  foreground: cyan
+  font-style: underline
+
+executable:
+  foreground: red
+  font-style: bold
+
+unimportant:
+  foreground: darkgray
