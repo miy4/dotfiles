@@ -16,7 +16,7 @@ define_multipurpose_modmap({
 })
 
 # Keybindings for Firefox/Chrome
-define_keymap(re.compile("Waterfox|Firefox|Google-chrome"), {
+define_keymap(re.compile("Waterfox|[Ff]irefox|Google-chrome"), {
     # Ctrl+./, to switch next/previous tab
     K("C-dot"): K("C-TAB"),
     K("C-comma"): K("C-Shift-TAB"),
