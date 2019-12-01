@@ -107,7 +107,9 @@
 (column-number-mode t)
 (size-indication-mode t)
 (setq ring-bell-function 'ignore)
-(add-to-list 'default-frame-alist '(font . "Cica"))
+(if (>= (x-display-pixel-width) 1920)
+    (add-to-list 'default-frame-alist '(font . "Cica-16"))
+  (add-to-list 'default-frame-alist '(font . "Cica")))
 
 ;; macOS setting
 (when (eq system-type 'darwin)
