@@ -227,10 +227,10 @@
     zplugin light zsh-users/zsh-autosuggestions
     zplugin light zdharma/fast-syntax-highlighting
 
-    zplugin ice silent wait'0' as'program' pick'bin/anyenv' atload'export ANYENV_ROOT=$PWD; eval "$(anyenv init -)"'
-    zplugin light anyenv/anyenv
-    zplugin ice silent as'program' pick'bin/anyenv-update'
-    zplugin light znz/anyenv-update
+    #zplugin ice silent wait'0' as'program' pick'bin/anyenv' atload'export ANYENV_ROOT=$PWD; eval "$(anyenv init -)"'
+    #zplugin light anyenv/anyenv
+    #zplugin ice silent as'program' pick'bin/anyenv-update'
+    #zplugin light znz/anyenv-update
 }
 
 : "Managing Environment Variables" && () {
