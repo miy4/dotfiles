@@ -123,13 +123,13 @@
 }
 
 : "Color and Theme" && () {
-    if (( ${+commands[vivid]} )); then
-        if [[ -r ~/.config/vivid/themes/challengerdeep.yml ]]; then
-            export LS_COLORS=$(vivid generate challengerdeep)
-        else
-            export LS_COLORS=$(vivid generate snazzy)
-        fi
-    fi
+    #if (( ${+commands[vivid]} )); then
+    #    if [[ -r ~/.config/vivid/themes/challengerdeep.yml ]]; then
+    #        export LS_COLORS=$(vivid generate challengerdeep)
+    #    else
+    #        export LS_COLORS=$(vivid generate snazzy)
+    #    fi
+    #fi
 }
 
 : "Aliasing" && () {
