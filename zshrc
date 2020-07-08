@@ -93,24 +93,31 @@
     # http://zsh.sourceforge.net/Doc/Release/Options.html#Changing-Directories
     setopt AUTO_CD
 
-    if (( ${+commands[fzf]} )); then
-        ..() {
-            local dir="$PWD"
-            local togo
-            while true; do
-                dir=${dir%/*}
-                if ((${#dir})); then
-                    echo $dir
-                else
-                    echo '/'
-                    break
-                fi
-            done | fzf | read togo
-            if [ -n "$togo" ]; then
-               cd "$togo"
+    ..() {
+        if (( ${+commands[sk]} )); then
+            filter='sk'
+        elif (( ${+commands[fzf]} )); then
+            filter='fzf'
+        else
+            printf "no filter command available\n"
+            return
+        fi
+
+        local dir="$PWD"
+        local togo
+        while true; do
+            dir=${dir%/*}
+            if ((${#dir})); then
+                echo $dir
+            else
+                echo '/'
+                break
             fi
-        }
-    fi
+        done | $filter | read togo
+        if [ -n "$togo" ]; then
+            cd "$togo"
+        fi
+    }
 }
 
 : "Expansion and Globbing" && () {
@@ -287,25 +294,45 @@ EOF2
 }
 
 : "Commandline Filter" && () {
-    (( ${+commands[fzf]} )) || return
+    if (( ${+commands[sk]} )); then
+        export SKIM_DEFAULT_OPTIONS="--regex --reverse --multi --bind 'ctrl-j:ignore,ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+    elif (( ${+commands[fzf]} )); then
+        export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+    else
+        return
+    fi
 
-    export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
 
     select-ghq-repository() {
-        local dir=$(ghq list --full-path | fzf)
-	if [[ -n "$dir" ]]; then
-	    cd "$dir"
-	    if zle; then
+        local dir
+        if (( ${+commands[sk]} )); then
+            dir=$(ghq list --full-path | sk)
+        elif (( ${+commands[fzf]} )); then
+            dir=$(ghq list --full-path | fzf)
+        else
+            printf "no filter command available\n"
+            return
+        fi
+	    if [[ -n "$dir" ]]; then
+	        cd "$dir"
+	        if zle; then
                 zle reset-prompt
             fi
-	fi
+	    fi
     }
     zle -N select-ghq-repository
     bindkey '^xg' select-ghq-repository
 
     select-history() {
         local selected num
-        selected=( $(fc -rl 1 | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2.. --query=${(qqq)LBUFFER} +m" fzf) )
+        if (( ${+commands[sk]} )); then
+            selected=( $(fc -rl 1 | sk -n 3.. --query="${LBUFFER}" --no-multi) )
+        elif (( ${+commands[fzf]} )); then
+            selected=( $(fc -rl 1 | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2.. --query=${(qqq)LBUFFER} +m" fzf) )
+        else
+            printf "no filter command available\n"
+            return
+        fi
         local ret=$?
         if [ -n "$selected" ]; then
             num=$selected[1]
@@ -314,7 +341,7 @@ EOF2
             fi
         fi
         zle reset-prompt
-	return $ret
+	    return $ret
     }
     zle -N select-history
     bindkey '^xr' select-history
