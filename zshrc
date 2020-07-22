@@ -186,7 +186,9 @@
     (( ${+commands[ncdu]} )) && alias ddu='ncdu --color dark -rr -x'
     (( ${+commands[nvim]} )) && alias vim='nvim'
 
-    if (( ${+commands[diff-so-fancy]} )); then
+    if (( ${+commands[icdiff]} )); then
+        alias ddiff=icdiff
+    elif (( ${+commands[diff-so-fancy]} )); then
         ddiff() {
             git diff "$@" \
                 | diff-so-fancy \
