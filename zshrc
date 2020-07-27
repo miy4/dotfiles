@@ -195,6 +195,28 @@
                 | less -R -f -X -i -P '?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]'
         }
     fi
+
+    http-server() {
+        local -r http_port=${1:-8080}
+        if (( ${+commands[python]} )); then
+            if python --version | grep -q '^Python 3\.'; then
+                python -m http.server $http_port
+            else
+                python -m SimpleHTTPServer $http_port
+            fi
+        elif (( ${+commands[python3]} )); then
+            python3 -m http.server $http_port
+        elif (( ${+commands[python2]} )); then
+            python2 -m SimpleHTTPServer $http_port
+        elif (( ${+commands[ruby]} )); then
+            ruby -run -e httpd . -p $http_port
+            #ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => "./", :Port => 8080).start'
+        elif (( ${+commands[php]} )); then
+            php -S localhost:$http_port
+        else
+            printf "nothing to do :(\n" 1>&2
+        fi
+    }
 }
 
 : "Pager and Manual" && () {
