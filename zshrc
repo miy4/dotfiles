@@ -217,6 +217,25 @@
             printf "nothing to do :(\n" 1>&2
         fi
     }
+
+    new() {
+        local dir file
+        while [[ -n $1 ]]; do
+            dir=$(dirname "$1")
+            file="$1"
+
+            if [[ ! -d $dir ]]; then
+                mkdir --parents "$dir"
+            fi
+
+            if [[ -f $file ]]; then
+                printf "You already have done it: %s\n" "$file" 1>&2
+            else
+                touch "$file"
+            fi
+            shift
+        done
+    }
 }
 
 : "Pager and Manual" && () {
