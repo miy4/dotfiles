@@ -1,0 +1,31 @@
+[env]
+target = "bundle.my.cmdcat"
+
+[tasks.default]
+alias = "bundle"
+
+[tasks.bundle]
+description = "Bundle the source files into a single file"
+script = ['''
+#!/bin/bash
+perl -0pe "s#\n+\Z#\0#g" *.cmdcat > ${target} 
+''']
+
+[tasks.install]
+description = "Copy all the target files"
+script = ['''
+#!/bin/bash
+install_dir="${HOME}/.local/share/cmdcat"
+if [[ ! -d ${install_dir} ]]; then
+  mkdir -p ${install_dir}
+fi
+cp ${target} ${install_dir}
+''']
+dependencies = ["bundle"]
+
+[tasks.cleanup]
+description = "Clean all the target files"
+script = ['''
+#!/bin/bash
+rm ${target}
+''']

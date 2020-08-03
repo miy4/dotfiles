@@ -388,6 +388,21 @@ EOF2
     }
     zle -N select-history
     bindkey '^xr' select-history
+    
+    select-command-snippet() {
+        local snippets=~/.local/share/cmdcat/bundle.my.cmdcat
+        local cmd=$(sk --read0 --preview 'if ((${+commands[pygmentize]})); then; echo {} | pygmentize -f terminal16m -O style=manni -l shell; else; echo {}; fi' --preview-window down:70% < "$snippets" | sed '/^#/d')
+        if [[ -z $cmd ]]; then
+            return 1
+        fi
+
+        lbuffer_size=${#LBUFFER}
+        RBUFFER="$cmd"
+        CURSOR=$(($lbuffer_size + ${#cmd}))
+        zle redisplay
+    }
+    zle -N select-command-snippet
+    bindkey '^xs' select-command-snippet
 }
 
 : "Loading a site local rc file" && () {
