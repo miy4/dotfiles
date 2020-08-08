@@ -146,13 +146,20 @@
     (server-start)))
 
 (use-package mozc
-  :ensure nil
   :if (and (eq system-type 'gnu/linux)
            (getenv "WSLENV"))
-  :init
-  (setq default-input-method "japanese-mozc")
   :custom
-  (mozc-leim-title "あ"))
+  (default-input-method "japanese-mozc")
+  (mozc-leim-title "あ")
+  :bind
+  (([henkan] . (lambda ()
+                 (interactive)
+                 (mozc-mode 1)))
+   :map mozc-mode-map
+   ([muhenkan] . (lambda ()
+                   (interactive)
+                   (mozc-handle-event 'enter)
+                   (mozc-mode -1)))))
 
 ;; https://github.com/challenger-deep-theme/emacs
 (use-package challenger-deep-theme
