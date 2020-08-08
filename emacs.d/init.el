@@ -529,6 +529,8 @@
   :config
   (yas-reload-all))
 
+(setq lsp-keymap-prefix "C-c l")
+
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
   :commands lsp
@@ -538,16 +540,8 @@
   (lsp-document-sync-method 'incremental)
   (lsp-prefer-flymake 'flymake)
   (lsp-auto-configure t)
-  :config
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection '("rls"))
-    :major-modes '(rust-mode)
-    :priority 0
-    :server-id 'myrls
-    :initialized-fn (lambda (workspace)
-                      (with-lsp-workspace workspace (lsp--set-configuration `(:rust (:clippy_preference "on")))))
-    :notification-handlers (lsp-ht ("window/progress" 'lsp-clients--rust-window-progress)))))
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -617,7 +611,8 @@
   (rust-mode . autopair-mode)
   (rust-mode . highlight-symbol-mode)
   :custom
-  (rust-format-on-save t))
+  (rust-format-on-save t)
+  (lsp-rust-server 'rust-analyzer))
 
 ;; https://github.com/fxbois/web-mode
 (use-package web-mode
