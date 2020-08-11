@@ -1,3 +1,5 @@
 # パッケージ名や説明に正規表現マッチしたパッケージを挙げる
+# `yay -Ss`はAURも検索の対象にする(ただし正規表現は使えない)
+# https://github.com/Jguer/yay/issues/700
 pacman -Ss ${REGEXP}
 
