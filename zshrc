@@ -71,7 +71,7 @@
 : "Completion" && () {
     # man zshcompsys
     # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
-    autoload -Uz compinit && compinit -C
+    autoload -Uz compinit && compinit -u
     local zsh_completions="/usr/local/share/zsh-completions"
     [[ -d $zsh_completions ]] && fpath=($zsh_completions $fpath)
 
