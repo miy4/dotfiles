@@ -291,7 +291,8 @@
 
 : "Golang" && () {
     if (( ${+commands[go]} )); then
-        export GOPATH=$HOME
+        export GOPATH=${HOME}/opt/go
+        export GO111MODULE=on
     fi
 
     get-go-tool() {
