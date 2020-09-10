@@ -558,19 +558,19 @@
   (lsp-ui-doc-use-webkit t)
   (lsp-ui-peek-enable t))
 
-(use-package company-lsp
-  :commands company-lsp
-  :custom
-  (company-lsp-cache-candidates t)
-  (company-lsp-async t)
-  (company-lsp-enable-recompletion nil))
+;(use-package company-lsp
+;  :commands company-lsp
+;  :custom
+;  (company-lsp-cache-candidates t)
+;  (company-lsp-async t)
+;  (company-lsp-enable-recompletion nil))
 
 ;; https://github.com/joaotavora/eglot
-(use-package eglot
-  :commands (eglot eglot-ensure) 
-  :config
-  (when (executable-find "bingo")
-    (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio")))))
+;(use-package eglot
+;  :commands (eglot eglot-ensure) 
+;  :config
+;  (when (executable-find "bingo")
+;    (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio")))))
 
 ;; https://github.com/tarsius/auto-compile
 (use-package auto-compile
