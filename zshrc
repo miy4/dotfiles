@@ -270,17 +270,15 @@
 }
 
 : "Managing plugins" && () {
-    source "${ZDOTDIR:-$HOME}/.zplugin/bin/zplugin.zsh"
-    autoload -Uz _zplugin
-    (( ${+_comps} )) && _comps[zplugin]=_zplugin
+    local -r zas="${ZDOTDIR:-$HOME}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    if [[ -f $zas ]]; then
+        source $zas
+    fi
 
-    zplugin light zsh-users/zsh-autosuggestions
-    zplugin light zdharma/fast-syntax-highlighting
-
-    #zplugin ice silent wait'0' as'program' pick'bin/anyenv' atload'export ANYENV_ROOT=$PWD; eval "$(anyenv init -)"'
-    #zplugin light anyenv/anyenv
-    #zplugin ice silent as'program' pick'bin/anyenv-update'
-    #zplugin light znz/anyenv-update
+    local -r fsh="${ZDOTDIR:-$HOME}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+    if [[ -f $fsh ]]; then
+        source $fsh
+    fi
 }
 
 : "Managing Environment Variables" && () {
