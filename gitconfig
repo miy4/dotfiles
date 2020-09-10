@@ -29,3 +29,5 @@
 	rebase = true
 [diff]
 	compactionHeuristic = true
+[icdiff]
+	options = --highlight --line-numbers
