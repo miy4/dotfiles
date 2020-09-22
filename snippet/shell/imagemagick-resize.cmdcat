@@ -1,0 +1,4 @@
+# アンシャープかけつつ、幅400pxにリサイズする
+# input 入力のファイル
+# output 出力のファイル
+convert ${input} -resize 480x -unsharp 1.5x1+0.7+0.02 ${output}
