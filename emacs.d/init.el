@@ -503,10 +503,64 @@
 
 ;; https://github.com/flycheck/flycheck
 (use-package flycheck
-  :defer t)
+  :defer t
+  :init
+  (define-fringe-bitmap 'flycheck-fringe-dotdot
+    (vector #b00110011
+            #b00110011
+            #b00000000
+            #b11001100
+            #b11001100
+            #b00000000
+            #b00110011
+            #b00110011
+            #b00000000
+            #b11001100
+            #b11001100
+            #b00000000
+            #b00110011
+            #b00110011
+            #b00000000
+            #b11001100
+            #b11001100))
+  (define-fringe-bitmap 'flycheck-fringe-ball
+    (vector #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00111000
+            #b01111100
+            #b11111110
+            #b11111110
+            #b11111110
+            #b01111100
+            #b00111000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000))
+  (flycheck-define-error-level 'error
+    :overlay-category 'flycheck-error-overlay
+    :fringe-bitmap 'flycheck-fringe-ball
+    :fringe-face 'flycheck-fringe-error)
+  (flycheck-define-error-level 'warning
+    :overlay-category 'flycheck-warning-overlay
+    :fringe-bitmap 'flycheck-fringe-ball
+    :fringe-face 'flycheck-fringe-warning)
+  (flycheck-define-error-level 'info
+    :overlay-category 'flycheck-info-overlay
+    :fringe-bitmap 'flycheck-fringe-ball
+    :fringe-face 'flycheck-fringe-info)
+  :custom-face
+  (flycheck-fringe-info    ((t (:foreground "#95ffa4"))))
+  (flycheck-fringe-warning ((t (:foreground "#ffe9aa"))))
+  (flycheck-fringe-error   ((t (:foreground "#ff8080")))))
 
 ;; https://github.com/meqif/flymake-diagnostic-at-point
 (use-package flymake-diagnostic-at-point
+  :disabled
   :after flymake
   :hook
   (flymake-mode . flymake-diagnostic-at-point-mode)
@@ -529,48 +583,29 @@
   :config
   (yas-reload-all))
 
-(setq lsp-keymap-prefix "C-c l")
-
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
   :commands lsp
   :custom
-  (lsp-auto-require-clients t)
-  (lsp-auto-guess-root t)
-  (lsp-document-sync-method 'incremental)
-  (lsp-prefer-flymake 'flymake)
-  (lsp-auto-configure t)
+  (lsp-keymap-prefix "C-c l")
+  (lsp-diagnostics-provider :auto)
+  (lsp-eldoc-render-all t)
   :hook
-  (lsp-mode . lsp-enable-which-key-integration))
+  (lsp-mode . lsp-enable-which-key-integration)
+  (lsp-mode . (lambda () (local-set-key (kbd "M-/") 'company-capf))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
   :custom
-  (lsp-ui-flycheck-enable nil)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-header t)
-  (lsp-ui-doc-include-signature t)
-  (lsp-ui-doc-position 'at-point)
-  (lsp-ui-doc-max-width 150)
-  (lsp-ui-doc-max-height 30)
-  (lsp-ui-doc-use-childframe t)
-  (lsp-ui-doc-use-webkit t)
-  (lsp-ui-peek-enable t))
+  (lsp-ui-sideline-enable nil))
 
-;(use-package company-lsp
-;  :commands company-lsp
-;  :custom
-;  (company-lsp-cache-candidates t)
-;  (company-lsp-async t)
-;  (company-lsp-enable-recompletion nil))
-
-;; https://github.com/joaotavora/eglot
-;(use-package eglot
-;  :commands (eglot eglot-ensure) 
-;  :config
-;  (when (executable-find "bingo")
-;    (add-to-list 'eglot-server-programs '(go-mode . ("bingo" "-mode" "stdio")))))
+;; TODO lsp-treemacs + all-the-icons
+(use-package treemacs)
+(use-package treemacs-all-the-icons
+  :after treemacs)
+(use-package lsp-treemacs
+  :after treemacs-all-the-icons
+  :commands lsp-treemacs-errors-list)
 
 ;; https://github.com/tarsius/auto-compile
 (use-package auto-compile
@@ -591,7 +626,7 @@
   :hook
   (go-mode . lsp)
   (go-mode . autopair-mode)
-  (go-mode . highlight-symbol-mode)
+;  (go-mode . highlight-symbol-mode)
   (go-mode . yas-minor-mode)
   (before-save . gofmt-before-save)
   :custom
