@@ -1,0 +1,4 @@
+# リモートのURLを変更する
+# name リモートの名前
+# url 新しく設定するGitリモートのURL
+git remote set-url ${name:-origin} ${url}
