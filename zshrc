@@ -184,7 +184,6 @@
     (( ${+commands[prettyping]} )) && alias pping='prettyping --nolegend'
     (( ${+commands[htop]} )) && alias ttop='htop'
     (( ${+commands[ncdu]} )) && alias ddu='ncdu --color dark -rr -x'
-    (( ${+commands[nvim]} )) && alias vim='nvim'
 
     if (( ${+commands[icdiff]} )); then
         alias ddiff=icdiff
