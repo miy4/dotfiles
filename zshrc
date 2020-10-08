@@ -403,6 +403,21 @@ EOF2
     bindkey '^xs' select-command-snippet
 }
 
+: "Configuring functionalities in WSL" && () {
+    [[ -d /mnt/c/Windows/System32 ]] || return
+
+    alias open='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
+    export BROWSER='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
+
+    launchx() {
+        # https://gist.github.com/ctaggart/68ead4d0d942b240061086f4ba587f5f
+        /mnt/c/Program\ Files/VcXsrv/vcxsrv.exe :0 \
+            -multiwindow -clipboard -primary -wgl -ac > /dev/null 2>&1 &
+        export DISPLAY=$(awk '/nameserver/ {print $2; exit;}' /etc/resolv.conf):0.0
+        export LIBGL_ALWAYS_INDIRECT=1
+    }
+}
+
 : "Loading a site local rc file" && () {
     local zshrc_site=~/.config/zsh/.zshrc.site
     [[ -f $zshrc_site ]] && source "$zshrc_site"
