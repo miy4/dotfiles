@@ -291,28 +291,6 @@
         export GOPATH=${HOME}/opt/go
         export GO111MODULE=on
     fi
-
-    get-go-tool() {
-        [[ -z $1 ]] && { echo "$0 package" 1>&2; return 1 }
-        readonly package="$1"
-        readonly tool_name="${package##*/}"
-
-        GO111MODULE=on
-        cat <<EOF1 > .envrc
-export GO111MODULE=on
-EOF1
-        direnv allow
-
-        go mod init "example.com/$package"
-        cat <<EOF2 > tools.go
-// +build tools
-package tools
-import (
-	_ "$package"
-)
-EOF2
-        go build -o $tool_name $package
-    }
 }
 
 : "Javascript" && () {
