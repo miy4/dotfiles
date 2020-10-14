@@ -579,7 +579,7 @@
    ("TAB"  . nil)
    ("<backtab>" . yas-expand))
   :custom
-  (yas-snippet-dirs '("~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+  (yas-snippet-dirs '("~/opt/emacs/snippets" "~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
   :config
   (yas-reload-all))
 
