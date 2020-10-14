@@ -1,0 +1,3 @@
+# 指定したモジュールの入手可能なバージョンを確認する
+# MODULE_PATH 確認したいモジュールのパス
+go list -m -versions ${MODULE_PATH}

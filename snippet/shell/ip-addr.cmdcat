@@ -1,0 +1,4 @@
+# IPアドレスと関連のプロパティを表示する
+# net-toolsでいう、ifconfig -a に相当する
+ip addr
+

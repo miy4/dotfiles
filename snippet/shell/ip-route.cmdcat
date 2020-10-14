@@ -1,0 +1,4 @@
+# ルーティングテーブルを表示する
+# net-toolsでいう、route に相当する
+ip route
+

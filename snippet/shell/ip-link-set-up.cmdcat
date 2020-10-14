@@ -1,0 +1,7 @@
+# ネットワークインターフェースをUpする
+# net-toolsでいう、ifconfig ${intf} up に相当する
+#
+# Parameter:
+# INTF インターフェース (`eth0`など)
+ip link set ${INTF} up
+

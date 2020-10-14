@@ -1,0 +1,7 @@
+# ネットワークインターフェースをDownする
+# net-toolsでいう、ifconfig ${intf} down に相当する
+#
+# Parameter:
+# INTF インターフェース (`eth0`など)
+ip link set ${INTF} down
+
