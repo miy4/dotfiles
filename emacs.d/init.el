@@ -11,6 +11,11 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
+;; You have emacs-native-comp (aka gccemacs)?
+(if (and (fboundp 'native-comp-available-p)
+         (native-comp-available-p))
+    (setq comp-deferred-compilation t))
+
 ;; Package Manager
 (eval-when-compile
   (require 'package)
@@ -30,6 +35,8 @@
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
 
+(setq gc-cons-threshold 1600000)
+(setq read-process-output-max (* 1024 1024))
 (setq backup-inhibited t)
 (setq auto-save-file-name-transforms
       `((".*" ,(concat user-emacs-directory "auto-save/") t)))
