@@ -367,7 +367,7 @@
     
     select-command-snippet() {
         local snippets=~/.local/share/cmdcat/bundle.my.cmdcat
-        local cmd=$(sk --read0 --preview 'if ((${+commands[pygmentize]})); then; echo {} | pygmentize -f terminal16m -O style=manni -l shell; else; echo {}; fi' --preview-window down:70% < "$snippets" | sed '/^#/d')
+        local cmd=$(sk --read0 --preview 'if ((${+commands[pygmentize]})); then; echo {} | pygmentize -f terminal16m -O style=manni -l shell; else; echo {}; fi' --preview-window down:80% < "$snippets" | sed '/^#/d')
         if [[ -z $cmd ]]; then
             return 1
         fi
