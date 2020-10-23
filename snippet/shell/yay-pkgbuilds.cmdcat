@@ -1,0 +1,3 @@
+# PKGBUILDSを編集するか確認してから、ビルドする
+# pkg パッケージ名
+yay -S --editmenu ${pkg}
