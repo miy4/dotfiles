@@ -345,7 +345,7 @@
     select-history() {
         local selected num
         if (( ${+commands[sk]} )); then
-            selected=( $(fc -rl 1 | sk -n 3.. --query="${LBUFFER}" --no-multi) )
+            selected=( $(fc -rl 1 | sk -n 2.. --query="${LBUFFER}" --no-multi) )
         elif (( ${+commands[fzf]} )); then
             selected=( $(fc -rl 1 | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2.. --query=${(qqq)LBUFFER} +m" fzf) )
         else
