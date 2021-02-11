@@ -1,0 +1,4 @@
+# UNIX時間をパースして、日付を出力する
+# UNXTIME UNIX時間 (1970-01-01 00:00:00からの経過秒数)
+date --date "@${UNIXTIME}"
+
