@@ -42,6 +42,10 @@ if [[ -d ${HOME}/opt/rustup ]]; then
     export RUSTUP_HOME=${HOME}/opt/rustup
 fi
 
+if [[ -d ${HOME}/.local/share/gnupg ]]; then
+    export GNUPGHOME=${HOME}/.local/share/gnupg
+fi
+
 if [ -r ~/ZPROF_ENABLE ]; then
     zmodload zsh/zprof && zprof
 fi
