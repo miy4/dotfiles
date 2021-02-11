@@ -35,7 +35,7 @@
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8-unix)
 
-(setq gc-cons-threshold 1600000)
+(setq gc-cons-threshold 12800000)
 (setq read-process-output-max (* 1024 1024))
 (setq backup-inhibited t)
 (setq auto-save-file-name-transforms
@@ -614,6 +614,15 @@
   :after treemacs-all-the-icons
   :commands lsp-treemacs-errors-list)
 
+(use-package lsp-java)
+
+(use-package dap-mode
+  :after lsp-mode
+  :config (dap-auto-configure-mode))
+
+(use-package dap-java
+  :ensure nil)
+
 ;; https://github.com/tarsius/auto-compile
 (use-package auto-compile
   :hook
@@ -655,6 +664,12 @@
   :custom
   (rust-format-on-save t)
   (lsp-rust-server 'rust-analyzer))
+
+(use-package java-mode
+  :ensure nil
+  :hook
+  (java-mode . lsp)
+  (java-mode . autopair-mode))
 
 ;; https://github.com/fxbois/web-mode
 (use-package web-mode
