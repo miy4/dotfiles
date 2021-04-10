@@ -235,6 +235,10 @@
             shift
         done
     }
+
+    gist-view() {
+        gh gist view $(gh gist list | sk | awk '{print $1}')
+    }
 }
 
 : "Pager and Manual" && () {
