@@ -289,6 +289,10 @@
 : "Golang" && () {
     if (( ${+commands[go]} )); then
         export GOPATH=${HOME}/opt/go
+        if [[ -d ${GOPATH}/bin ]]; then
+            export PATH=${GOPATH}/bin:$PATH
+        fi
+
         export GO111MODULE=on
     fi
 }
@@ -320,7 +324,6 @@
     else
         return
     fi
-
 
     select-ghq-repository() {
         local dir
