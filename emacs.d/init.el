@@ -115,7 +115,7 @@
 (size-indication-mode t)
 (setq ring-bell-function 'ignore)
 (if (>= (x-display-pixel-width) 1920)
-    (add-to-list 'default-frame-alist '(font . "Cica-16"))
+    (add-to-list 'default-frame-alist '(font . "Cica-12"))
   (add-to-list 'default-frame-alist '(font . "Cica")))
 
 ;; macOS setting
@@ -183,10 +183,13 @@
 (use-package doom-modeline
   :hook
   (emacs-startup . doom-modeline-mode)
+  :init
+  (set-face-attribute 'mode-line nil :family "Cica" :height 100)
+  (set-face-attribute 'mode-line-inactive nil :family "Cica" :height 100)
   :config
   (doom-modeline-def-modeline 'main
-    '(bar workspace-name window-number modals matches buffer-info remote-host buffer-position parrot selection-info)
-    '(misc-info persp-name lsp debug minor-modes input-method buffer-encoding major-mode process vcs checker)))
+    '(bar workspace-name window-number modals matches buffer-info buffer-position parrot)
+    '(misc-info persp-name lsp debug minor-modes buffer-encoding major-mode process vcs checker)))
 
 ;; https://github.com/DarthFennec/highlight-indent-guides
 (use-package highlight-indent-guides
@@ -586,7 +589,8 @@
    ("TAB"  . nil)
    ("<backtab>" . yas-expand))
   :custom
-  (yas-snippet-dirs '("~/opt/emacs/snippets" "~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+  ;(yas-snippet-dirs '("~/opt/emacs/snippets" "~/.config/emacs/snippets" "~/.emacs.d/snippets" "~/.emacs.d/site-snippets"))
+  (yas-snippet-dirs '("~/opt/emacs/snippets"))
   :config
   (yas-reload-all))
 
@@ -604,6 +608,7 @@
 (use-package lsp-ui
   :commands lsp-ui-mode
   :custom
+  (lsp-ui-doc-enable nil)
   (lsp-ui-sideline-enable nil))
 
 ;; TODO lsp-treemacs + all-the-icons
@@ -661,6 +666,7 @@
 ;      (lsp--set-configuration `(:rust ,lsp-rust-configuration)))))
   (rust-mode . autopair-mode)
   (rust-mode . highlight-symbol-mode)
+  (rust-mode . yas-minor-mode)
   :custom
   (rust-format-on-save t)
   (lsp-rust-server 'rust-analyzer))
