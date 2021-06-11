@@ -1,0 +1,2 @@
+# go.modとgo.sumを整理整頓する
+go mod tidy

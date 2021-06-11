@@ -1,0 +1,4 @@
+# 依存するモジュールをバージョン(タグ)を指定して追加する
+#      -d インストールやビルドは行わない
+# ex) go get -d example.com/path/to/module@v0.1.0
+go get -d {{module-path}}@{{tag}}

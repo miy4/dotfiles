@@ -1,0 +1,4 @@
+# 依存するモジュールをブランチを指定して追加する
+#      -d インストールやビルドは行わない
+# ex) go get -d example.com/path/to/module@feature-a
+go get -d {{module-path}}@{{branch}}
