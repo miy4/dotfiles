@@ -386,6 +386,16 @@
     }
     zle -N select-command-snippet
     bindkey '^xs' select-command-snippet
+
+    pick-gist-id() {
+        local -r gist_id=$(gh gist list | sk | awk '{print $1}')
+        local -r lbuffer_size=${#LBUFFER}
+        RBUFFER="$gist_id"
+        CURSOR=$(($lbuffer_size + ${#gist_id}))
+        zle redisplay
+    }
+    zle -N pick-gist-id
+    bindkey '^xp' pick-gist-id
 }
 
 : "Configuring functionalities in WSL" && () {
