@@ -65,7 +65,7 @@
         echo " (%F{$color}$branch%f)"
     }
 
-    export PS1='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%B%F{magenta}>%f%b "
+    export PS1='%F{blue}%n%f@%F{blue}%m%f:%F{blue}%/%f$(prompt_git_current_branch)'$'\n'"%B%F{magenta}❱❱%f%b "
 }
 
 : "Completion" && () {
