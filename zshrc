@@ -339,12 +339,12 @@
             printf "no filter command available\n"
             return
         fi
-	    if [[ -n "$dir" ]]; then
-	        cd "$dir"
-	        if zle; then
+        if [[ -n "$dir" ]]; then
+            cd "$dir"
+            if zle; then
                 zle reset-prompt
             fi
-	    fi
+        fi
     }
     zle -N select-ghq-repository
     bindkey '^xg' select-ghq-repository
@@ -367,7 +367,7 @@
             fi
         fi
         zle reset-prompt
-	    return $ret
+        return $ret
     }
     zle -N select-history
     bindkey '^xr' select-history
@@ -402,8 +402,8 @@
     [[ -d /mnt/c/Windows/System32 ]] || return
 
     alias open='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
-	alias pbcopy='/mnt/c/Windows/System32/clip.exe'
-	alias pbpaste='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe Get-Clipboard'
+    alias pbcopy='/mnt/c/Windows/System32/clip.exe'
+    alias pbpaste='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe Get-Clipboard'
     export BROWSER='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
 
     launchx() {
