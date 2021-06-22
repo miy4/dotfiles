@@ -163,6 +163,7 @@
 
     alias g='grep --color=auto'
     alias psv='ps auxww'
+    alias pps='ps -eo pid,ppid,user,tty,%cpu,%mem,time,command'
     alias reload='exec zsh -l'
     alias ec='emacsclient -n'
 
