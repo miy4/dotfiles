@@ -1,0 +1,4 @@
+# XMLを読みやすく、整形して表示する
+# #xml #pretty-print #output #human-readable
+# file 入力のファイル
+xmllint --format ${file}
