@@ -322,10 +322,9 @@
 }
 
 : "Commandline Filter" && () {
-    if (( ${+commands[sk]} )); then
-        export SKIM_DEFAULT_OPTIONS="--regex --reverse --multi --bind 'ctrl-j:ignore,ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
-    elif (( ${+commands[fzf]} )); then
+    if (( ${+commands[fzf]} || ${+commands[sk]} )); then
         export FZF_DEFAULT_OPTS="--reverse --no-sort --inline-info --multi --bind 'ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
+        export SKIM_DEFAULT_OPTIONS="--regex --reverse --multi --bind 'ctrl-j:ignore,ctrl-k:kill-line,ctrl-v:page-down,alt-v:page-up'"
     else
         return
     fi
@@ -375,7 +374,8 @@
     
     select-command-snippet() {
         local snippets=~/.local/share/cmdcat/bundle.my.cmdcat
-        local cmd=$(sk --read0 --preview 'if ((${+commands[pygmentize]})); then; echo {} | pygmentize -f terminal16m -O style=manni -l shell; else; echo {}; fi' --preview-window down:80% < "$snippets" | sed '/^#/d')
+        local cmd=$(fzf --read0 --preview 'if ((${+commands[chroma]})); then; chroma -l Bash -s dracula -f terminal256 <<< {}; else; echo {}; fi' --preview-window down:80% < "$snippets" | sed '/^#/d')
+        #local cmd=$(sk --read0 --preview 'if ((${+commands[pygmentize]})); then; echo {} | pygmentize -f terminal16m -O style=manni -l shell; else; echo {}; fi' --preview-window down:80% < "$snippets" | sed '/^#/d')
         if [[ -z $cmd ]]; then
             return 1
         fi
