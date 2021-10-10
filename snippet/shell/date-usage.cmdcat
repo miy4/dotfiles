@@ -19,12 +19,12 @@
         )
 
         for s in "${catalogue[@]}"; do
-            printf "%s	\033[32;1m| %s\033[m\n" "$(eval "$s")" "$s"
+            printf "%s\t\033[32;1m| %s\033[m\n" "$(eval "$s")" "$s"
         done
     }
 
     source_date_help() {
-        LANG=C date --help | \
+        LC_ALL=C date --help | \
             sed -n "/^ *%%/,/^ *%Z/p" | \
             while read -r line; do
                 format="${line/% *}"
@@ -34,7 +34,7 @@
 
                 example="$(date "+$format")"
                 description=$(sed "s/^$format *//" <<< "$line")
-                printf "%s	\033[32;1m| %s  # %s\033[m\n" "$example" "date +$format" "$description"
+                printf "%s\t\033[32;1m| %s  # %s\033[m\n" "$example" "date +$format" "$description"
             done
     }
 
