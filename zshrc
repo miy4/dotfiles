@@ -153,7 +153,16 @@
     alias da='d -a'
     alias va='v -a'
 
-    if (( ${+commands[src-hilite-lesspipe.sh]} )); then
+    if (( ${+commands[chroma]} )); then
+        l() {
+            LESSOPEN='| p() { chroma --fail -s dracula -f terminal256 "$1" || cat "$1"; }; p "%s"' \
+                less -sNRi "$@"
+        }
+        lF() {
+            LESSOPEN='| p() { chroma --fail -s dracula -f terminal256 "$1" || cat "$1"; }; p "%s"' \
+                less -sNRij10 +F "$@"
+        }
+    elif (( ${+commands[src-hilite-lesspipe.sh]} )); then
         alias l="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRi"
         alias lF="LESSOPEN='| src-hilite-lesspipe.sh %s\' less -sNRij10 +F"
     else
@@ -239,6 +248,10 @@
 
     gist-view() {
         gh gist view $(gh gist list | sk | awk '{print $1}')
+    }
+
+    readit() {
+        readable "$1" | w3m -T text/html
     }
 }
 
