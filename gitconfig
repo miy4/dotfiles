@@ -1,5 +1,5 @@
-[ghq]
-	root = ~/src
+[init]
+	defaultBranch = main
 [core]
 	editor = vim
 [user]
@@ -31,3 +31,6 @@
 	compactionHeuristic = true
 [icdiff]
 	options = --highlight --line-numbers
+[ghq]
+	root = ~/src
+
