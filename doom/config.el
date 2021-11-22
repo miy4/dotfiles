@@ -41,7 +41,8 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+;(setq display-line-numbers-type t)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -69,6 +70,9 @@
 (map! "C-c l" #'evil-avy-goto-line)
 (map! "C-c y" #'counsel-yank-pop)
 
+(setq +format-on-save-enabled-modes
+      '(not markdown-mode)) ; prettier is too nosy
+
 (use-package! expand-region
   :config
   (map! "M-m" #'er/expand-region)
@@ -89,6 +93,11 @@
 (use-package! which-key
   :custom
   (which-key-idle-delay 0.5))
+
+(use-package! lsp-ui
+  :custom
+  ;(lsp-ui-doc-position 'top)
+  (lsp-ui-doc-enable nil))
 
 (use-package! lsp-mode
   :hook
