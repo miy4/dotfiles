@@ -1,0 +1,3 @@
+# tmuxの設定値を確認する
+tmux show-options -A
+
