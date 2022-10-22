@@ -138,6 +138,10 @@
     #        export LS_COLORS=$(vivid generate snazzy)
     #    fi
     #fi
+
+    if (( ${+commands[fx]} )); then
+        export FX_THEME=2
+    fi
 }
 
 : "Aliasing" && () {
