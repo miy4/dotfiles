@@ -350,7 +350,7 @@
     select-ghq-repository() {
         local dir
         if (( ${+commands[sk]} )); then
-            dir=$(ghq list --full-path | sk)
+            dir=$(ghq list --full-path | sk --delimiter=/ --nth=5..)
         elif (( ${+commands[fzf]} )); then
             dir=$(ghq list --full-path | fzf)
         else
