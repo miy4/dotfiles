@@ -125,3 +125,8 @@
 (use-package! counsel
   :custom
   (counsel-yank-pop-separator "\n-------\n"))
+
+(use-package! org-journal
+  :custom
+  (org-journal-date-format "%Y-%m-%d (%a)")
+  (org-journal-search-result-date-format "%Y-%m-%d (%a)"))
