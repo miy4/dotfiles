@@ -10,6 +10,13 @@
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
 
+;; Use eccentric-j's super cute Doom Icon as the splash screen
+;; https://github.com/eccentric-j/doom-icon
+(setq my-fancy-splash-image
+      (expand-file-name "doom.png" doom-private-dir))
+(if (file-exists-p my-fancy-splash-image)
+    (setq fancy-splash-image my-fancy-splash-image))
+
 ;; Doom exposes five (optional) variables for controllind fonts in Doom. Here
 ;; are the three important ones:
 ;;
