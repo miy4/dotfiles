@@ -2,7 +2,8 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8-unix)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -80,15 +81,29 @@
   (expand-region-contract-fast-key "M")
   (expand-region-reset-fast-key "*"))
 
-(use-package! mozc
+;(use-package! mozc
+;  :if (and (eq system-type 'gnu/linux)
+;           (getenv "WSL_INTEROP"))
+;  :custom
+;  (default-input-method "japanese-mozc")
+;  :config
+;  (map! [henkan] (lambda () (interactive) (mozc-mode 1)))
+;  (map! :map mozc-mode-map
+;        [muhenkan] (lambda () (interactive) (mozc-handle-event 'enter) (mozc-mode -1))))
+
+(use-package! skk
   :if (and (eq system-type 'gnu/linux)
-           (getenv "WSLENV"))
+           (getenv "WSL_INTEROP"))
+  :hook
+  (evil-insert-state-exit . (lambda () (interactive) (skk-mode-exit)))
   :custom
-  (default-input-method "japanese-mozc")
+  (default-input-method "japanese-skk")
+  (skk-user-directory "~/.local/share/ddskk")
+  (skk-large-jisyo (concat skk-user-directory "/dict/SKK-JISYO.L"))
+  (skk-egg-like-newline t)
   :config
-  (map! [henkan] (lambda () (interactive) (mozc-mode 1)))
-  (map! :map mozc-mode-map
-        [muhenkan] (lambda () (interactive) (mozc-handle-event 'enter) (mozc-mode -1))))
+  (map! [henkan] (lambda () (interactive) (skk-j-mode-on)))
+  (map! [muhenkan] (lambda () (interactive) (skk-mode-exit))))
 
 (use-package! which-key
   :custom
