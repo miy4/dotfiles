@@ -115,6 +115,8 @@
   (lsp-ui-doc-enable nil))
 
 (use-package! lsp-mode
+  :custom
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
   :hook
   (lsp-mode . (lambda () (local-set-key (kbd "M-/") 'company-capf))))
 
