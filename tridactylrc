@@ -1,0 +1,29 @@
+# Tridactyl RC file
+# ~/.config/tridactyl/tridactylrc
+# %USERPROFILE%\.tridactyl\tridactylrc
+
+# hit-a-hint
+set hintchars asdfghjkl
+
+# scrolling
+set smoothscroll true
+bind j scrollline 3
+bind k scrollline -3
+
+# history
+bind S back
+bind D forward
+
+# tab
+unbind d
+bind x tabclose
+bind g< tabmove ^
+bind g> tabmove $
+
+# disable tridactyl on the following sites
+blacklistadd mail.google.com/mail
+blacklistadd jp.inoreader.com
+
+# clipboard
+bind yy composite js document.title + " " + document.URL | yank
+
