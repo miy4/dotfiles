@@ -73,9 +73,10 @@
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 
-                                        ;(map! "C-h" (cmd! (delete-backward-char)))
 (map! "C-;" (cmd! (evil-escape)))
-(map! "C-c l" #'evil-avy-goto-line)
+(map! :i "C-h" #'delete-backward-char)
+(map! :i "C-d" #'delete-char)
+(map! :i "C-y" #'yank)
 (map! "C-c y" #'counsel-yank-pop)
 
 (setq +format-on-save-enabled-modes
