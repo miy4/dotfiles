@@ -266,7 +266,7 @@
     export MANPAGER='less -R --use-color -Dd+b$Du+g$Ds+c$DSkm'
     export MANROFFOPT='-c'
     export LESSCHARSET=utf-8
-    export LESS='-RfXi -P?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]$ -Dd+b$Du+g$Ds+c'
+    export LESS='-RfXi -P?f%f:(stdin). ?lb%lb?L/%L.. [?eEOF:?pb%pb\%..]$ --use-color -Dd+b$Du+g$Ds+c'
 }
 
 : "Managing plugins" && () {
