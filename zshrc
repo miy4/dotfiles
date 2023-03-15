@@ -243,13 +243,18 @@
             fi
 
             if [[ -f $file ]]; then
-                printf "You already have done it: %s\n" "$file" 1>&2
+                printf "You already have: %s\n" "$file" 1>&2
             else
                 touch "$file"
             fi
             shift
         done
     }
+
+    _miy4_new() {
+        _arguments '*: :_files'
+    }
+    compdef _miy4_new new
 
     gist-view() {
         gh gist view $(gh gist list | sk | awk '{print $1}')
