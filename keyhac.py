@@ -9,7 +9,7 @@ from keyhac import *
 def configure(keymap):
 
     def on_web_browser(window):
-        if window.getProcessName() in ("firefox.exe"):
+        if window.getProcessName() in ("firefox.exe", "msedgewebview2.exe"):
             return True
         return False
 
