@@ -404,7 +404,7 @@
     [[ -d /mnt/c/Windows/System32 ]] || return
 
     alias open='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
-    alias pbcopy='/mnt/c/Windows/System32/clip.exe'
+    alias pbcopy='iconv -t UTF-16LE | /mnt/c/Windows/System32/clip.exe'
     alias pbpaste='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe Get-Clipboard'
     export BROWSER='/mnt/c/Program\ Files/PowerShell/7/pwsh.exe /c start'
 
