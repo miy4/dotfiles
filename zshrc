@@ -40,6 +40,18 @@
 }
 
 : "Prompting" && () {
+    # https://github.com/spaceship-prompt/spaceship-prompt
+    local -r spaceship_zsh="${ZDOTDIR:-$HOME}/plugins/spaceship-prompt/spaceship.zsh"
+    if [[ -f $spaceship_zsh ]]; then
+        export SPACESHIP_PROMPT_ORDER=(user dir host git venv async line_sep jobs exit_code sudo char)
+        export SPACESHIP_DIR_TRUNC_REPO='false'
+        export SPACESHIP_DIR_TRUNC=0
+        export SPACESHIP_CHAR_SYMBOL='❱❱ '
+
+        source "$spaceship_zsh"
+        return
+    fi
+
     # man zshoptions, zshmisc
     # http://zsh.sourceforge.net/Doc/Release/Options.html#Prompting
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
