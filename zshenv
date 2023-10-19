@@ -1,5 +1,10 @@
 # -*- mode: sh -*-
 
+# Ensure that /etc/zsh/zshenv contains the following lines:
+#
+# export ZDOTDIR=${HOME}/.config/zsh
+# export HISTFILE=${HOME}/.local/share/zsh/history
+
 ulimit -c unlimited
 
 if [[ $(umask) = "0000" ]]; then
