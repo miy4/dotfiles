@@ -345,7 +345,8 @@
     select-ghq-repository() {
         local dir
         if (( ${+commands[sk]} )); then
-            dir=$(ghq list --full-path | sk --delimiter=/ --nth=5..)
+            #dir=$(ghq list --full-path | sk --delimiter=/ --nth=5..)
+            dir=$(find $(ghq root) -maxdepth 4 -type d -name .git | sed 's#/\.git$##' | sk --delimiter=/ --nth=5..)
         elif (( ${+commands[fzf]} )); then
             dir=$(ghq list --full-path | fzf)
         else
