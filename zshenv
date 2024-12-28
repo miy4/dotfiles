@@ -51,6 +51,10 @@ if [[ -d ${HOME}/.local/share/gnupg ]]; then
     export GNUPGHOME=${HOME}/.local/share/gnupg
 fi
 
+if (( ${+commands[timew]} )); then
+    export TIMEWARRIORDB=${HOME}/.config/timewarrior
+fi
+
 if [ -r ~/ZPROF_ENABLE ]; then
     zmodload zsh/zprof && zprof
 fi
