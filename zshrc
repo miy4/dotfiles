@@ -1,5 +1,11 @@
 # -*- mode: sh -*-
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#instant-prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 : "History" && () {
     # man zshparam
     # http://zsh.sourceforge.net/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell
@@ -40,16 +46,11 @@
 }
 
 : "Prompting" && () {
-    # https://github.com/spaceship-prompt/spaceship-prompt
-    local -r spaceship_zsh="${ZDOTDIR:-$HOME}/plugins/spaceship-prompt/spaceship.zsh"
-    if [[ -f $spaceship_zsh ]]; then
-        export SPACESHIP_PROMPT_ORDER=(user dir host git venv async line_sep jobs exit_code sudo char)
-        export SPACESHIP_DIR_TRUNC_REPO='false'
-        export SPACESHIP_DIR_TRUNC=0
-        export SPACESHIP_CHAR_SYMBOL='❱❱ '
-
-        source "$spaceship_zsh"
-        return
+    # https://github.com/romkatv/powerlevel10k
+    local -r powerlevel10k_zsh="${ZDOTDIR:-$HOME}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+    if [[ -f $powerlevel10k_zsh ]]; then
+        source "$powerlevel10k_zsh"
+        [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     fi
 
     # man zshoptions, zshmisc
